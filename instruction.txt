@@ -1,0 +1,42 @@
+i will give you job descriptions and you tell me if i'm a good fit or not in a percentage, why I'm I a good fit and what I'm I missing
+this is my cv:
+Ahmed Hesham
+Ahmed.hesham.farag@gmail.com
+Cairo, Egypt
+LinkedIn:https://www.linkedin.com/in/ahmed-hesham0/ 
+GitHub:https://github.com/ahmedhesham301
+PROFILE
+DevOps Engineer with hands-on experience in automating CI/CD pipelines, containerizing
+applications, and deploying scalable infrastructure on AWS using Docker, Terraform, and
+Ansible. Skilled in backend development with Python and Go, building RESTful APIs and
+automating system workflows.
+EDUCATION
+Sadat Academy | Cairo, Egypt
+Computer science
+Predicted Grade: Very good
+Oct 2022 – June 2026
+TECHNICAL SKILLS
+-DevOps Tools: Jenkins, Docker, Ansible, Terraform.
+-Programming & Scripting: Python, GO, Bash, YAML, JSON.
+-Monitoring & Observability: Prometheus, Grafana.
+-Cloud Platforms & OS: Linux, AWS, Ubuntu.
+-Database: SQL, PostgreSQL.
+-Version control: Git, GitHub.
+Projects
+•Built CI/CD pipeline using Jenkins to test and deploy Flask app to EC2 on AWS. The
+pipeline included building a Docker image, pushing it to Docker Hub, provisioning
+infrastructure with Terraform, and configuring the server using Ansible.
+GitHub Repo: weather-app
+•A Docker image for a Minecraft server that allows you to specify the desired version as
+an argument. The image automatically downloads the specified version from Mojang's
+website and launches the server with a single command. GitHub repo
+•An Amazon price tracker that monitors the price of a specified item. It scrapes the current
+price and sends you an email notification whenever the price drops below your desired
+price.
+EXPERIENCE
+Orange Digital Centre
+Jan 2025 – Feb 2025
+DevOps internship
+Gained hands-on experience in CI/CD pipelines using Jenkins, Ansible, and Terraform.
+ADDITIONAL SKILLS
+Languages: Arabic (Native), English (Fluent)Microsoft Office: Proficient in Word and PowerPoint

@@ -1,0 +1,30 @@
+from jobspy import scrape_jobs
+
+
+def getJobs(jobTitle, results_wanted, hours_old):
+    jobs = scrape_jobs(
+        site_name=[
+            "indeed",
+            "linkedin",
+            # "zip_recruiter",
+            "google",
+            # "glassdoor",
+            # "bayt",
+            # "naukri",
+            # "bdjobs",
+        ],
+        search_term=jobTitle,
+        location="Egypt",
+        results_wanted=results_wanted,
+        google_search_term=f"{jobTitle} jobs near Cairo since {hours_old} hours",
+        hours_old=hours_old,
+        country_indeed="Egypt",
+        linkedin_fetch_description=True,  # gets more info such as description, direct job url (slower)
+        # proxies=["208.195.175.46:65095", "208.195.175.45:65095", "localhost"],
+    )
+    print(f"Found {len(jobs)} jobs")
+    # print(jobs)
+    return jobs
+    # jobs.to_csv(
+    #     "jobs.csv", quoting=csv.QUOTE_NONNUMERIC, escapechar="\\", index=False
+    # )  # to_excel
