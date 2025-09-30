@@ -84,7 +84,7 @@ def get_jobs(job_title, cv, results_wanted, hours_old):
                 if e.details["error"]["code"] == 429:
                     logging.warning("api limit hit")
                     key_number += 1
-                    if key_number > len(api_keys):
+                    if key_number > len(api_keys) - 1:
                         logging.critical("All api keys hit the limit")
                         return 1
                 else:
@@ -117,6 +117,7 @@ Total overloads:       {total_overload}       fail: {total_fail_overload}"""
 if __name__ == "__main__":
     get_jobs("devops", CV, results_wanted=30, hours_old=2)
     get_jobs("backend", CV, results_wanted=30, hours_old=2)
+    get_jobs("software engineer", CV, results_wanted=30, hours_old=2)
     if len(good_fit_jobs) > 0:
         send_email(SENDER, RECEIVER, PASSWORD, good_fit_jobs)
     else:
