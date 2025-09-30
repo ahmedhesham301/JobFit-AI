@@ -14,7 +14,7 @@ def getJobs(jobTitle, results_wanted, hours_old):
             # "bdjobs",
         ],
         search_term=jobTitle,
-        location="Egypt",
+        location="Cairo",
         results_wanted=results_wanted,
         google_search_term=f"{jobTitle} jobs near Cairo since {hours_old} hours",
         hours_old=hours_old,
