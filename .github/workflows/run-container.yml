@@ -2,16 +2,15 @@ name: Run Docker Image
 
 on:
   workflow_dispatch:  # run manually, or change to push/pr
+  schedule:
+    - cron: "0 */2 * * *" 
 
 jobs:
   run-docker:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Run Docker container with secrets
+    - name: Run container
       run: |
         docker run \
           -e smtp_email=${{ secrets.SMTP_EMAIL }} \
