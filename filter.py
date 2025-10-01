@@ -72,7 +72,7 @@ def filter_jobs(jobs, cv, api_keys, good_fit_jobs):
             logging.critical("All attempts failed")
             continue
 
-        if ai_response_dict["percentage"] > 50:
+        if ai_response_dict["percentage"] > 70:
             good_fit_jobs.append(
                 {
                     "title": job["title"],
