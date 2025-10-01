@@ -9,6 +9,11 @@ jobs:
   run-docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Run container
+      - name: Create .env file
         run: |
-          docker run ahmedhesham301/jobfit-ai:latest
+          echo "smtp_email=${{ secrets.SMTP_EMAIL }}" >> .env
+          echo "smtp_password=${{ secrets.SMTP_PASSWORD }}" >> .env
+          echo "receiver_email=${{ secrets.RECEIVER_EMAIL }}" >> .env
+          echo "api_keys=${{ secrets.API_KEYS }}" >> .env
+      - name: Run container
+        run: docker run --env-file .env ahmedhesham301/jobfit-ai:latest
