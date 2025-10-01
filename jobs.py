@@ -1,5 +1,5 @@
 from jobspy import scrape_jobs
-
+import logging
 
 def getJobs(jobTitle, results_wanted, hours_old):
     jobs = scrape_jobs(
@@ -22,7 +22,7 @@ def getJobs(jobTitle, results_wanted, hours_old):
         linkedin_fetch_description=True,  # gets more info such as description, direct job url (slower)
         # proxies=["208.195.175.46:65095", "208.195.175.45:65095", "localhost"],
     )
-    print(f"Found {len(jobs)} jobs")
+    logging.warning(f"Found {len(jobs)} {jobTitle} jobs")
     # print(jobs)
     return jobs
     # jobs.to_csv(

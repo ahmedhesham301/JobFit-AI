@@ -3,3 +3,4 @@ jobs.csv
 __pycache__
 .env
 .vscode
+.env2
