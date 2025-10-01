@@ -34,8 +34,10 @@ if __name__ == "__main__":
     get_jobs("backend", results_wanted=30, hours_old=2)
     get_jobs("software engineer", results_wanted=30, hours_old=2)
     get_jobs("cloud", results_wanted=30, hours_old=2)
+    get_jobs("site reliability engineer", results_wanted=30, hours_old=2)
     get_jobs("sre", results_wanted=30, hours_old=2)
     get_jobs("intern", results_wanted=30, hours_old=2)
+    logging.warning(f"Total jobs no duplicates: {len(all_jobs)}")
     all_jobs.drop_duplicates(inplace=True, ignore_index=True)
     filter_jobs(all_jobs, CV, api_keys, good_fit_jobs)
     if len(good_fit_jobs) > 0:
