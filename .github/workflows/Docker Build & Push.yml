@@ -26,4 +26,4 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: ahmedhesham301/jobfitai:latest
+        tags: ahmedhesham301/jobfit-ai:latest
