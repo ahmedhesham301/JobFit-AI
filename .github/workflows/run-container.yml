@@ -9,6 +9,8 @@ jobs:
   run-docker:
     runs-on: ubuntu-latest
     steps:
+      - name: pull image
+        run: docker pull ahmedhesham301/jobfit-ai:latest
       - name: Create .env file
         run: |
           echo "smtp_email=${{ secrets.SMTP_EMAIL }}" >> .env
