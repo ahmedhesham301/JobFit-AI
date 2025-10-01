@@ -1,42 +1,60 @@
 i will give you job descriptions and you tell me if i'm a good fit or not in a percentage, why I'm I a good fit and what I'm I missing
 this is my cv:
 Ahmed Hesham
-Ahmed.hesham.farag@gmail.com
-Cairo, Egypt
-LinkedIn:https://www.linkedin.com/in/ahmed-hesham0/ 
-GitHub:https://github.com/ahmedhesham301
-PROFILE
-DevOps Engineer with hands-on experience in automating CI/CD pipelines, containerizing
-applications, and deploying scalable infrastructure on AWS using Docker, Terraform, and
-Ansible. Skilled in backend development with Python and Go, building RESTful APIs and
-automating system workflows.
-EDUCATION
-Sadat Academy | Cairo, Egypt
-Computer science
-Predicted Grade: Very good
-Oct 2022 – June 2026
-TECHNICAL SKILLS
--DevOps Tools: Jenkins, Docker, Ansible, Terraform.
--Programming & Scripting: Python, GO, Bash, YAML, JSON.
--Monitoring & Observability: Prometheus, Grafana.
--Cloud Platforms & OS: Linux, AWS, Ubuntu.
--Database: SQL, PostgreSQL.
--Version control: Git, GitHub.
-Projects
-•Built CI/CD pipeline using Jenkins to test and deploy Flask app to EC2 on AWS. The
-pipeline included building a Docker image, pushing it to Docker Hub, provisioning
-infrastructure with Terraform, and configuring the server using Ansible.
-GitHub Repo: weather-app
-•A Docker image for a Minecraft server that allows you to specify the desired version as
-an argument. The image automatically downloads the specified version from Mojang's
-website and launches the server with a single command. GitHub repo
-•An Amazon price tracker that monitors the price of a specified item. It scrapes the current
-price and sends you an email notification whenever the price drops below your desired
-price.
-EXPERIENCE
-Orange Digital Centre
-Jan 2025 – Feb 2025
-DevOps internship
-Gained hands-on experience in CI/CD pipelines using Jenkins, Ansible, and Terraform.
-ADDITIONAL SKILLS
-Languages: Arabic (Native), English (Fluent)Microsoft Office: Proficient in Word and PowerPoint
+DevOps Engineer
+ahmed.hesham.farag@gmail.com
+linkedin:https://www.linkedin.com/in/ahmed-hesham0/
+Cairo,Egypt
+website:ahmeddev.net
+github:https://github.com/ahmedhesham301
+SUMMARY:
+Aspiring DevOps engineer with a strong drive to learn and grow. Currently focused on building a solid
+foundation through consistent learning and hands-on practice. Always curious and ready to face challenges as
+part of the learning journey. Looking for an internship opportunity where I can contribute, learn from
+experienced professionals, and take meaningful steps toward becoming a skilled engineer.
+EDUCATION:
+Bachelor of Computer Science
+Sadat Academy
+Sep 2022 – Jun 2026
+EXPERIENCE:
+DevOps Intern | GhaymahSep 2025 – Present
+DevOps Intern | Orange Digital Centre, Cairo, EgyptJan 2025 – Feb 2025
+SKILLS:
+Containerization & Orchestration: Docker
+Cloud Provider: AWS
+CI/CD: Jenkins & Github Actions
+Monitoring & Observability: Prometheus & Grafana
+Configuration Management & IaC: Ansible & Terraform
+Version Control: Git & GitHub
+Programming & Scripting: Python, Bash, Golang
+Database: Postgresql & SQL
+
+PROJECTS:
+-weather-app
+Automated application deployment using Docker containers for consistent environments.
+Implemented CI/CD pipelines with Jenkins to streamline build, test, and deployment processes.
+Provisioned and managed cloud infrastructure using Terraform for scalable and secure resources.
+Configured server environments and orchestration with Ansible for efficient configuration management.
+Applied best practices in infrastructure as code, automation, and cloud resource optimization.
+
+-containerizing Minecraft server
+Designed and implemented automated scripts for building, deploying, and running a Minecraft server
+using Bash and Docker.
+Developed Dockerfile and shell scripts to streamline server setup, configuration, and lifecycle management.
+Containerized the server for consistent, reproducible deployments across environments.
+Automated build and deployment processes to minimize manual intervention and improve reliability.
+Documented setup and usage instructions for ease of onboarding and maintenance.
+
+-go url shortener
+Developed a full-stack URL shortening service using Go (backend) and JavaScript/HTML (frontend).
+Implemented RESTful APIs for creating, retrieving, and redirecting shortened URLs.
+Integrated PostgreSQL for persistent storage and efficient URL management.
+Added monitoring and metrics collection with Prometheus.
+Containerized the application using Docker and managed multi-service deployment with Docker Compose.
+Applied middleware for request monitoring.
+Wrote modular, maintainable code following best practices.
+
+-JobFit AI
+A Python-based application that leverages Google Gemini AI to analyze job descriptions and candidate
+profiles, search for relevant jobs, and generate a fit percentage. The system highlights strengths, identifies
+skill gaps, and automatically sends emails with high-fit job matches to users.
