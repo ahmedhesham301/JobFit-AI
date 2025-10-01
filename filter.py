@@ -12,6 +12,7 @@ total_fail_empty_response = 0
 
 
 def filter_jobs(jobs, cv, api_keys, good_fit_jobs):
+    global total_fail,total_overload,total_fail_overload,total_empty_response,total_fail_empty_response
     key_number = 0
 
     for i, job in jobs.iterrows():
@@ -90,4 +91,4 @@ def print_stats():
     stats = f"""total fail: {total_fail}
 total empty responses: {total_empty_response} fail: {total_fail_empty_response}
 Total overloads:       {total_overload}       fail: {total_fail_overload}"""
-    print(stats)
+    logging.warning(stats)
