@@ -1,7 +1,7 @@
 name: Run Docker Image
 
 on:
-  workflow_dispatch:  # run manually, or change to push/pr
+  workflow_dispatch:
   schedule:
     - cron: "0 */2 * * *" 
 
@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Run container
-      run: |
-        docker run \
-          -e smtp_email=${{ secrets.SMTP_EMAIL }} \
-          -e smtp_password=${{ secrets.SMTP_PASSWORD }} \
-          -e receiver_email=${{ secrets.RECEIVER_EMAIL }} \
-          -e api_keys=${{ secrets.API_KEYS }} \
-          ahmedhesham301/jobfit-ai:latest
+      - name: Run container
+        run: |
+          docker run \
+            -e smtp_email=${{ secrets.SMTP_EMAIL }} \
+            -e smtp_password=${{ secrets.SMTP_PASSWORD }} \
+            -e receiver_email=${{ secrets.RECEIVER_EMAIL }} \
+            -e api_keys=${{ secrets.API_KEYS }} \
+            ahmedhesham301/jobfit-ai:latest
