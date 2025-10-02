@@ -23,9 +23,9 @@ with open("instruction.txt", "r") as f:
     CV = f.read()
 
 
-def get_jobs(job_title, results_wanted, hours_old, country, location, is_remote):
+def get_jobs(job_title, results_wanted, hours_old, country, location, is_remote=False):
     global all_jobs
-    jobs = getJobs(job_title, results_wanted, hours_old, country, location, is_remote=False)
+    jobs = getJobs(job_title, results_wanted, hours_old, country, location, is_remote)
     all_jobs = pd.concat([all_jobs, jobs], ignore_index=True)
 
 
