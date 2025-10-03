@@ -31,7 +31,7 @@ def getJobs(
         linkedin_fetch_description=True,  # gets more info such as description, direct job url (slower)
         # proxies=["208.195.175.46:65095", "208.195.175.45:65095", "localhost"],
     )
-    logging.warning(f"Found {len(jobs)} {jobTitle} jobs in {country},{location}")
+    logging.warning(f"Found {len(jobs)} {jobTitle} jobs in {location},{country}")
     # print(jobs)
     return jobs
     # jobs.to_csv(
