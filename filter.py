@@ -11,25 +11,19 @@ total_empty_response = 0
 total_fail_empty_response = 0
 
 
-def filter_jobs(jobs, cv, api_keys, good_fit_jobs):
+def filter_jobs(jobs, cv, km, good_fit_jobs):
     global total_fail,total_overload,total_fail_overload,total_empty_response,total_fail_empty_response
-    key_number = 0
 
     for i, job in jobs.iterrows():
         # print("index is :", i)  # for debugging
-
-        if (i + 1) % 10 == 0 and i != 0:
-            logging.warning("sleeping to avoid API rate limits")
-            time.sleep(60)
         try_count = 3
-
         while try_count > 0:
 
             try:
                 cleaned_description = "\n".join(
                     [line for line in job["description"].splitlines() if line.strip()]
                 )
-                ai_response = generate(cleaned_description, cv, api_keys[key_number])
+                ai_response = generate(cleaned_description, cv, km.get_key())
                 ai_response_dict = json.loads(ai_response)
                 break
 
@@ -40,8 +34,7 @@ def filter_jobs(jobs, cv, api_keys, good_fit_jobs):
                     total_fail += 1
                     total_fail_empty_response += 1
 
-                logging.warning("Sleeping after JSONDecodeError")
-                time.sleep(6)
+                logging.warning("JSONDecodeError happend")
 
             except ServerError as e:
 
@@ -52,8 +45,7 @@ def filter_jobs(jobs, cv, api_keys, good_fit_jobs):
                         total_fail += 1
                         total_fail_overload += 1
                     logging.warning("sleeping to after The model is overloaded.")
-                    print(e.details)
-                    time.sleep(10)
+                    time.sleep(3)
                 else:
                     logging.critical(e.details)
                     return 1
@@ -61,10 +53,8 @@ def filter_jobs(jobs, cv, api_keys, good_fit_jobs):
             except ClientError as e:
                 if e.details["error"]["code"] == 429:
                     logging.warning("api limit hit")
-                    key_number += 1
-                    if key_number > len(api_keys) - 1:
-                        logging.critical("All api keys hit the limit")
-                        return 1
+                    if km.delete_key() == 1:
+                        return 429
                 else:
                     logging.critical(e.details)
                     return 1
