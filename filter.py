@@ -3,6 +3,7 @@ import time
 from ai import generate
 import json
 from google.genai.errors import ServerError, ClientError
+from httpx import RemoteProtocolError
 
 total_fail = 0
 total_overload = 0
@@ -58,6 +59,11 @@ def filter_jobs(jobs, cv, km, good_fit_jobs):
                 else:
                     logging.critical(e.details)
                     return 1
+
+            except RemoteProtocolError as e:
+                try_count -= 1
+                logging.exception("sleeping after RemoteProtocolError")
+                time.sleep(3)
 
         else:
             logging.critical("All attempts failed")
