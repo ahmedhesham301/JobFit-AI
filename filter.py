@@ -56,6 +56,7 @@ def filter_jobs(jobs, cv, km, good_fit_jobs):
                     logging.warning("api limit hit")
                     if km.delete_key() == 1:
                         return 429
+                    time.sleep(10)
                 else:
                     logging.critical(e.details)
                     return 1
