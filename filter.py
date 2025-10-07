@@ -21,6 +21,7 @@ def filter_jobs(jobs, cv, km, good_fit_jobs):
         while try_count > 0:
 
             try:
+                logging.warning(i)
                 cleaned_description = "\n".join(
                     [line for line in job["description"].splitlines() if line.strip()]
                 )
@@ -53,7 +54,7 @@ def filter_jobs(jobs, cv, km, good_fit_jobs):
 
             except ClientError as e:
                 if e.details["error"]["code"] == 429:
-                    logging.warning("api limit hit")
+                    logging.exception("api limit hit")
                     if km.delete_key() == 1:
                         return 429
                     time.sleep(10)
