@@ -21,7 +21,7 @@ def filter_jobs(jobs, cv, km, good_fit_jobs):
         while try_count > 0:
 
             try:
-                logging.warning(i)
+                logging.warning(f"index is {i}")
                 cleaned_description = "\n".join(
                     [line for line in job["description"].splitlines() if line.strip()]
                 )
