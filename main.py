@@ -41,6 +41,7 @@ def main():
     get_jobs("backend",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
     get_jobs("software engineer",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
     get_jobs("intern",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
+    print(f"Total jobs with duplicates: {len(all_jobs)}")
     all_jobs.drop_duplicates(subset=["job_url"], inplace=True, ignore_index=True)
     logging.warning(f"Total jobs no duplicates: {len(all_jobs)}")
     all_api_key_used = filter_jobs(all_jobs, CV, km, good_fit_jobs)
