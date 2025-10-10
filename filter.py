@@ -58,7 +58,7 @@ def filter_jobs(jobs, cv, km, good_fit_jobs):
                     if km.delete_key() == 1:
                         return 429
                     logging.warning(f"total api keys count after deleting current key: {len(km.keys)}")
-                    time.sleep(10)
+                    time.sleep(60)
                 else:
                     logging.critical(e.details)
                     return 1
