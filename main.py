@@ -5,6 +5,8 @@ import os
 import logging
 import pandas as pd
 from key_manger import KeyManger
+from stats import Stats
+from datetime import datetime
 
 logging.basicConfig(
     level=logging.WARNING, format="%(asctime)s - %(levelname)s - %(message)s"
@@ -29,26 +31,40 @@ def get_jobs(job_title, results_wanted, hours_old, country, location, is_remote=
 
 
 def main():
+    s = Stats()
+    t = datetime.now()
     get_jobs("devops", results_wanted=30, hours_old=2, country="egypt", location="cairo")
-    get_jobs("backend", results_wanted=30, hours_old=2, country="egypt", location="cairo")
-    get_jobs("software engineer",results_wanted=30,hours_old=2,country="egypt",location="cairo",)
-    get_jobs("cloud", results_wanted=30, hours_old=2, country="egypt", location="cairo")
-    get_jobs("site reliability engineer",results_wanted=30,hours_old=2,country="egypt",location="cairo")
-    get_jobs("sre", results_wanted=30, hours_old=2, country="egypt", location="cairo")
-    get_jobs("intern", results_wanted=30, hours_old=2, country="egypt", location="cairo")
+    # get_jobs("backend", results_wanted=30, hours_old=2, country="egypt", location="cairo")
+    # get_jobs("software engineer",results_wanted=30,hours_old=2,country="egypt",location="cairo",)
+    # get_jobs("cloud", results_wanted=30, hours_old=2, country="egypt", location="cairo")
+    # get_jobs("site reliability engineer",results_wanted=30,hours_old=2,country="egypt",location="cairo")
+    # get_jobs("sre", results_wanted=30, hours_old=2, country="egypt", location="cairo")
+    # get_jobs("intern", results_wanted=30, hours_old=2, country="egypt", location="cairo")
     
-    get_jobs("devops",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
-    get_jobs("backend",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
-    get_jobs("software engineer",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
-    get_jobs("intern",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
+    # get_jobs("devops",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
+    # get_jobs("backend",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
+    # get_jobs("software engineer",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
+    # get_jobs("intern",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
+
+    s.scraping_time = datetime.now() - t
+    
     logging.warning(f"Total jobs with duplicates: {len(all_jobs)}")
     all_jobs.drop_duplicates(subset=["job_url"], inplace=True, ignore_index=True)
     logging.warning(f"Total jobs no duplicates: {len(all_jobs)}")
+
+    t = datetime.now()
     all_api_key_used = filter_jobs(all_jobs, CV, km, good_fit_jobs)
+    s.filter_time = datetime.now() - t
     if len(good_fit_jobs) > 0:
+        t = datetime.now()
         send_email(SENDER, RECEIVER, PASSWORD, good_fit_jobs)
+        s.email_time = datetime.now() - t
     else:
         logging.warning("no good fit jobs")
+   
+    s.end_time = datetime.now()
+    s.print()
+    
     if all_api_key_used == True:
         return 429
     
