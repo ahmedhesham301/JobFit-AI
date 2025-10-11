@@ -1,4 +1,3 @@
-import logging
 class Stats:
     def __init__(self):
         self.scraping_time = None
@@ -13,5 +12,6 @@ class Stats:
 Total jobs no duplicates: {self.jobs_no_duplicates}
 Scraping time: {self.scraping_time}
 Filter_time: {self.filter_time}
+AVG request time: {self.filter_time / self.jobs_no_duplicates}
 Email time: {self.email_time}"""
         )
