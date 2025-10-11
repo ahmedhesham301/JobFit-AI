@@ -34,20 +34,20 @@ def main():
     s = Stats()
     t = datetime.now()
     get_jobs("devops", results_wanted=30, hours_old=2, country="egypt", location="cairo")
-    # get_jobs("backend", results_wanted=30, hours_old=2, country="egypt", location="cairo")
-    # get_jobs("software engineer",results_wanted=30,hours_old=2,country="egypt",location="cairo",)
-    # get_jobs("cloud", results_wanted=30, hours_old=2, country="egypt", location="cairo")
-    # get_jobs("site reliability engineer",results_wanted=30,hours_old=2,country="egypt",location="cairo")
-    # get_jobs("sre", results_wanted=30, hours_old=2, country="egypt", location="cairo")
-    # get_jobs("intern", results_wanted=30, hours_old=2, country="egypt", location="cairo")
+    get_jobs("backend", results_wanted=30, hours_old=2, country="egypt", location="cairo")
+    get_jobs("software engineer",results_wanted=30,hours_old=2,country="egypt",location="cairo",)
+    get_jobs("cloud", results_wanted=30, hours_old=2, country="egypt", location="cairo")
+    get_jobs("site reliability engineer",results_wanted=30,hours_old=2,country="egypt",location="cairo")
+    get_jobs("sre", results_wanted=30, hours_old=2, country="egypt", location="cairo")
+    get_jobs("intern", results_wanted=30, hours_old=2, country="egypt", location="cairo")
     
-    # get_jobs("devops",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
-    # get_jobs("backend",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
-    # get_jobs("software engineer",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
-    # get_jobs("intern",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
+    get_jobs("devops",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
+    get_jobs("backend",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
+    get_jobs("software engineer",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
+    get_jobs("intern",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
 
     s.scraping_time = datetime.now() - t
-    
+
     logging.warning(f"Total jobs with duplicates: {len(all_jobs)}")
     all_jobs.drop_duplicates(subset=["job_url"], inplace=True, ignore_index=True)
     logging.warning(f"Total jobs no duplicates: {len(all_jobs)}")
