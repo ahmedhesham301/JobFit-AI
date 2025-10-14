@@ -7,6 +7,8 @@ import pandas as pd
 from key_manger import KeyManger
 from stats import Stats
 from datetime import datetime
+import concurrent.futures
+from jobs_to_search import jobs
 
 logging.basicConfig(
     level=logging.WARNING, format="%(asctime)s - %(levelname)s - %(message)s"
@@ -24,34 +26,36 @@ km = KeyManger(api_keys)
 with open("instruction.txt", "r") as f:
     CV = f.read()
 
-def get_jobs(job_title, results_wanted, hours_old, country, location, is_remote=False):
-    global all_jobs
-    jobs = getJobs(job_title, results_wanted, hours_old, country, location, is_remote)
-    all_jobs = pd.concat([all_jobs, jobs], ignore_index=True)
+
+def get_jobs(job):
+    print(f"searching for {job["role"]}")
+    jobs = getJobs(
+        job["role"],
+        job["results_wanted"],
+        job["hours_old"],
+        job["country"],
+        job["city"],
+        job["is_remote"],
+    )
+    print(f"searching for {job["role"]} ended")
+    return jobs
 
 
 def main():
+    global all_jobs
     s = Stats()
     t = datetime.now()
-    get_jobs("devops", results_wanted=30, hours_old=2, country="egypt", location="cairo")
-    get_jobs("backend", results_wanted=30, hours_old=2, country="egypt", location="cairo")
-    get_jobs("software engineer",results_wanted=30,hours_old=2,country="egypt",location="cairo",)
-    get_jobs("cloud", results_wanted=30, hours_old=2, country="egypt", location="cairo")
-    get_jobs("site reliability engineer",results_wanted=30,hours_old=2,country="egypt",location="cairo")
-    get_jobs("sre", results_wanted=30, hours_old=2, country="egypt", location="cairo")
-    get_jobs("intern", results_wanted=30, hours_old=2, country="egypt", location="cairo")
-
-    get_jobs("devops",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
-    get_jobs("backend",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
-    get_jobs("software engineer",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
-    get_jobs("intern",results_wanted=200,hours_old=2,country="worldwide",location="",is_remote=True)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+        futures = [executor.submit(get_jobs, job) for job in jobs]
+        for future in concurrent.futures.as_completed(futures):
+            all_jobs = pd.concat([all_jobs, future.result()], ignore_index=True)
 
     s.scraping_time = datetime.now() - t
 
     s.jobs_duplicates = len(all_jobs)
     all_jobs.drop_duplicates(subset=["job_url"], inplace=True, ignore_index=True)
     s.jobs_no_duplicates = len(all_jobs)
-    
+
     t = datetime.now()
     all_api_key_used = filter_jobs(all_jobs, CV, km, good_fit_jobs)
     s.filter_time = datetime.now() - t
