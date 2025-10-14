@@ -58,7 +58,7 @@ def main():
     s.jobs_no_duplicates = len(all_jobs)
 
     t = datetime.now()
-    jobs_per_chunk = ceil(len(all_jobs) / 5)
+    jobs_per_chunk = ceil(len(all_jobs) / 4)
     jobs_chunks = [all_jobs[i : i + jobs_per_chunk] for i in range(0, len(all_jobs), jobs_per_chunk)]
     kms = km.split(len(jobs_chunks))
 
