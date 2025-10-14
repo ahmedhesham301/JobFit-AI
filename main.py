@@ -46,7 +46,7 @@ def main():
     global all_jobs, good_fit_jobs
     s = Stats()
     t = datetime.now()
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+    with concurrent.futures.ThreadPoolExecutor() as executor:
         futures = [executor.submit(get_jobs, job) for job in jobs]
         for future in concurrent.futures.as_completed(futures):
             all_jobs = pd.concat([all_jobs, future.result()], ignore_index=True)
@@ -62,7 +62,7 @@ def main():
     jobs_chunks = [all_jobs[i : i + jobs_per_chunk] for i in range(0, len(all_jobs), jobs_per_chunk)]
     kms = km.split(len(jobs_chunks))
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+    with concurrent.futures.ThreadPoolExecutor() as executor:
         futures = [executor.submit(filter_jobs, jobs_chunk, CV, km) for jobs_chunk,km in zip(jobs_chunks,kms)]
         for future in concurrent.futures.as_completed(futures):
             good_fit_jobs.extend(future.result())
