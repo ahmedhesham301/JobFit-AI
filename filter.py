@@ -5,16 +5,8 @@ import json
 from google.genai.errors import ServerError, ClientError
 from httpx import RemoteProtocolError
 
-total_fail = 0
-total_overload = 0
-total_fail_overload = 0
-total_empty_response = 0
-total_fail_empty_response = 0
-
-
-def filter_jobs(jobs, cv, km, good_fit_jobs):
-    global total_fail,total_overload,total_fail_overload,total_empty_response,total_fail_empty_response
-
+def filter_jobs(jobs, cv, km):
+    good_fit_jobs = []
     for i, job in jobs.iterrows():
         # print("index is :", i)  # for debugging
         try_count = 3
@@ -82,12 +74,5 @@ def filter_jobs(jobs, cv, km, good_fit_jobs):
                     "what I'm I missing": ai_response_dict["what I'm I missing"],
                 }
             )
-    print_stats
     return good_fit_jobs
 
-
-def print_stats():
-    stats = f"""total fail: {total_fail}
-total empty responses: {total_empty_response} fail: {total_fail_empty_response}
-Total overloads:       {total_overload}       fail: {total_fail_overload}"""
-    logging.warning(stats)

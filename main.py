@@ -9,6 +9,7 @@ from stats import Stats
 from datetime import datetime
 import concurrent.futures
 from jobs_to_search import jobs
+from math import ceil
 
 logging.basicConfig(
     level=logging.WARNING, format="%(asctime)s - %(levelname)s - %(message)s"
@@ -17,7 +18,7 @@ logging.basicConfig(
 SENDER = os.getenv("smtp_email")
 PASSWORD = os.getenv("smtp_password")
 RECEIVER = os.getenv("receiver_email")
-api_keys = os.getenv("api_keys")
+api_keys = os.getenv("api_keys").split(",")
 
 all_jobs = pd.DataFrame()
 good_fit_jobs = []
@@ -42,7 +43,7 @@ def get_jobs(job):
 
 
 def main():
-    global all_jobs
+    global all_jobs, good_fit_jobs
     s = Stats()
     t = datetime.now()
     with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
@@ -57,7 +58,16 @@ def main():
     s.jobs_no_duplicates = len(all_jobs)
 
     t = datetime.now()
-    all_api_key_used = filter_jobs(all_jobs, CV, km, good_fit_jobs)
+    jobs_per_chunk = ceil(len(all_jobs) / 5)
+    jobs_chunks = [all_jobs[i : i + jobs_per_chunk] for i in range(0, len(all_jobs), jobs_per_chunk)]
+    kms = km.split(len(jobs_chunks))
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+        futures = [executor.submit(filter_jobs, jobs_chunk, CV, km) for jobs_chunk,km in zip(jobs_chunks,kms)]
+        for future in concurrent.futures.as_completed(futures):
+            good_fit_jobs.extend(future.result())
+
+    # all_api_key_used = filter_jobs(all_jobs, CV, km, good_fit_jobs)
     s.filter_time = datetime.now() - t
     if len(good_fit_jobs) > 0:
         t = datetime.now()
@@ -69,8 +79,8 @@ def main():
     s.end_time = datetime.now()
     s.print()
 
-    if all_api_key_used == True:
-        return 429
+    # if all_api_key_used == True:
+    #     return 429
 
 
 if __name__ == "__main__":

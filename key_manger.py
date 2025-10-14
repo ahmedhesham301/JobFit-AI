@@ -1,11 +1,20 @@
 from random import shuffle
+from math import ceil
 
 
 class KeyManger:
-    def __init__(self, keys_string):
-        self.keys = keys_string.split(",")
+    def __init__(self, keys):
+        self.keys = keys
         shuffle(self.keys)
         self.keys_index = -1
+
+    def split(self, no_of_chunks):
+        key_mangers = []
+        chunk_size = ceil(len(self.keys) / no_of_chunks)
+        for i in range(0, len(self.keys), chunk_size):
+            km = KeyManger(self.keys[i : i + chunk_size])
+            key_mangers.append(km)
+        return key_mangers
 
     def get_key(self):
         self.keys_index = (self.keys_index + 1) % len(self.keys)
