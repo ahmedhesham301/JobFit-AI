@@ -47,9 +47,9 @@ def filter_jobs(jobs, cv, km):
             except ClientError as e:
                 if e.details["error"]["code"] == 429:
                     logging.exception("api limit hit")
-                    if km.delete_key() == 1:
-                        return 429
-                    logging.warning(f"total api keys count after deleting current key: {len(km.keys)}")
+                    # if km.delete_key() == 1:
+                    #     return 429
+                    # logging.warning(f"total api keys count after deleting current key: {len(km.keys)}")
                     time.sleep(60)
                 else:
                     logging.critical(e.details)
