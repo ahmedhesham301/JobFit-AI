@@ -23,10 +23,10 @@ def filter_jobs(jobs, cv, km):
 
             except json.JSONDecodeError as e:
                 try_count -= 1
-                total_empty_response += 1
-                if try_count == 0:
-                    total_fail += 1
-                    total_fail_empty_response += 1
+                # total_empty_response += 1
+                # if try_count == 0:
+                #     total_fail += 1
+                #     total_fail_empty_response += 1
 
                 logging.warning("JSONDecodeError happend")
 
@@ -34,10 +34,10 @@ def filter_jobs(jobs, cv, km):
 
                 if e.details["error"]["code"] == 503:
                     try_count -= 1
-                    total_overload += 1
-                    if try_count == 0:
-                        total_fail += 1
-                        total_fail_overload += 1
+                    # total_overload += 1
+                    # if try_count == 0:
+                    #     total_fail += 1
+                    #     total_fail_overload += 1
                     logging.warning("sleeping to after The model is overloaded.")
                     time.sleep(3)
                 else:
