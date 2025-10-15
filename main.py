@@ -63,7 +63,7 @@ def main():
     print(f"number of jobs per chunk: {jobs_per_chunk}")
     print(f"number of job chunks: {len(jobs_chunks)}")
     print(f"number of kms: {len(kms)}")
-    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+    with concurrent.futures.ThreadPoolExecutor() as executor:
         futures = [executor.submit(filter_jobs, jobs_chunk, CV, km) for jobs_chunk,km in zip(jobs_chunks,kms)]
         for future in concurrent.futures.as_completed(futures):
             good_fit_jobs.extend(future.result())
