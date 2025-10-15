@@ -45,12 +45,15 @@ def filter_jobs(jobs, cv, km):
                     return 1
 
             except ClientError as e:
-                if e.details["error"]["code"] == 429:
-                    logging.exception("api limit hit")
+                if (
+                    e.details["error"]["code"] == 429
+                    and e.details["error"]["status"] == "RESOURCE_EXHAUSTED"
+                ):
+                    logging.error("RESOURCE_EXHAUSTED sleeping for 3 seconds")
                     # if km.delete_key() == 1:
                     #     return 429
                     # logging.warning(f"total api keys count after deleting current key: {len(km.keys)}")
-                    time.sleep(60)
+                    time.sleep(3)
                 else:
                     logging.critical(e.details)
                     return 1
@@ -75,4 +78,3 @@ def filter_jobs(jobs, cv, km):
                 }
             )
     return good_fit_jobs
-
