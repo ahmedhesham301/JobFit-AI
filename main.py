@@ -54,6 +54,7 @@ def main():
 
     s.jobs_duplicates = len(all_jobs)
     all_jobs.drop_duplicates(subset=["job_url"], inplace=True, ignore_index=True)
+    all_jobs = all_jobs.dropna(subset=["description"])
     s.jobs_no_duplicates = len(all_jobs)
     t = datetime.now()
     jobs_per_chunk = ceil(len(all_jobs) / 5)
