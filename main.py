@@ -38,7 +38,6 @@ def get_jobs(job):
         job["city"],
         job["is_remote"],
     )
-    print(f"searching for {job["role"]} ended")
     return jobs
 
 
