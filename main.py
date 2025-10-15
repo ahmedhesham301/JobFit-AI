@@ -56,13 +56,13 @@ def main():
     all_jobs.drop_duplicates(subset=["job_url"], inplace=True, ignore_index=True)
     s.jobs_no_duplicates = len(all_jobs)
     t = datetime.now()
-    jobs_per_chunk = ceil(len(all_jobs) / 4)
+    jobs_per_chunk = ceil(len(all_jobs) / 5)
     jobs_chunks = [all_jobs[i : i + jobs_per_chunk] for i in range(0, len(all_jobs), jobs_per_chunk)]
     kms = km.split(len(jobs_chunks))
     print(f"number of jobs per chunk: {jobs_per_chunk}")
     print(f"number of job chunks: {len(jobs_chunks)}")
     print(f"number of kms: {len(kms)}")
-    with concurrent.futures.ThreadPoolExecutor() as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         futures = [executor.submit(filter_jobs, jobs_chunk, CV, km) for jobs_chunk,km in zip(jobs_chunks,kms)]
         for future in concurrent.futures.as_completed(futures):
             good_fit_jobs.extend(future.result())
