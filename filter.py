@@ -63,12 +63,6 @@ def filter_jobs(jobs, cv, km):
                 logging.exception("sleeping after RemoteProtocolError")
                 time.sleep(3)
 
-            except AttributeError as e:
-                logging.critical("AttributeError happen")
-                print(job["description"])
-                ai_response = generate(job["description"], cv, km.get_key())
-                ai_response_dict = json.loads(ai_response)
-                break
         else:
             logging.critical("All attempts failed")
             continue
