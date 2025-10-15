@@ -49,11 +49,11 @@ def filter_jobs(jobs, cv, km):
                     e.details["error"]["code"] == 429
                     and e.details["error"]["status"] == "RESOURCE_EXHAUSTED"
                 ):
-                    logging.error("RESOURCE_EXHAUSTED sleeping for 3 seconds")
+                    logging.error("RESOURCE_EXHAUSTED sleeping for 60 seconds")
                     # if km.delete_key() == 1:
                     #     return 429
                     # logging.warning(f"total api keys count after deleting current key: {len(km.keys)}")
-                    time.sleep(30)
+                    time.sleep(60)
                 else:
                     logging.critical(e.details)
                     return 1
@@ -63,6 +63,12 @@ def filter_jobs(jobs, cv, km):
                 logging.exception("sleeping after RemoteProtocolError")
                 time.sleep(3)
 
+            except AttributeError as e:
+                logging.critical("AttributeError happen")
+                print(job["description"])
+                ai_response = generate(job["description"], cv, km.get_key())
+                ai_response_dict = json.loads(ai_response)
+                break
         else:
             logging.critical("All attempts failed")
             continue
