@@ -6,7 +6,7 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN mv .venv/lib/python3.12/site-packages/jobspy/ /usr/local/lib/python3.12/site-packages/jobspy/ && rm -r .venv
+RUN mv .venv/lib/python3.12/site-packages/jobspy/ /usr/local/lib/python3.12/site-packages/jobspy/
 
 COPY . .
 
