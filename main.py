@@ -38,6 +38,7 @@ def get_jobs(job, last_run_info):
     if last_run_info == None:
         hours_old = job["hours_old"]
     elif datetime.now() - last_run_info > timedelta(hours=5):
+        print(f"the previous run was {datetime.now() - last_run_info}")
         hours_old = job["hours_old"]
     else:
         hours_old = (datetime.now() - last_run_info).total_seconds() / 3600
