@@ -32,17 +32,17 @@ with open("instruction.txt", "r") as f:
 if len(workflow_runs_info) == 2:
     if workflow_runs_info[1]["conclusion"] == "success":
         last_run_info = datetime.strptime(workflow_runs_info[1]["createdAt"], "%Y-%m-%dT%H:%M:%SZ")
-        print(last_run_info)
 
 def get_jobs(job, last_run_info):
     if last_run_info == None:
         hours_old = job["hours_old"]
-    elif datetime.now() - last_run_info > timedelta(hours=5):
-        print(f"the previous run was {datetime.now() - last_run_info}")
+    elif (diff := datetime.now() - last_run_info) > timedelta(hours=5):
         hours_old = job["hours_old"]
     else:
-        hours_old = (datetime.now() - last_run_info).total_seconds() / 3600
-    print(f"searching for {job["role"]} past {hours_old} hours")
+        hours_old = diff.total_seconds() / 3600
+    hours, remainder = divmod(diff.total_seconds(), 3600)
+    minutes = remainder / 60
+    print(f"searching for {job["role"]} past {int(hours)}:{int(minutes)} hours")
     jobs = getJobs(
         job["role"],
         job["results_wanted"],
