@@ -6,34 +6,46 @@ import logging
 import pandas as pd
 from key_manger import KeyManger
 from stats import Stats
-from datetime import datetime
+from datetime import datetime,timedelta
 import concurrent.futures
 from jobs_to_search import jobs
 from math import ceil
+import json
 
 logging.basicConfig(
-    level=logging.WARNING, format="%(asctime)s - %(levelname)s - %(message)s"
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
 SENDER = os.getenv("smtp_email")
 PASSWORD = os.getenv("smtp_password")
 RECEIVER = os.getenv("receiver_email")
 api_keys = os.getenv("api_keys").split(",")
+workflow_runs_info = json.loads(os.getenv("last_run_info"))
 
 all_jobs = pd.DataFrame()
 good_fit_jobs = []
 km = KeyManger(api_keys)
-
+last_run_info = None
 with open("instruction.txt", "r") as f:
     CV = f.read()
 
+if len(workflow_runs_info) == 2:
+    if workflow_runs_info[1]["conclusion"] == "success":
+        last_run_info = datetime.strptime(workflow_runs_info[1]["createdAt"], "%Y-%m-%dT%H:%M:%SZ")
+        print(last_run_info)
 
-def get_jobs(job):
-    print(f"searching for {job["role"]}")
+def get_jobs(job, last_run_info):
+    if last_run_info == None:
+        hours_old = job["hours_old"]
+    elif datetime.now() - last_run_info > timedelta(hours=5):
+        hours_old = job["hours_old"]
+    else:
+        hours_old = (datetime.now() - last_run_info).total_seconds() / 3600
+    print(f"searching for {job["role"]} past {hours_old} hours")
     jobs = getJobs(
         job["role"],
         job["results_wanted"],
-        job["hours_old"],
+        hours_old,
         job["country"],
         job["city"],
         job["is_remote"],
@@ -46,7 +58,7 @@ def main():
     s = Stats()
     t = datetime.now()
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        futures = [executor.submit(get_jobs, job) for job in jobs]
+        futures = [executor.submit(get_jobs, job,last_run_info) for job in jobs]
         for future in concurrent.futures.as_completed(futures):
             all_jobs = pd.concat([all_jobs, future.result()], ignore_index=True)
 
