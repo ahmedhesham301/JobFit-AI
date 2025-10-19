@@ -36,9 +36,8 @@ if len(workflow_runs_info) == 2:
 def get_jobs(job, last_run_info):
     if last_run_info == None:
         hours_old = job["hours_old"]
-    elif (diff := datetime.now() - last_run_info) > timedelta(hours=5):
-        hours_old = job["hours_old"]
     else:
+        diff = datetime.now() - last_run_info
         hours_old = diff.total_seconds() / 3600
     hours, remainder = divmod(diff.total_seconds(), 3600)
     minutes = remainder / 60
