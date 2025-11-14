@@ -20,7 +20,7 @@ EXPERIENCE:
 DevOps Intern | GhaymahSep 2025 – Present
 DevOps Intern | Orange Digital Centre, Cairo, EgyptJan 2025 – Feb 2025
 SKILLS:
-Containerization & Orchestration: Docker
+Containerization & Orchestration: Docker & Kubernetes
 Cloud Provider: AWS
 CI/CD: Jenkins & Github Actions
 Monitoring & Observability: Prometheus & Grafana
@@ -28,6 +28,7 @@ Configuration Management & IaC: Ansible & Terraform
 Version Control: Git & GitHub
 Programming & Scripting: Python, Bash, Golang
 Database: Postgresql & SQL
+security: Trivy
 
 PROJECTS:
 -weather-app
