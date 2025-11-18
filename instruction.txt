@@ -1,4 +1,4 @@
-i will give you job descriptions and you tell me if i'm a good fit or not in a percentage, why I'm I a good fit and what I'm I missing
+i will give you job descriptions and you tell me if i'm a good fit or not in a percentage, why I'm I a good fit in summary and what I'm I missing in summary
 this is my cv:
 Ahmed Hesham
 DevOps Engineer
@@ -28,7 +28,7 @@ Configuration Management & IaC: Ansible & Terraform
 Version Control: Git & GitHub
 Programming & Scripting: Python, Bash, Golang
 Database: Postgresql & SQL
-security: Trivy
+security: Trivy & SonarQube
 
 PROJECTS:
 -weather-app
@@ -59,3 +59,9 @@ Wrote modular, maintainable code following best practices.
 A Python-based application that leverages Google Gemini AI to analyze job descriptions and candidate
 profiles, search for relevant jobs, and generate a fit percentage. The system highlights strengths, identifies
 skill gaps, and automatically sends emails with high-fit job matches to users.
+
+CERTIFICATES:
+SQL and PostgreSQL: The Complete Developer's Guide
+Go - The Complete Guide
+Introduction to NGINX
+Kubernetes for the Absolute Beginners - Hands-on
