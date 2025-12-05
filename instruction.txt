@@ -60,6 +60,19 @@ A Python-based application that leverages Google Gemini AI to analyze job descri
 profiles, search for relevant jobs, and generate a fit percentage. The system highlights strengths, identifies
 skill gaps, and automatically sends emails with high-fit job matches to users.
 
+-URL Shortener
+(Node.js, Express, PostgreSQL, Redis)
+Built a production-style URL shortening service that converts long URLs into compact base62 IDs and
+performs fast 302 redirects.
+Implemented user registration/login with bcrypt password hashing and Redis-backed sessions for scalable
+authentication.
+Improved performance with Redis caching for URL lookups (cache-first reads with 24h TTL) and a collision-
+safe base62 ID generator.
+Added observability: Prometheus metrics endpoint and Grafana dashboards to monitor request rates, error
+counts, and request duration histograms.
+Containerized app with Docker / Docker Compose and provided scripts + docs for local development and
+production deployment.
+
 CERTIFICATES:
 SQL and PostgreSQL: The Complete Developer's Guide
 Go - The Complete Guide
