@@ -49,8 +49,7 @@ def filter_jobs(jobs, cv, km):
                     e.details["error"]["code"] == 429
                     and e.details["error"]["status"] == "RESOURCE_EXHAUSTED"
                 ):
-                    logging.error("RESOURCE_EXHAUSTED sleeping for 120 seconds")
-                    logging.error(e)
+                    logging.error("RESOURCE_EXHAUSTED sleeping for 60 seconds")
                     # if km.delete_key() == 1:
                     #     return 429
                     # logging.warning(f"total api keys count after deleting current key: {len(km.keys)}")
