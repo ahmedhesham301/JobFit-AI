@@ -45,7 +45,7 @@ def get_jobs(job, last_run_info):
     jobs = getJobs(
         job["role"],
         job["results_wanted"],
-        hours_old,
+        job["hours_old"],
         job["country"],
         job["city"],
         job["is_remote"],
