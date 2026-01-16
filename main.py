@@ -29,9 +29,9 @@ last_run_info = None
 with open("instruction.txt", "r") as f:
     CV = f.read()
 
-if len(workflow_runs_info) == 2:
-    if workflow_runs_info[1]["conclusion"] == "success":
-        last_run_info = datetime.strptime(workflow_runs_info[1]["createdAt"], "%Y-%m-%dT%H:%M:%SZ")
+# if len(workflow_runs_info) == 2:
+#     if workflow_runs_info[1]["conclusion"] == "success":
+#         last_run_info = datetime.strptime(workflow_runs_info[1]["createdAt"], "%Y-%m-%dT%H:%M:%SZ")
 
 def get_jobs(job, last_run_info):
     if last_run_info == None:
