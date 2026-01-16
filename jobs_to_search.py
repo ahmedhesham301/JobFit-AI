@@ -32,6 +32,14 @@ jobs = [
         "is_remote": True,
     },
     {
+        "role": "go",
+        "results_wanted": 1000,
+        "hours_old": 24,
+        "country": "worldwide",
+        "city": "",
+        "is_remote": True,
+    },
+    {
         "role": "devops",
         "results_wanted": 1000,
         "hours_old": 24,
