@@ -74,7 +74,7 @@ def main():
     s.jobs_no_duplicates = len(all_jobs)
     all_jobs = all_jobs[["title", "description", "job_url"]]
     all_jobs["description"] = all_jobs["description"].apply(clean_description)
-    all_jobs.to_csv("output.csv")
+    all_jobs.to_csv("/output/output.csv")
     # print(all_jobs.memory_usage(deep=True).sum())
     # t = datetime.now()
     # jobs_per_chunk = ceil(len(all_jobs) / 5)
