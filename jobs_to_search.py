@@ -2,7 +2,7 @@ jobs = [
     {
         "role": "devops",
         "results_wanted": 1000,
-        "hours_old": 24,
+        "hours_old": 1,
         "country": "worldwide",
         "city": "",
         "is_remote": True,
@@ -10,7 +10,7 @@ jobs = [
     {
         "role": "backend",
         "results_wanted": 1000,
-        "hours_old": 24,
+        "hours_old": 1,
         "country": "worldwide",
         "city": "",
         "is_remote": True,
@@ -18,7 +18,7 @@ jobs = [
     {
         "role": "software engineer",
         "results_wanted": 1000,
-        "hours_old": 24,
+        "hours_old": 1,
         "country": "worldwide",
         "city": "",
         "is_remote": True,
@@ -26,7 +26,7 @@ jobs = [
     {
         "role": "intern",
         "results_wanted": 1000,
-        "hours_old": 24,
+        "hours_old": 1,
         "country": "worldwide",
         "city": "",
         "is_remote": True,
@@ -34,7 +34,7 @@ jobs = [
     {
         "role": "go",
         "results_wanted": 1000,
-        "hours_old": 24,
+        "hours_old": 1,
         "country": "worldwide",
         "city": "",
         "is_remote": True,
@@ -42,7 +42,7 @@ jobs = [
     {
         "role": "devops",
         "results_wanted": 1000,
-        "hours_old": 24,
+        "hours_old": 1,
         "country": "egypt",
         "city": "cairo",
         "is_remote": False,
@@ -50,7 +50,7 @@ jobs = [
     {
         "role": "backend",
         "results_wanted": 1000,
-        "hours_old": 24,
+        "hours_old": 1,
         "country": "egypt",
         "city": "cairo",
         "is_remote": False,
@@ -58,7 +58,7 @@ jobs = [
     {
         "role": "software engineer",
         "results_wanted": 1000,
-        "hours_old": 24,
+        "hours_old": 1,
         "country": "egypt",
         "city": "cairo",
         "is_remote": False,
@@ -66,7 +66,7 @@ jobs = [
     {
         "role": "cloud",
         "results_wanted": 1000,
-        "hours_old": 24,
+        "hours_old": 1,
         "country": "egypt",
         "city": "cairo",
         "is_remote": False,
@@ -74,7 +74,7 @@ jobs = [
     {
         "role": "site reliability engineer",
         "results_wanted": 1000,
-        "hours_old": 24,
+        "hours_old": 1,
         "country": "egypt",
         "city": "cairo",
         "is_remote": False,
@@ -82,7 +82,7 @@ jobs = [
     {
         "role": "sre",
         "results_wanted": 1000,
-        "hours_old": 2,
+        "hours_old": 1,
         "country": "egypt",
         "city": "cairo",
         "is_remote": False,
@@ -90,7 +90,7 @@ jobs = [
     {
         "role": "intern",
         "results_wanted": 1000,
-        "hours_old": 24,
+        "hours_old": 1,
         "country": "egypt",
         "city": "cairo",
         "is_remote": False,
