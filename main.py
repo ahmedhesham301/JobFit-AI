@@ -51,7 +51,11 @@ def get_jobs(job, last_run_info):
         job["is_remote"],
     )
     return jobs
-
+def clean_description(d):
+    cleaned_description = "\n".join(
+        [line for line in d.splitlines() if line.strip()]
+    )
+    return cleaned_description
 
 def main():
     global all_jobs, good_fit_jobs
@@ -68,7 +72,10 @@ def main():
     all_jobs.drop_duplicates(subset=["job_url"], inplace=True, ignore_index=True)
     all_jobs = all_jobs.dropna(subset=["description"])
     s.jobs_no_duplicates = len(all_jobs)
-    print(all_jobs.memory_usage(deep=True).sum())
+    all_jobs = all_jobs[["title", "description", "job_url"]]
+    all_jobs["description"] = all_jobs["description"].apply(clean_description)
+    all_jobs.to_csv("output.csv")
+    # print(all_jobs.memory_usage(deep=True).sum())
     # t = datetime.now()
     # jobs_per_chunk = ceil(len(all_jobs) / 5)
     # jobs_chunks = [all_jobs[i : i + jobs_per_chunk] for i in range(0, len(all_jobs), jobs_per_chunk)]
