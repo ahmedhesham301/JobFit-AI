@@ -1,2 +1,1 @@
 python-jobspy==1.1.82
-google-genai==1.38.0
