@@ -1,0 +1,44 @@
+Ahmed Hesham
+DevOps Engineer
+Cairo, Egypt
+
+Email: ahmed.hesham.farag@gmail.com
+GitHub: github.com/ahmedhesham301
+LinkedIn: linkedin.com/in/ahmed-hesham0
+Portfolio: ahmedhesham301.github.io/developerFolio
+
+Summary
+Aspiring DevOps Engineer with hands-on experience in CI/CD, cloud infrastructure, containerization, and monitoring. Strong foundation in automation, infrastructure as code, and backend systems. Actively seeking opportunities to grow through real-world DevOps challenges and production-grade systems.
+
+Education
+Bachelor of Computer Science
+Sadat Academy
+Sep 2022 – Jun 2026
+
+Experience
+DevOps Intern — Ghaymah (Sep 2025 – Nov 2025)
+DevOps Intern — Orange Digital Centre, Cairo (Jan 2025 – Feb 2025)
+
+Technical Skills
+Containerization & Orchestration: Docker, Kubernetes
+Cloud: AWS (EC2, IAM, Load Balancing, Auto Scaling, RDS)
+CI/CD: Jenkins, GitHub Actions
+Monitoring & Observability: Prometheus, Grafana, Grafana Alloy, Grafana Loki
+Configuration Management & IaC: Ansible, Terraform
+Version Control: Git, GitHub
+Programming & Scripting: Python, Bash, Golang
+Databases: PostgreSQL, SQL
+Security & Code Quality: Trivy, SonarQube
+
+Projects
+Weather App: CI/CD with Jenkins, Dockerized deployment, Terraform infrastructure, Ansible automation
+URL Shortener: Node.js service with Redis caching, PostgreSQL, Docker, Kubernetes, Prometheus, Grafana
+Go URL Shortener: REST APIs in Go, PostgreSQL, Docker, Prometheus monitoring
+JobFit AI: Python app using Google Gemini AI to match CVs with job descriptions
+Minecraft Server Automation: Dockerized Minecraft server with Bash automation
+
+Certificates
+SQL & PostgreSQL – The Complete Developer’s Guide
+Go – The Complete Guide
+Introduction to NGINX
+Kubernetes for Absolute Beginners
