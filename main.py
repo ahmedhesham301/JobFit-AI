@@ -1,6 +1,4 @@
 from jobs import getJobs
-# from alert import send_email
-# from filter import filter_jobs
 import os
 import logging
 import pandas as pd
