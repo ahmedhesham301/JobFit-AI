@@ -13,7 +13,7 @@ good_fit_jobs = pd.DataFrame(columns=["title", "description", "job_url", "percen
 bad_fit_jobs = pd.DataFrame(columns=["title", "description", "job_url", "percentage"])
 total_jobs = 0
 
-with open("local/cv.txt", "r") as file:
+with open("cv.txt", "r") as file:
     cv = file.read()
 
 artifacts = am.list_artifacts("mokagad/job")["artifacts"][0:3]
