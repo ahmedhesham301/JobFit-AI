@@ -27,12 +27,9 @@ Job Description:
 {job}
 """
     response = chat(
-        model="phi4-mini",
+        model="gemma3:12b-it-qat",
         stream=False,
-        options={
-            "seed": 1,
-            "temperature": 0
-        },
+        options={"seed": 1, "temperature": 0},
         messages=[
             {
                 "role": "user",
