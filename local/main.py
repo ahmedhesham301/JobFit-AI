@@ -29,7 +29,7 @@ for artifact in artifacts:
         ai_response = local_ai.generate(row.description, cv)
         ai_response = json.loads(ai_response)
         print(ai_response["fitPercentage"])
-        if ai_response["fitPercentage"] < 70:
+        if ai_response["fitPercentage"] < 65:
             bad_fit_jobs.loc[len(bad_fit_jobs)] = [
                 row.title,
                 row.description,
