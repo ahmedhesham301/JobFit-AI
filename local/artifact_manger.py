@@ -2,12 +2,12 @@ import requests
 import zipfile
 import io
 import pandas as pd
-from os import getenv
+import os
 import sys
 
 
 def list_artifacts(repo):
-    GITHUB_TOKEN = getenv("gh_token")
+    GITHUB_TOKEN = os.getenv("gh_token")
     url = f"https://api.github.com/repos/{repo}/actions/artifacts"
     headers = {
     "accept": "application/vnd.github+json",
@@ -22,7 +22,7 @@ def list_artifacts(repo):
     return(response.json())
 
 def get_an_artifact(repo, artifact_id):
-    GITHUB_TOKEN = getenv("gh_token")
+    GITHUB_TOKEN = os.getenv("gh_token")
     url = f"https://api.github.com/repos/{repo}/actions/artifacts/{artifact_id}/zip"
     headers = {
         "accept": "application/vnd.github+json",
@@ -39,7 +39,7 @@ def get_an_artifact(repo, artifact_id):
 
 
 def delete_artifact(repo, artifact_id):
-    GITHUB_TOKEN = getenv("gh_token")
+    GITHUB_TOKEN = os.getenv("gh_token")
     url = f"https://api.github.com/repos/{repo}/actions/artifacts/{artifact_id}"
     headers = {
         "accept": "application/vnd.github+json",

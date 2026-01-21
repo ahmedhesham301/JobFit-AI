@@ -1,5 +1,6 @@
 from ollama import chat
 from pydantic import BaseModel
+import os
 
 class format(BaseModel):
     fitPercentage: int
@@ -27,7 +28,7 @@ Job Description:
 {job}
 """
     response = chat(
-        model="gemma3:12b-it-qat",
+        model= os.getenv("model"),
         stream=False,
         options={"seed": 1, "temperature": 0},
         messages=[

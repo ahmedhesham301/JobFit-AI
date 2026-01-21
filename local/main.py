@@ -17,7 +17,7 @@ total_jobs = 0
 with open("cv.txt", "r") as file:
     cv = file.read()
 
-artifacts = am.list_artifacts("mokagad/job")["artifacts"]
+artifacts = am.list_artifacts("mokagad/job")["artifacts"][0:1]
 
 print(f"Total artifacts: {len(artifacts)}")
 
