@@ -5,7 +5,8 @@ import pandas as pd
 import time
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(".env")
+
 
 start_time = time.perf_counter()
 
@@ -16,7 +17,7 @@ total_jobs = 0
 with open("cv.txt", "r") as file:
     cv = file.read()
 
-artifacts = am.list_artifacts("mokagad/job")["artifacts"][0:3]
+artifacts = am.list_artifacts("mokagad/job")["artifacts"][0:1]
 
 print(f"Total artifacts: {len(artifacts)}")
 
