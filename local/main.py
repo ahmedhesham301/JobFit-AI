@@ -16,11 +16,11 @@ total_jobs = 0
 with open("local/cv.txt", "r") as file:
     cv = file.read()
 
-artifacts = am.list_artifacts("mokagad/job")
+artifacts = am.list_artifacts("mokagad/job")["artifacts"][0:3]
 
-print(f"Total artifacts: {artifacts["total_count"]}")
+print(f"Total artifacts: {len(artifacts)}")
 
-for artifact in artifacts["artifacts"]:
+for artifact in artifacts:
     df = am.get_an_artifact("mokagad/job", artifact["id"])
     print(f"Jobs to filter: {len(df)}")
     total_jobs = total_jobs + len(df)
@@ -43,7 +43,7 @@ for artifact in artifacts["artifacts"]:
                 ai_response["fitPercentage"],
             ]
 
-for artifact in artifacts["artifacts"]:
+for artifact in artifacts:
     am.delete_artifact("mokagad/job", artifact["id"])
 
 good_fit_jobs.to_csv("goodfitjobs.csv")
