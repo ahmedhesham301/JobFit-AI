@@ -4,6 +4,8 @@ import json
 import pandas as pd
 import time
 from dotenv import load_dotenv
+import alert
+import os
 
 load_dotenv(".env")
 
@@ -53,5 +55,13 @@ bad_fit_jobs.to_csv("badfitjobs.csv")
 
 end_time = time.perf_counter()
 elapsed_time = end_time - start_time
+
+alert.send_email(
+    os.getenv("smtp_email"),
+    os.getenv("receiver_email"),
+    os.getenv("smtp_password"),
+    good_fit_jobs
+)
+
 print(f"Elapsed time: {elapsed_time:.1f} seconds")
 print(f"Total jobs filtered: {total_jobs}")
