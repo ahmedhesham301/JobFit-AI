@@ -22,14 +22,15 @@ print(f"Total artifacts: {len(artifacts)}")
 
 # Inserts unfiltered jobs to database
 for artifact in artifacts:
-    df = am.get_an_artifact("mokagad/job", artifact["id"])
-    print(f"Jobs to add to db: {len(df)}")
-    for row in df.itertuples(index=False):
-        db.insert_job(
-            row.job_url,
-            row.title,
-            row.description,
-        )
+    if artifact["expired"] != True:
+        df = am.get_an_artifact("mokagad/job", artifact["id"])
+        print(f"Jobs to add to db: {len(df)}")
+        for row in df.itertuples(index=False):
+            db.insert_job(
+                row.job_url,
+                row.title,
+                row.description,
+            )
     am.delete_artifact("mokagad/job", artifact["id"])
 
 # Get unfiltered jobs and filter them
