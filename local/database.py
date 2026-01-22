@@ -36,5 +36,5 @@ class Database:
     def get_jobs(self, status):
         with self.pool.connection() as conn:
             with conn.cursor() as cur:
-                cur.execute("SELECT * FROM jobs WHERE status = %s ORDER BY percentage DESC", (status,))
+                cur.execute("SELECT * FROM jobs WHERE status = %s ORDER BY percentage DESC;", (status,))
                 return cur.fetchall()
