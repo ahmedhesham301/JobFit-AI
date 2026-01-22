@@ -14,12 +14,12 @@ def send_email(sender, receiver, password, good_fit_jobs):
         count=len(good_fit_jobs)
     )
 
-    for job in good_fit_jobs.itertuples(index=False):
+    for job in good_fit_jobs:
         html_body += f"""
         <li style="margin-bottom: 15px;">
-            <p><b>Title:</b> {job.title}</p>
-            <p><b>URL:</b> <a href="{job.job_url}">{job.job_url}</a></p>
-            <p><b>Percentage:</b> {job.percentage}</p>
+            <p><b>Title:</b> {job[1]}</p>
+            <p><b>URL:</b> <a href="{job[0]}">{job[0]}</a></p>
+            <p><b>Percentage:</b> {job[3]}</p>
 
         </li>
         """

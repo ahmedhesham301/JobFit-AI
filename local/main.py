@@ -6,62 +6,53 @@ import time
 from dotenv import load_dotenv
 import alert
 import os
-
+import database
 load_dotenv(".env")
 
+db = database.Database()
 
 start_time = time.perf_counter()
-
-good_fit_jobs = pd.DataFrame(columns=["title", "description", "job_url", "percentage"])
-bad_fit_jobs = pd.DataFrame(columns=["title", "description", "job_url", "percentage"])
-total_jobs = 0
 
 with open("cv.txt", "r") as file:
     cv = file.read()
 
-artifacts = am.list_artifacts("mokagad/job")["artifacts"][0:10]
+artifacts = am.list_artifacts("mokagad/job")["artifacts"]
 
 print(f"Total artifacts: {len(artifacts)}")
 
+# Inserts unfiltered jobs to database
 for artifact in artifacts:
     df = am.get_an_artifact("mokagad/job", artifact["id"])
-    print(f"Jobs to filter: {len(df)}")
-    total_jobs = total_jobs + len(df)
+    print(f"Jobs to add to db: {len(df)}")
     for row in df.itertuples(index=False):
-        ai_response = local_ai.generate(row.description, cv)
-        ai_response = json.loads(ai_response)
-        print(ai_response["fitPercentage"])
-        if ai_response["fitPercentage"] < 65:
-            bad_fit_jobs.loc[len(bad_fit_jobs)] = [
-                row.title,
-                row.description,
-                row.job_url,
-                ai_response["fitPercentage"]
-            ]
-        else:
-            good_fit_jobs.loc[len(bad_fit_jobs)] = [
-                row.title,
-                row.description,
-                row.job_url,
-                ai_response["fitPercentage"],
-            ]
-
-for artifact in artifacts:
+        db.insert_job(
+            row.job_url,
+            row.title,
+            row.description,
+        )
     am.delete_artifact("mokagad/job", artifact["id"])
 
-good_fit_jobs.to_csv("goodfitjobs.csv")
-bad_fit_jobs.to_csv("badfitjobs.csv")
+# Get unfiltered jobs and filter them
+unfiltered_jobs = db.get_jobs("unfiltered")
+for row in unfiltered_jobs:
+    ai_response = local_ai.generate(row[2], cv)
+    ai_response = json.loads(ai_response)
+    if ai_response["fitPercentage"] >= 65:
+        db.update_status(row[0], "good_fit_not_sent", ai_response["fitPercentage"])
+    else:
+        db.update_status(row[0], "bad_fit", ai_response["fitPercentage"])
+    print(f"{row[1]}\t{ai_response["fitPercentage"]}%")
 
-
-end_time = time.perf_counter()
-elapsed_time = end_time - start_time
 
 alert.send_email(
     os.getenv("smtp_email"),
     os.getenv("receiver_email"),
     os.getenv("smtp_password"),
-    good_fit_jobs
+    db.get_jobs("good_fit_not_sent"),
 )
 
+
+end_time = time.perf_counter()
+elapsed_time = end_time - start_time
 print(f"Elapsed time: {elapsed_time:.1f} seconds")
-print(f"Total jobs filtered: {total_jobs}")
+# print(f"Total jobs filtered: {total_jobs}")
