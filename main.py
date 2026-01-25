@@ -34,13 +34,17 @@ def get_jobs(job, last_run_info):
 
     diff = datetime.now() - last_run_info
     hours_old = diff.total_seconds() / 3600
-    hours, remainder = divmod(diff.total_seconds(), 3600)
+    if hours_old > 4:
+        hours_long = job["hours_old"]
+    else:
+        hours_long = hours_old
+    hours, remainder = divmod(hours_long , 1)
     minutes = remainder / 60
     print(f"searching for {job["role"]} past {int(hours)}:{int(minutes)} hours")
     jobs = getJobs(
         job["role"],
         job["results_wanted"],
-        job["hours_old"],
+        hours_long,
         job["country"],
         job["city"],
         job["is_remote"],
