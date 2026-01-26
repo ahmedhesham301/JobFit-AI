@@ -38,7 +38,6 @@ def get_jobs(job, last_run_info):
         hours_long = job["hours_old"]
     else:
         hours_long = hours_old
-    print(hours_long)
     hours, remainder = divmod(hours_long , 1)
     minutes = remainder * 60
     print(f"searching for {job["role"]} past {int(hours)}:{int(minutes)} hours")
