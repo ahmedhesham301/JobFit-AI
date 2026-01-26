@@ -7,10 +7,14 @@ from dotenv import load_dotenv
 import alert
 import os
 import database
+import vars
+from status import Status
+
 load_dotenv(".env")
 
+blacklist = [s.lower() for s in vars.blacklist]
 db = database.Database()
-
+status = Status()
 start_time = time.perf_counter()
 
 with open("cv.txt", "r") as file:
@@ -26,11 +30,14 @@ for artifact in artifacts:
         df = am.get_an_artifact("mokagad/job", artifact["id"])
         print(f"Jobs to add to db: {len(df)}")
         for row in df.itertuples(index=False):
-            db.insert_job(
-                row.job_url,
-                row.title,
-                row.description,
-            )
+            if row.title.lower() not in blacklist: 
+                db.insert_job(
+                    row.job_url,
+                    row.title,
+                    row.description,
+                )
+            else:
+                status.blacklisted_jobs += 1
     am.delete_artifact("mokagad/job", artifact["id"])
 
 # Get unfiltered jobs and filter them
@@ -57,3 +64,4 @@ end_time = time.perf_counter()
 elapsed_time = end_time - start_time
 print(f"Elapsed time: {elapsed_time:.1f} seconds")
 # print(f"Total jobs filtered: {total_jobs}")
+status.print()
