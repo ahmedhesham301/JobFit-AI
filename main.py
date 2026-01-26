@@ -34,6 +34,7 @@ def get_jobs(job, last_run_info):
 
     diff = datetime.now() - last_run_info
     hours_old = diff.total_seconds() / 3600
+    print(hours_old)
     if hours_old > 4:
         hours_long = job["hours_old"]
     else:
