@@ -48,7 +48,7 @@ duplicated_descriptions = db.get_duplicated_descriptions()
 for row in duplicated_descriptions:
     ai_response = local_ai.generate(row[0], cv)
     ai_response = json.loads(ai_response)
-    if ai_response["fitPercentage"] >= 70:
+    if ai_response["fitPercentage"] >= 51:
         db.update_status_by_description(row[0], "good_fit_not_sent", ai_response["fitPercentage"])
     else:
         db.update_status_by_description(row[0], "bad_fit", ai_response["fitPercentage"])
@@ -60,7 +60,7 @@ unfiltered_jobs = db.get_jobs("unfiltered")
 for row in unfiltered_jobs:
     ai_response = local_ai.generate(row[2], cv)
     ai_response = json.loads(ai_response)
-    if ai_response["fitPercentage"] >= 70:
+    if ai_response["fitPercentage"] >= 51:
         db.update_status_by_url(row[0], "good_fit_not_sent", ai_response["fitPercentage"])
     else:
         db.update_status_by_url(row[0], "bad_fit", ai_response["fitPercentage"])
