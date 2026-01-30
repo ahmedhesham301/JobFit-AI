@@ -98,5 +98,12 @@ blacklist = [
     "Digital Marketing Specialist",
     "Senior Java Developer",
     "Freelance Senior Software Developer (Kotlin) - AI Trainer",
+    "Sales & Business Development Intern",
+    "Staff Product Designer",
+    "PRN Nurse Practitioner",
+    "Founding Account Executive, Investigate",
+    "Retail Sales Associate – Full Time",
+    "Supplier Enablement Associate",
+    "Real Estate Team Lead",
     
 ]

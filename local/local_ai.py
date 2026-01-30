@@ -7,21 +7,12 @@ class format(BaseModel):
 
 
 def generate(job, cv):
-    MSG = f"""
-You are a technical recruiter and hiring manager.
-
-Task:
-Evaluate how well my CV matches the job description.
+    MSG = f"""Evaluate how well my CV matches the job description.
 
 Return your answer in the following format:
 Fit Percentage (0–100)
 
-Rules:
-- Be strict and realistic.
-- Base the evaluation only on the information provided.
-- Do not assume missing skills or experience.
-
-CV:
+my CV:
 {cv}
 
 Job Description:
