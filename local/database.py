@@ -6,7 +6,7 @@ class Database:
     def __init__(self):
         self.pool = ConnectionPool("postgresql://postgres:1234@0.0.0.0:5432/postgres")
 
-    def insert_job(self, url, title, description,status):
+    def insert_job(self, url, title, description, status):
         try:
             with self.pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -36,7 +36,10 @@ class Database:
     def get_jobs(self, status):
         with self.pool.connection() as conn:
             with conn.cursor() as cur:
-                cur.execute("SELECT * FROM jobs WHERE status = %s ORDER BY percentage DESC;", (status,))
+                cur.execute(
+                    "SELECT * FROM jobs WHERE status = %s ORDER BY percentage DESC;",
+                    (status),
+                )
                 return cur.fetchall()
 
     def update_status_by_description(self, description, status, percentage=None):
@@ -44,7 +47,8 @@ class Database:
             with self.pool.connection() as conn:
                 with conn.cursor() as cur:
                     cur.execute(
-                        "UPDATE jobs SET status = %s WHERE description = %s;", (status, description)
+                        "UPDATE jobs SET status = %s WHERE description = %s;",
+                        (status, description),
                     )
         else:
             with self.pool.connection() as conn:
@@ -66,3 +70,10 @@ HAVING COUNT(*) > 1
 ORDER BY c DESC;""",
                 )
                 return cur.fetchall()
+
+    def update_to_good_fit_sent(self):
+        with self.pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "UPDATE jobs SET status = good_fit_sent WHERE status = good_fit_not_sent;"
+                )

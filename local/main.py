@@ -73,6 +73,7 @@ alert.send_email(
     os.getenv("smtp_password"),
     db.get_jobs("good_fit_not_sent"),
 )
+db.update_to_good_fit_sent()
 
 
 end_time = time.perf_counter()
