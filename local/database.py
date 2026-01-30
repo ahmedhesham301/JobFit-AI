@@ -75,5 +75,5 @@ ORDER BY c DESC;""",
         with self.pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
-                    "UPDATE jobs SET status = good_fit_sent WHERE status = good_fit_not_sent;"
+                    "UPDATE jobs SET status = 'good_fit_sent' WHERE status = 'good_fit_not_sent';"
                 )
