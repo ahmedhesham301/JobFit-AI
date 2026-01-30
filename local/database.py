@@ -38,7 +38,7 @@ class Database:
             with conn.cursor() as cur:
                 cur.execute(
                     "SELECT * FROM jobs WHERE status = %s ORDER BY percentage DESC;",
-                    (status),
+                    (status,),
                 )
                 return cur.fetchall()
 
