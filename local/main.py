@@ -17,7 +17,7 @@ db = database.Database()
 status = Status()
 start_time = time.perf_counter()
 
-with open("cv.txt", "r") as file:
+with open(os.getenv("cv_path"), "r") as file:
     cv = file.read()
 
 artifacts = am.list_artifacts("mokagad/job")["artifacts"]
