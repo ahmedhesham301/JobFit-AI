@@ -8,7 +8,7 @@ class format(BaseModel):
 
 def generate(job, cv):
     MSG = f"""Evaluate how well my CV matches the job description.
-
+I'm only interested in backend,devops jobs and anything related to them
 Return your answer in the following format:
 Fit Percentage (0–100)
 
