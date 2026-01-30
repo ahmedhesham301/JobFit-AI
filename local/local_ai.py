@@ -30,7 +30,7 @@ Job Description:
     response = chat(
         model= os.getenv("model"),
         stream=False,
-        options={"seed": 1, "temperature": 0},
+        options={"seed": 1, "temperature": 0.2},
         messages=[
             {
                 "role": "user",
