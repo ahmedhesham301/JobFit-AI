@@ -16,7 +16,7 @@ blacklist = [s.lower() for s in vars.blacklist]
 db = database.Database()
 status = Status()
 start_time = time.perf_counter()
-
+print(os.getenv("cv_path"))
 with open(os.getenv("cv_path"), "r") as file:
     cv = file.read()
 
