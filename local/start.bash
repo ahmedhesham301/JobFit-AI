@@ -4,7 +4,7 @@
 
 sleep 30
 
-/JobFit-AI/local/myenv/bin/python -u /JobFit-AI/local/main.py >> /var/log/job.log 2>&1 || true
+/JobFit-AI/local/myenv/bin/python -u /JobFit-AI/local/main.py || true
 
 
 # shutdown +1
