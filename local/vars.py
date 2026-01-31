@@ -105,5 +105,6 @@ blacklist = [
     "Retail Sales Associate – Full Time",
     "Supplier Enablement Associate",
     "Real Estate Team Lead",
-    
+    "Remote Java Engineer",
+    "Java Developer (Remote)",
 ]
