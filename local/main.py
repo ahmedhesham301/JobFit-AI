@@ -10,7 +10,7 @@ import database
 import vars
 from status import Status
 
-load_dotenv(".env")
+load_dotenv("/JobFit-AI/local/.env")
 
 blacklist = [s.lower() for s in vars.blacklist]
 db = database.Database()
