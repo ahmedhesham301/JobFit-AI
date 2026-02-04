@@ -72,7 +72,7 @@ def main():
     all_jobs = all_jobs.dropna(subset=["description"])
     s.jobs_no_duplicates = len(all_jobs)
     print(all_jobs.info())
-    all_jobs = all_jobs[["title", "description", "job_url"]]
+    all_jobs = all_jobs[["title", "description", "job_url", "company", "location"]]
     all_jobs["description"] = all_jobs["description"].apply(clean_description)
     all_jobs.to_csv("/output/output.csv", index=False)
 
