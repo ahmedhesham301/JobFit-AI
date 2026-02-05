@@ -11,5 +11,8 @@ CREATE TABLE jobs (
     description VARCHAR NOT NULL,
     percentage SMALLINT,
     status status NOT NULL DEFAULT 'unfiltered',
+    company VARCHAR,
+    location VARCHAR,
+    details json,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
