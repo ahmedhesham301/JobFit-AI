@@ -103,6 +103,8 @@ REQUIREMENT EXTRACTION:
 3) IMPORTANT: If a JD bullet contains multiple skills (e.g., AWS + Docker + ECS),
    split it into 2–4 atomic requirements so matching is accurate.
 
+Before matching, extract all CV skill keywords into a list (AWS, Docker, Kubernetes, Terraform, Ansible, Prometheus, Grafana, Python, Bash…). Use that list to avoid false ‘missing’   
+
 MATCHING LOGIC:
 - status="met": clear direct CV evidence matches the requirement.
 - status="partial": CV matches a meaningful subset of a compound requirement OR evidence is weaker/less complete.
