@@ -73,40 +73,53 @@ def generate(job, cv):
     MSG = f"""
 You are a strict, conservative job-fit evaluator for DevOps/SRE/Platform/Cloud/Infrastructure/Backend/System roles.
 
-Return ONLY a JSON object matching this schema (no extra text):
-{{
-  "fitPercentage": 0,
-  "roleFamily": "devops|sre|platform|cloud|backend|systems|other",
-  "seniorityRequired": "intern|junior|mid|senior|lead",
-  "seniorityCandidate": "intern|junior|mid|senior|lead",
-  "mustHaves": [{{"requirement": "...", "status": "met|partial|missing", "cvEvidence": ["..."]}}],
-  "niceToHaves": [{{"requirement": "...", "status": "met|partial|missing", "cvEvidence": ["..."]}}],
-  "biggestGaps": ["..."],
-  "scoreNotes": ["short bullet reasons for major penalties/caps only"]
-}}
+You MUST return ONLY a JSON object that conforms to the provided schema via the tool format.
+No prose. No markdown. No extra keys.
 
-Hard rules:
+CRITICAL RULES (anti-hallucination):
 - Do NOT assume skills not explicitly present in the CV.
-- A requirement is "met" only if there is direct evidence in the CV (exact term or unambiguous equivalent).
-- Be conservative: if unclear, mark "missing".
-- If role is primarily outside allowed families, set roleFamily="other" and fitPercentage in 0–25.
+- Do NOT invent requirements. Every requirement in mustHaves/niceToHaves MUST be grounded in the Job Description.
+  - For each requirement, copy a short phrase from the JD (verbatim or near-verbatim).
+- Evidence-first: Before marking ANY requirement as "missing", scan the CV for relevant keywords/synonyms.
+  If you find explicit evidence, it cannot be "missing".
+- Consistency:
+  - If status is "met" or "partial", cvEvidence MUST contain 1+ exact CV snippets.
+  - If cvEvidence is empty, status MUST be "missing".
 
-Allowed equivalences (do not create new skills):
+ROLE-FAMILY GATE (very important):
+- First decide the job family based on the JD’s core responsibilities and required tools.
+- If the JD is primarily outside DevOps/SRE/Platform/Cloud/Infra/Backend/Systems
+  (examples: seismic geophysics, sales enablement admin, finance, marketing, HR, design, PM, support),
+  set roleFamily="other" and fitPercentage MUST be between 0 and 25.
+
+ALLOWED EQUIVALENCES (do not create new skills):
 - k8s == kubernetes
 - cicd == jenkins/github actions/gitlab ci (only if named)
 - monitoring/observability == prometheus/grafana/loki (only if named)
 
-Scoring method (must follow):
-1) Role-family gate: if roleFamily="other" => fitPercentage 0–25.
-2) Extract MUST-HAVES, NICE-TO-HAVES, Responsibilities.
-3) Weighting:
-   - MUST-HAVES 65%, NICE 15%, Responsibilities 10%, Seniority 10%.
-4) Seniority caps:
-   - Mid required & candidate junior => cap 70
-   - Senior required & candidate junior => cap 55
-   - Lead required & candidate junior => cap 40
-5) Missing critical must-have: subtract 10–25 each based on importance.
-6) Final score is an integer 0–100. If unsure, choose the lower.
+REQUIREMENT EXTRACTION:
+1) Extract MUST-HAVES only if JD uses signals like: "must", "required", "minimum", "need", "strong experience".
+2) Extract NICE-TO-HAVES if JD uses: "preferred", "plus", "nice to have".
+3) IMPORTANT: If a JD bullet contains multiple skills (e.g., AWS + Docker + ECS),
+   split it into 2–4 atomic requirements so matching is accurate.
+
+MATCHING LOGIC:
+- status="met": clear direct CV evidence matches the requirement.
+- status="partial": CV matches a meaningful subset of a compound requirement OR evidence is weaker/less complete.
+- status="missing": no explicit evidence in CV.
+
+SENIORITY:
+- Infer seniorityRequired from JD (years, "senior/lead/principal", ownership).
+- Infer seniorityCandidate from CV (internships/student => intern/junior).
+- Apply caps:
+  - Mid required & candidate junior/intern => cap 70
+  - Senior required & candidate junior/intern => cap 55
+  - Lead required & candidate junior/intern => cap 40
+
+SCORING:
+- MUST-HAVES 65%, NICE 15%, Responsibilities 10%, Seniority 10%.
+- Missing critical must-have: subtract 10–25 depending on importance.
+- Choose the LOWER score if uncertain.
 
 CV:
 {cv}
@@ -114,6 +127,7 @@ CV:
 Job Description:
 {job}
 """
+
     response = chat(
         model=os.getenv("model"),
         stream=False,
