@@ -122,5 +122,6 @@ blacklist = [
     "Mobile Software Engineer",
     "Mobile Application Developer (Android)",
     "Java Tutor",
-    
+    "Business Analyst Intern",
+    "Technical Account Manager",
 ]
