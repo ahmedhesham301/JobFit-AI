@@ -46,25 +46,24 @@ for artifact in artifacts:
 # Get jobs with same description and filter them
 duplicated_descriptions = db.get_duplicated_descriptions()
 for row in duplicated_descriptions:
-    ai_response_json = local_ai.generate(row[0], cv)
-    ai_response = json.loads(ai_response_json)
+    ai_response = local_ai.generate(row[0], cv)
+    ai_response = json.loads(ai_response)
     if ai_response["fitPercentage"] >= 71:
-        db.update_status_by_description(row[0], "good_fit_not_sent", ai_response["fitPercentage"],ai_response_json)
+        db.update_status_by_description(row[0], "good_fit_not_sent", ai_response["fitPercentage"])
     else:
-        db.update_status_by_description(row[0], "bad_fit", ai_response["fitPercentage"],ai_response_json)
+        db.update_status_by_description(row[0], "bad_fit", ai_response["fitPercentage"])
     status.duplicates += row[1]
     print(f"jobs that is duplicated {row[1]} times\t{ai_response["fitPercentage"]}%")
 
 # Get unfiltered individual jobs and filter them
 unfiltered_jobs = db.get_jobs("unfiltered")
 for row in unfiltered_jobs:
-    ai_response_json = local_ai.generate(row[2], cv)
-    print(ai_response_json)
-    ai_response = json.loads(ai_response_json)
+    ai_response = local_ai.generate(row[2], cv)
+    ai_response = json.loads(ai_response)
     if ai_response["fitPercentage"] >= 71:
-        db.update_status_by_url(row[0], "good_fit_not_sent", ai_response["fitPercentage"], ai_response_json)
+        db.update_status_by_url(row[0], "good_fit_not_sent", ai_response["fitPercentage"])
     else:
-        db.update_status_by_url(row[0], "bad_fit", ai_response["fitPercentage"], ai_response_json)
+        db.update_status_by_url(row[0], "bad_fit", ai_response["fitPercentage"])
     print(f"{row[1]}\t{ai_response["fitPercentage"]}%")
 
 

@@ -17,7 +17,7 @@ class Database:
         except UniqueViolation:
             status.duplicates += 1
 
-    def update_status_by_url(self, url, status, percentage=None,details = None):
+    def update_status_by_url(self, url, status, percentage=None):
         if percentage == None:
             with self.pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -28,8 +28,8 @@ class Database:
             with self.pool.connection() as conn:
                 with conn.cursor() as cur:
                     cur.execute(
-                        "UPDATE jobs SET status = %s, percentage = %s, details = %s WHERE url = %s;",
-                        (status, percentage, details, url),
+                        "UPDATE jobs SET status = %s, percentage = %s WHERE url = %s;",
+                        (status, percentage, url),
                         prepare=True,
                     )
 
@@ -42,7 +42,7 @@ class Database:
                 )
                 return cur.fetchall()
 
-    def update_status_by_description(self, description, status, percentage=None,details=None):
+    def update_status_by_description(self, description, status, percentage=None):
         if percentage == None:
             with self.pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -54,8 +54,8 @@ class Database:
             with self.pool.connection() as conn:
                 with conn.cursor() as cur:
                     cur.execute(
-                        "UPDATE jobs SET status = %s, percentage = %s,details = %s WHERE description = %s;",
-                        (status, percentage, details, description),
+                        "UPDATE jobs SET status = %s, percentage = %s WHERE description = %s;",
+                        (status, percentage, description),
                         prepare=True,
                     )
 
