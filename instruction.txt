@@ -1,80 +1,56 @@
 i will give you job descriptions and you tell me if i'm a good fit or not in a percentage, why I'm I a good fit in summary and what I'm I missing in summary
 this is my cv:
 Ahmed Hesham
-DevOps Engineer
-ahmed.hesham.farag@gmail.com
-linkedin:https://www.linkedin.com/in/ahmed-hesham0/
+Backend / DevOps / Platform Engineer
 Cairo,Egypt
-website:ahmeddev.net
-github:https://github.com/ahmedhesham301
 SUMMARY:
-Aspiring DevOps engineer with a strong drive to learn and grow. Currently focused on building a solid
-foundation through consistent learning and hands-on practice. Always curious and ready to face challenges as
-part of the learning journey. Looking for an internship opportunity where I can contribute, learn from
-experienced professionals, and take meaningful steps toward becoming a skilled engineer.
+Backend / DevOps / Platform Engineer specializing in Go, Kubernetes, AWS, and Terraform. Experienced in building scalable backend services, automated cloud infrastructure, CI/CD and GitOps pipelines, observability platforms, and autoscaling systems. Strong background in PostgreSQL, Redis, Docker, distributed systems, and infrastructure automation, with a focus on reliability, performance, scalability, and reducing operational overhead.
 EDUCATION:
 Bachelor of Computer Science
 Sadat Academy
 Sep 2022 – Jun 2026
 EXPERIENCE:
-DevOps Intern | GhaymahSep 2025 – Present
-DevOps Intern | Orange Digital Centre, Cairo, EgyptJan 2025 – Feb 2025
+DevOps Intern | GhaymahSep sep 2025 – nov 2025
+DevOps Intern | Orange Digital Centre, Cairo, Egypt Jan 2025 – Feb 2025
 SKILLS:
-Containerization & Orchestration: Docker & Kubernetes
-Cloud Provider: AWS
-CI/CD: Jenkins & Github Actions
-Monitoring & Observability: Prometheus & Grafana
-Configuration Management & IaC: Ansible & Terraform
-Version Control: Git & GitHub
-Programming & Scripting: Python, Bash, Golang
-Database: Postgresql & SQL
-security: Trivy & SonarQube
+Programming:Go, Node.js, Python, Bash
+Backend:REST APIs, Gin, Express.js, Authentication, Session Management
+Cloud:AWS, EC2, S3, VPC, IAM, RDS, EKS
+Infrastructure as Code:Terraform, Packer, Ansible
+Containers & Kubernetes:Docker, Kubernetes, Helm, Docker, Talos Linux
+CI/CD & GitOps:GitHub Actions, GitLab CI, Jenkins, ArgoCD
+Observability:OpenTelemetry, Prometheus, Grafana, Grafana Alloy, Loki, Mimir, Tempo, Alertmanager
+Databases & Caching:PostgreSQL, SQL, Redis
+Security:Vault, Trivy, SonarQube
+Performance & Testing:k6
+Operating Systems:Linux
 
 PROJECTS:
--weather-app
-Automated application deployment using Docker containers for consistent environments.
-Implemented CI/CD pipelines with Jenkins to streamline build, test, and deployment processes.
-Provisioned and managed cloud infrastructure using Terraform for scalable and secure resources.
-Configured server environments and orchestration with Ansible for efficient configuration management.
-Applied best practices in infrastructure as code, automation, and cloud resource optimization.
+-URL Shortener & Click Stream Analytics Engine
+Architected a high-throughput URL shortening and redirection service using Base62 encoding with cryptographic collision resolution and a Redis cache-aside layer with 24h TTL to achieve sub-millisecond redirect latency.
+Engineered a granular click-stream analytics system supporting minutely, hourly, and daily aggregations using PostgreSQL atomic upserts (ON CONFLICT DO UPDATE) and temporal timestamp truncation.
+Secured user authentication and session management using Argon2 hashing, Redis-backed distributed sessions, and Zod schema validation.
+Implemented distributed observability with custom OpenTelemetry spans across database and cache layers, RED metrics using Prometheus / prom-client, and structured logging with Winston, Grafana Alloy, and Loki.
+Provisioned immutable Kubernetes infrastructure using Terraform and Talos Linux, with Cilium eBPF networking, Gateway API, Helm, and Horizontal Pod Autoscaling.
+Designed a highly available Redis layer using Redis Sentinel and HAProxy for load balancing and failover.
+Built CI/CD and GitOps delivery using GitHub Actions and ArgoCD, including Trivy vulnerability scanning and automated SARIF reporting.
+Validated system resilience and throughput using k6 load testing.
 
--containerizing Minecraft server
-Designed and implemented automated scripts for building, deploying, and running a Minecraft server
-using Bash and Docker.
-Developed Dockerfile and shell scripts to streamline server setup, configuration, and lifecycle management.
-Containerized the server for consistent, reproducible deployments across environments.
-Automated build and deployment processes to minimize manual intervention and improve reliability.
-Documented setup and usage instructions for ease of onboarding and maintenance.
-
--go url shortener
-Developed a full-stack URL shortening service using Go (backend) and JavaScript/HTML (frontend).
-Implemented RESTful APIs for creating, retrieving, and redirecting shortened URLs.
-Integrated PostgreSQL for persistent storage and efficient URL management.
-Added monitoring and metrics collection with Prometheus.
-Containerized the application using Docker and managed multi-service deployment with Docker Compose.
-Applied middleware for request monitoring.
-Wrote modular, maintainable code following best practices.
+-Autoscaling Hetzner
+Built an alert-driven autoscaling control plane that provisions and decommissions Hetzner Cloud servers from Grafana webhook events.
+Implemented scaling guardrails using minimum, desired, and maximum capacity limits, with location-aware balancing to prevent unsafe capacity changes.
+Exposed dynamic /targets service discovery for Grafana Alloy and automated Grafana provisioning to reduce manual operations.
 
 -JobFit AI
 A Python-based application that leverages Google Gemini AI to analyze job descriptions and candidate
 profiles, search for relevant jobs, and generate a fit percentage. The system highlights strengths, identifies
 skill gaps, and automatically sends emails with high-fit job matches to users.
 
--URL Shortener
-(Node.js, Express, PostgreSQL, Redis)
-Built a production-style URL shortening service that converts long URLs into compact base62 IDs and
-performs fast 302 redirects.
-Implemented user registration/login with bcrypt password hashing and Redis-backed sessions for scalable
-authentication.
-Improved performance with Redis caching for URL lookups (cache-first reads with 24h TTL) and a collision-
-safe base62 ID generator.
-Added observability: Prometheus metrics endpoint and Grafana dashboards to monitor request rates, error
-counts, and request duration histograms.
-Containerized app with Docker / Docker Compose and provided scripts + docs for local development and
-production deployment.
+-Graduation Project
+Designed and deployed a cloud-native multi-tier application architecture on AWS using Terraform, VPCs, public/private subnets, ALBs, EKS, RDS, and S3 for scalable and production-style hosting.
+Containerized application services with Docker and deployed them to Kubernetes using Deployments, Services, ConfigMaps, and Horizontal Pod Autoscaling to improve availability and elasticity.
+Provisioned managed PostgreSQL, object storage, and Redis-based services to support a resilient backend stack and reduce manual environment setup.
+Automated infrastructure provisioning and cluster configuration with Terraform and shell-based EKS setup scripts, enabling repeatable and consistent cloud deployments.
 
 CERTIFICATES:
-SQL and PostgreSQL: The Complete Developer's Guide
-Go - The Complete Guide
-Introduction to NGINX
-Kubernetes for the Absolute Beginners - Hands-on
+AWS Certified Solutions Architect – Associate (SAA-C03)
