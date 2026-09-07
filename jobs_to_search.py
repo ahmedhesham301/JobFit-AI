@@ -1,7 +1,7 @@
 jobs = [
     {
         "role": "devops",
-        "results_wanted": 30,
+        "results_wanted": 100,
         "hours_old": 2,
         "country": "egypt",
         "city": "cairo",
@@ -9,7 +9,7 @@ jobs = [
     },
     {
         "role": "backend",
-        "results_wanted": 30,
+        "results_wanted": 100,
         "hours_old": 2,
         "country": "egypt",
         "city": "cairo",
@@ -17,7 +17,7 @@ jobs = [
     },
     {
         "role": "software engineer",
-        "results_wanted": 30,
+        "results_wanted": 100,
         "hours_old": 2,
         "country": "egypt",
         "city": "cairo",
@@ -25,7 +25,7 @@ jobs = [
     },
     {
         "role": "cloud",
-        "results_wanted": 30,
+        "results_wanted": 100,
         "hours_old": 2,
         "country": "egypt",
         "city": "cairo",
@@ -33,7 +33,7 @@ jobs = [
     },
     {
         "role": "site reliability engineer",
-        "results_wanted": 30,
+        "results_wanted": 100,
         "hours_old": 2,
         "country": "egypt",
         "city": "cairo",
@@ -41,7 +41,7 @@ jobs = [
     },
     {
         "role": "sre",
-        "results_wanted": 30,
+        "results_wanted": 100,
         "hours_old": 2,
         "country": "egypt",
         "city": "cairo",
@@ -49,7 +49,7 @@ jobs = [
     },
     {
         "role": "intern",
-        "results_wanted": 30,
+        "results_wanted": 100,
         "hours_old": 2,
         "country": "egypt",
         "city": "cairo",
