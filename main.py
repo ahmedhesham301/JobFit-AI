@@ -72,16 +72,18 @@ def main():
     all_jobs = all_jobs.dropna(subset=["description"])
     s.jobs_no_duplicates = len(all_jobs)
     t = datetime.now()
-    jobs_per_chunk = ceil(len(all_jobs) / 5)
-    jobs_chunks = [all_jobs[i : i + jobs_per_chunk] for i in range(0, len(all_jobs), jobs_per_chunk)]
-    kms = km.split(len(jobs_chunks))
-    print(f"number of jobs per chunk: {jobs_per_chunk}")
-    print(f"number of job chunks: {len(jobs_chunks)}")
-    print(f"number of kms: {len(kms)}")
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        futures = [executor.submit(filter_jobs, jobs_chunk, CV, km) for jobs_chunk,km in zip(jobs_chunks,kms)]
-        for future in concurrent.futures.as_completed(futures):
-            good_fit_jobs.extend(future.result())
+    if len(all_jobs) > 0:
+        num_chunks = max(1, min(len(km.keys), 5))
+        jobs_per_chunk = ceil(len(all_jobs) / num_chunks)
+        jobs_chunks = [all_jobs[i : i + jobs_per_chunk] for i in range(0, len(all_jobs), jobs_per_chunk)]
+        kms = km.split(len(jobs_chunks))
+        print(f"number of jobs per chunk: {jobs_per_chunk}")
+        print(f"number of job chunks: {len(jobs_chunks)}")
+        print(f"number of kms: {len(kms)}")
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            futures = [executor.submit(filter_jobs, jobs_chunk, CV, km) for jobs_chunk,km in zip(jobs_chunks,kms)]
+            for future in concurrent.futures.as_completed(futures):
+                good_fit_jobs.extend(future.result())
 
     # all_api_key_used = filter_jobs(all_jobs, CV, km, good_fit_jobs)
     s.filter_time = datetime.now() - t
