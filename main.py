@@ -6,7 +6,7 @@ import logging
 import pandas as pd
 from key_manger import KeyManger
 from stats import Stats
-from datetime import datetime,timedelta
+from datetime import datetime, timedelta
 import concurrent.futures
 from jobs_to_search import jobs
 from math import ceil
@@ -31,7 +31,10 @@ with open("instruction.txt", "r") as f:
 
 if len(workflow_runs_info) == 2:
     if workflow_runs_info[1]["conclusion"] == "success":
-        last_run_info = datetime.strptime(workflow_runs_info[1]["createdAt"], "%Y-%m-%dT%H:%M:%SZ")
+        last_run_info = datetime.strptime(
+            workflow_runs_info[1]["createdAt"], "%Y-%m-%dT%H:%M:%SZ"
+        )
+
 
 def get_jobs(job, last_run_info):
     if last_run_info == None:
@@ -41,9 +44,9 @@ def get_jobs(job, last_run_info):
     hours_old = diff.total_seconds() / 3600
     if hours_old > 120:
         hours_old = 120
-    hours, remainder = divmod(diff.total_seconds(), 3600)
+    hours, remainder = divmod(hours_old * 3600, 3600)
     minutes = remainder / 60
-    
+
     print(f"searching for {job["role"]} past {int(hours)}:{int(minutes)} hours")
     jobs = getJobs(
         job["role"],
@@ -61,7 +64,7 @@ def main():
     s = Stats()
     t = datetime.now()
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
-        futures = [executor.submit(get_jobs, job,last_run_info) for job in jobs]
+        futures = [executor.submit(get_jobs, job, last_run_info) for job in jobs]
         for future in concurrent.futures.as_completed(futures):
             all_jobs = pd.concat([all_jobs, future.result()], ignore_index=True)
 
@@ -75,13 +78,19 @@ def main():
     if len(all_jobs) > 0:
         num_chunks = max(1, min(len(km.keys), 5))
         jobs_per_chunk = ceil(len(all_jobs) / num_chunks)
-        jobs_chunks = [all_jobs[i : i + jobs_per_chunk] for i in range(0, len(all_jobs), jobs_per_chunk)]
+        jobs_chunks = [
+            all_jobs[i : i + jobs_per_chunk]
+            for i in range(0, len(all_jobs), jobs_per_chunk)
+        ]
         kms = km.split(len(jobs_chunks))
         print(f"number of jobs per chunk: {jobs_per_chunk}")
         print(f"number of job chunks: {len(jobs_chunks)}")
         print(f"number of kms: {len(kms)}")
         with concurrent.futures.ThreadPoolExecutor() as executor:
-            futures = [executor.submit(filter_jobs, jobs_chunk, CV, km) for jobs_chunk,km in zip(jobs_chunks,kms)]
+            futures = [
+                executor.submit(filter_jobs, jobs_chunk, CV, km)
+                for jobs_chunk, km in zip(jobs_chunks, kms)
+            ]
             for future in concurrent.futures.as_completed(futures):
                 good_fit_jobs.extend(future.result())
 
