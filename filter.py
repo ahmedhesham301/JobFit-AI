@@ -5,10 +5,10 @@ import json
 from google.genai.errors import ServerError, ClientError
 from httpx import RemoteProtocolError
 
-def filter_jobs(jobs, cv, km):
+
+def filter_jobs(jobs, cv, key):
     good_fit_jobs = []
     for i, job in jobs.iterrows():
-        # print("index is :", i)  # for debugging
         try_count = 3
         while try_count > 0:
 
@@ -17,27 +17,18 @@ def filter_jobs(jobs, cv, km):
                 cleaned_description = "\n".join(
                     [line for line in job["description"].splitlines() if line.strip()]
                 )
-                ai_response = generate(cleaned_description, cv, km.get_key())
+                ai_response = generate(cleaned_description, cv, key)
                 ai_response_dict = json.loads(ai_response)
                 break
 
             except json.JSONDecodeError as e:
                 try_count -= 1
-                # total_empty_response += 1
-                # if try_count == 0:
-                #     total_fail += 1
-                #     total_fail_empty_response += 1
-
                 logging.warning("JSONDecodeError happend")
 
             except ServerError as e:
 
                 if e.details["error"]["code"] == 503:
                     try_count -= 1
-                    # total_overload += 1
-                    # if try_count == 0:
-                    #     total_fail += 1
-                    #     total_fail_overload += 1
                     logging.warning("sleeping to after The model is overloaded.")
                     time.sleep(3)
                 else:
@@ -50,9 +41,6 @@ def filter_jobs(jobs, cv, km):
                     and e.details["error"]["status"] == "RESOURCE_EXHAUSTED"
                 ):
                     logging.error("RESOURCE_EXHAUSTED sleeping for 60 seconds")
-                    # if km.delete_key() == 1:
-                    #     return 429
-                    # logging.warning(f"total api keys count after deleting current key: {len(km.keys)}")
                     time.sleep(60)
                 else:
                     logging.critical(e.details)

@@ -4,7 +4,6 @@ from filter import filter_jobs
 import os
 import logging
 import pandas as pd
-from key_manger import KeyManger
 from stats import Stats
 from datetime import datetime
 import concurrent.futures
@@ -21,14 +20,13 @@ logging.basicConfig(
 SENDER = os.getenv("smtp_email")
 PASSWORD = os.getenv("smtp_password")
 RECEIVER = os.getenv("receiver_email")
-api_keys = os.getenv("api_keys").split(",")
+api_key = os.getenv("gemini_api_key")
 
 all_jobs = pd.DataFrame()
 good_fit_jobs = []
-km = KeyManger(api_keys)
-last_run_info = None
 with open("instruction.txt", "r") as f:
     CV = f.read()
+
 
 def get_jobs(job):
     print(f"searching for {job["role"]} past {job["hours_old"]} hours\n")
@@ -48,7 +46,7 @@ def main():
     s = Stats()
     t = datetime.now()
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
-        futures = [executor.submit(get_jobs, job, None) for job in jobs]
+        futures = [executor.submit(get_jobs, job) for job in jobs]
         for future in concurrent.futures.as_completed(futures):
             all_jobs = pd.concat([all_jobs, future.result()], ignore_index=True)
 
@@ -60,25 +58,22 @@ def main():
     s.jobs_no_duplicates = len(all_jobs)
     t = datetime.now()
     if len(all_jobs) > 0:
-        num_chunks = max(1, min(len(km.keys), 5))
+        num_chunks = max(1, 5)
         jobs_per_chunk = ceil(len(all_jobs) / num_chunks)
         jobs_chunks = [
             all_jobs[i : i + jobs_per_chunk]
             for i in range(0, len(all_jobs), jobs_per_chunk)
         ]
-        kms = km.split(len(jobs_chunks))
         print(f"number of jobs per chunk: {jobs_per_chunk}")
         print(f"number of job chunks: {len(jobs_chunks)}")
-        print(f"number of kms: {len(kms)}")
         with concurrent.futures.ThreadPoolExecutor() as executor:
             futures = [
-                executor.submit(filter_jobs, jobs_chunk, CV, km)
-                for jobs_chunk, km in zip(jobs_chunks, kms)
+                executor.submit(filter_jobs, chunk, CV, api_key)
+                for chunk in jobs_chunks
             ]
             for future in concurrent.futures.as_completed(futures):
                 good_fit_jobs.extend(future.result())
 
-    # all_api_key_used = filter_jobs(all_jobs, CV, km, good_fit_jobs)
     s.filter_time = datetime.now() - t
     if len(good_fit_jobs) > 0:
         t = datetime.now()
@@ -89,9 +84,6 @@ def main():
 
     s.end_time = datetime.now()
     s.print()
-
-    # if all_api_key_used == True:
-    #     return 429
 
 
 if __name__ == "__main__":
