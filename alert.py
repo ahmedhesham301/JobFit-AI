@@ -10,9 +10,7 @@ def send_email(sender, receiver, password, good_fit_jobs):
         <h2 style="color: #2c3e50;">My Job Alert</h2>
         <p><b>{count} jobs</b> have been found that match your profile:</p>
         <ul style="padding-left: 20px;">
-    """.format(
-        count=len(good_fit_jobs)
-    )
+    """.format(count=len(good_fit_jobs))
 
     for job in good_fit_jobs:
         html_body += f"""
