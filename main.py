@@ -6,11 +6,13 @@ import logging
 import pandas as pd
 from key_manger import KeyManger
 from stats import Stats
-from datetime import datetime, timedelta
+from datetime import datetime
 import concurrent.futures
 from jobs_to_search import jobs
 from math import ceil
-import json
+from dotenv import load_dotenv
+
+load_dotenv()
 
 logging.basicConfig(
     level=logging.WARNING, format="%(asctime)s - %(levelname)s - %(message)s"
@@ -20,7 +22,6 @@ SENDER = os.getenv("smtp_email")
 PASSWORD = os.getenv("smtp_password")
 RECEIVER = os.getenv("receiver_email")
 api_keys = os.getenv("api_keys").split(",")
-workflow_runs_info = json.loads(os.getenv("last_run_info"))
 
 all_jobs = pd.DataFrame()
 good_fit_jobs = []
@@ -29,29 +30,12 @@ last_run_info = None
 with open("instruction.txt", "r") as f:
     CV = f.read()
 
-if len(workflow_runs_info) == 2:
-    if workflow_runs_info[1]["conclusion"] == "success":
-        last_run_info = datetime.strptime(
-            workflow_runs_info[1]["createdAt"], "%Y-%m-%dT%H:%M:%SZ"
-        )
-
-
-def get_jobs(job, last_run_info):
-    if last_run_info is None:
-        last_run_info = datetime.now() - timedelta(hours=job["hours_old"])
-
-    diff = datetime.now() - last_run_info
-    hours_old = diff.total_seconds() / 3600
-    if hours_old > 120:
-        hours_old = 120
-    hours, remainder = divmod(hours_old * 3600, 3600)
-    minutes = remainder / 60
-
-    print(f"searching for {job["role"]} past {int(hours)}:{int(minutes)} hours")
+def get_jobs(job):
+    print(f"searching for {job["role"]} past {job["hours_old"]} hours\n")
     jobs = getJobs(
         job["role"],
         job["results_wanted"],
-        hours_old,
+        job["hours_old"],
         job["country"],
         job["city"],
         job["is_remote"],
@@ -64,7 +48,7 @@ def main():
     s = Stats()
     t = datetime.now()
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
-        futures = [executor.submit(get_jobs, job, last_run_info) for job in jobs]
+        futures = [executor.submit(get_jobs, job, None) for job in jobs]
         for future in concurrent.futures.as_completed(futures):
             all_jobs = pd.concat([all_jobs, future.result()], ignore_index=True)
 
