@@ -22,7 +22,7 @@ def getJobs(
             # "bdjobs",
         ],
         search_term=jobTitle,
-        location=location,
+        location=country,
         results_wanted=results_wanted,
         # google_search_term=f"{jobTitle} jobs near Cairo since {hours_old} hours",
         hours_old=hours_old,
