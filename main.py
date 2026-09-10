@@ -38,6 +38,9 @@ def get_jobs(job):
         job["city"],
         job["is_remote"],
     )
+    for _, job in jobs.iterrows():
+        print(f"{job["title"]}\n")
+
     return jobs
 
 
