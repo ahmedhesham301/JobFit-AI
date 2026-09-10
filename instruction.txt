@@ -36,10 +36,12 @@ Designed a highly available Redis layer using Redis Sentinel and HAProxy for loa
 Built CI/CD and GitOps delivery using GitHub Actions and ArgoCD, including Trivy vulnerability scanning and automated SARIF reporting.
 Validated system resilience and throughput using k6 load testing.
 
--Autoscaling Hetzner
-Built an alert-driven autoscaling control plane that provisions and decommissions Hetzner Cloud servers from Grafana webhook events.
-Implemented scaling guardrails using minimum, desired, and maximum capacity limits, with location-aware balancing to prevent unsafe capacity changes.
-Exposed dynamic /targets service discovery for Grafana Alloy and automated Grafana provisioning to reduce manual operations.
+-Hetzner Cloud Autoscaling Control Plane & DBaaS Platform
+Engineered a Go-based cloud control plane for automated VM autoscaling across multiple Hetzner Cloud datacenters, using CPU/memory telemetry and Grafana Alerting → webhook → API feedback loops with configurable thresholds and anti-flap windows.
+Designed a balanced multi-datacenter placement strategy that scales into the least-populated location and drains instances from the most-populated location during scale-down operations.
+Built a Database-as-a-Service provisioning platform using Temporal durable workflows to orchestrate Packer image builds, label-based snapshot caching, firewall configuration, and on-demand PostgreSQL VM deployment.
+Automated observability provisioning by programmatically configuring Grafana alert rules, datasources, contact points, and HTTP service-discovery targets, with Grafana Alloy dynamically scraping control-plane /targets endpoints and forwarding Node Exporter metrics to Prometheus.
+Developed and containerized a microservices architecture comprising 3 Go services and a shared module library, with multi-stage Docker builds, Docker Compose health-check dependencies, and GitHub Actions CI/CD with path-filtered builds, Trivy scanning, SARIF reporting, and Snyk SAST/SCA analysis.
 
 -JobFit AI
 A Python-based application that leverages Google Gemini AI to analyze job descriptions and candidate
