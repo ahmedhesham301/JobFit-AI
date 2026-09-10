@@ -28,7 +28,7 @@ with open("instruction.txt", "r") as f:
 
 
 def get_jobs(job):
-    print(f"searching for {job["role"]} past {job["hours_old"]} hours\n")
+    print(f"\nsearching for {job["role"]} past {job["hours_old"]} hours\n")
     jobs = getJobs(
         job["role"],
         job["results_wanted"],
@@ -38,7 +38,7 @@ def get_jobs(job):
         job["is_remote"],
     )
     for _, job in jobs.iterrows():
-        print(f"{job["title"]}\n")
+        print(f"{job["title"]}")
 
     return jobs
 
@@ -60,9 +60,10 @@ def main():
         all_jobs.drop_duplicates(subset=["job_url"], inplace=True, ignore_index=True)
         all_jobs = all_jobs.dropna(subset=["description"])
         s.jobs_no_duplicates = len(all_jobs)
+        print(f"Total jobs to filter: {s.jobs_no_duplicates}")
 
         t = datetime.now()
-        
+
         num_chunks = max(1, 5)
         jobs_per_chunk = ceil(len(all_jobs) / num_chunks)
         jobs_chunks = [
