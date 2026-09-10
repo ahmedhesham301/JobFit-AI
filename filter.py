@@ -4,6 +4,8 @@ from ai import generate
 import json
 from google.genai.errors import ServerError, ClientError
 from httpx import RemoteProtocolError
+import os
+import sqlite3
 
 
 def filter_jobs(jobs, cv):
@@ -54,6 +56,21 @@ def filter_jobs(jobs, cv):
         else:
             logging.critical("All attempts failed")
             continue
+        with sqlite3.connect(os.getenv("data_path"), timeout=30) as conn:
+            conn.execute(
+                """
+                    INSERT INTO jobs
+                    (title, url, why_good_fit, what_missing, percentage)
+                    VALUES (?, ?, ?, ?, ?)
+                    """,
+                (
+                    job["title"],
+                    job["job_url"],
+                    ai_response_dict["why I'm I a good fit in summary"],
+                    ai_response_dict["what I'm I missing in summary"],
+                    ai_response_dict["percentage"],
+                ),
+            )
 
         if ai_response_dict["percentage"] > 70:
             good_fit_jobs.append(
@@ -61,8 +78,12 @@ def filter_jobs(jobs, cv):
                     "title": job["title"],
                     "url": job["job_url"],
                     "percentage": ai_response_dict["percentage"],
-                    "why I'm I a good fit": ai_response_dict["why I'm I a good fit in summary"],
-                    "what I'm I missing": ai_response_dict["what I'm I missing in summary"],
+                    "why I'm I a good fit": ai_response_dict[
+                        "why I'm I a good fit in summary"
+                    ],
+                    "what I'm I missing": ai_response_dict[
+                        "what I'm I missing in summary"
+                    ],
                 }
             )
     return good_fit_jobs

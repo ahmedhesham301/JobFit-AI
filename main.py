@@ -10,6 +10,7 @@ import concurrent.futures
 from jobs_to_search import jobs
 from math import ceil
 from dotenv import load_dotenv
+import database
 
 load_dotenv()
 

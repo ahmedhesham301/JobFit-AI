@@ -5,3 +5,6 @@ __pycache__
 .vscode
 .env2
 .venv2
+data.db
+data.db-shm
+data.db-wal
