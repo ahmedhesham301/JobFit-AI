@@ -48,7 +48,7 @@ def main():
     global all_jobs, good_fit_jobs
     s = Stats()
     t = datetime.now()
-    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
         futures = [executor.submit(get_jobs, job) for job in jobs]
         for future in concurrent.futures.as_completed(futures):
             all_jobs = pd.concat([all_jobs, future.result()], ignore_index=True)
