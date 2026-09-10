@@ -10,6 +10,6 @@ class Stats:
         print(f"""Total jobs with duplicates: {self.jobs_duplicates}
 Total jobs no duplicates: {self.jobs_no_duplicates}
 Scraping time: {self.scraping_time}
-Filter_time: {self.filter_time}
-AVG request time: {self.filter_time / self.jobs_no_duplicates}
-Email time: {self.email_time}""")
+Filter_time: {self.filter_time if self.jobs_no_duplicates else "N/A"}
+AVG request time: {self.filter_time / self.jobs_no_duplicates if self.jobs_no_duplicates else "N/A"}
+Email time: {self.email_time if self.jobs_no_duplicates else "N/A"}""")

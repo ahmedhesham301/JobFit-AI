@@ -3,11 +3,12 @@
 
 from google import genai
 from google.genai import types
+import os
+
+client = genai.Client(api_key=os.getenv("gemini_api_key"))
 
 
-def generate(description, instruction, api_key):
-    client = genai.Client(api_key=api_key)
-
+def generate(description, instruction):
     model = "gemini-2.5-flash"
     contents = [
         types.Content(
@@ -26,17 +27,17 @@ def generate(description, instruction, api_key):
             type=genai.types.Type.OBJECT,
             required=[
                 "percentage",
-                "why I'm I a good fit",
-                "what I'm I missing",
+                "why I'm I a good fit in summary",
+                "what I'm I missing in summary",
             ],
             properties={
                 "percentage": genai.types.Schema(
                     type=genai.types.Type.INTEGER,
                 ),
-                "why I'm I a good fit": genai.types.Schema(
+                "why I'm I a good fit in summary": genai.types.Schema(
                     type=genai.types.Type.STRING,
                 ),
-                "what I'm I missing": genai.types.Schema(
+                "what I'm I missing in summary": genai.types.Schema(
                     type=genai.types.Type.STRING,
                 ),
             },
@@ -46,12 +47,6 @@ def generate(description, instruction, api_key):
         ],
     )
 
-    # for chunk in client.models.generate_content_stream(
-    #     model=model,
-    #     contents=contents,
-    #     config=generate_content_config,
-    # ):
-    #     print(chunk.text, end="")
     response = client.models.generate_content(
         model=model,
         contents=contents,

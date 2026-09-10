@@ -6,7 +6,7 @@ from google.genai.errors import ServerError, ClientError
 from httpx import RemoteProtocolError
 
 
-def filter_jobs(jobs, cv, key):
+def filter_jobs(jobs, cv):
     good_fit_jobs = []
     for i, job in jobs.iterrows():
         try_count = 3
@@ -17,7 +17,7 @@ def filter_jobs(jobs, cv, key):
                 cleaned_description = "\n".join(
                     [line for line in job["description"].splitlines() if line.strip()]
                 )
-                ai_response = generate(cleaned_description, cv, key)
+                ai_response = generate(cleaned_description, cv)
                 ai_response_dict = json.loads(ai_response)
                 break
 
@@ -61,8 +61,8 @@ def filter_jobs(jobs, cv, key):
                     "title": job["title"],
                     "url": job["job_url"],
                     "percentage": ai_response_dict["percentage"],
-                    "why I'm I a good fit": ai_response_dict["why I'm I a good fit"],
-                    "what I'm I missing": ai_response_dict["what I'm I missing"],
+                    "why I'm I a good fit": ai_response_dict["why I'm I a good fit in summary"],
+                    "what I'm I missing": ai_response_dict["what I'm I missing in summary"],
                 }
             )
     return good_fit_jobs

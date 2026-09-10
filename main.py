@@ -20,7 +20,6 @@ logging.basicConfig(
 SENDER = os.getenv("smtp_email")
 PASSWORD = os.getenv("smtp_password")
 RECEIVER = os.getenv("receiver_email")
-api_key = os.getenv("gemini_api_key")
 
 all_jobs = pd.DataFrame()
 good_fit_jobs = []
@@ -55,12 +54,15 @@ def main():
 
     s.scraping_time = datetime.now() - t
 
-    s.jobs_duplicates = len(all_jobs)
-    all_jobs.drop_duplicates(subset=["job_url"], inplace=True, ignore_index=True)
-    all_jobs = all_jobs.dropna(subset=["description"])
-    s.jobs_no_duplicates = len(all_jobs)
-    t = datetime.now()
+    
     if len(all_jobs) > 0:
+        s.jobs_duplicates = len(all_jobs)
+        all_jobs.drop_duplicates(subset=["job_url"], inplace=True, ignore_index=True)
+        all_jobs = all_jobs.dropna(subset=["description"])
+        s.jobs_no_duplicates = len(all_jobs)
+
+        t = datetime.now()
+        
         num_chunks = max(1, 5)
         jobs_per_chunk = ceil(len(all_jobs) / num_chunks)
         jobs_chunks = [
@@ -71,7 +73,7 @@ def main():
         print(f"number of job chunks: {len(jobs_chunks)}")
         with concurrent.futures.ThreadPoolExecutor() as executor:
             futures = [
-                executor.submit(filter_jobs, chunk, CV, api_key)
+                executor.submit(filter_jobs, chunk, CV)
                 for chunk in jobs_chunks
             ]
             for future in concurrent.futures.as_completed(futures):
