@@ -9,10 +9,7 @@ from datetime import datetime
 import concurrent.futures
 from jobs_to_search import jobs
 from math import ceil
-from dotenv import load_dotenv
 import vars
-
-load_dotenv()
 
 logging.basicConfig(
     level=logging.WARNING, format="%(asctime)s - %(levelname)s - %(message)s"
@@ -28,19 +25,25 @@ with open("instruction.txt", "r") as f:
     CV = f.read()
 
 
-def get_jobs(job):
-    print(f"\nsearching for {job["role"]} past {job["hours_old"]} hours\n")
+def get_jobs(job_info):
+    print(f"searching for {job_info["role"]} past {job_info["hours_old"]} hours\n")
     jobs = getJobs(
-        job["role"],
-        job["results_wanted"],
-        job["hours_old"],
-        job["country"],
-        job["city"],
-        job["is_remote"],
+        job_info["role"],
+        job_info["results_wanted"],
+        job_info["hours_old"],
+        job_info["country"],
+        job_info["city"],
+        job_info["is_remote"],
     )
-    for _, job in jobs.iterrows():
-        print(f"{job["title"]}")
-
+    summary = (
+        f"\nRole: {job_info['role']} | Country: {job_info['country']}\n"
+        f"Found {len(jobs)} jobs\n"
+        f"{'-' * 50}\n"
+    )
+    summary += "\n".join(
+        f"  {i}. {title}" for i, title in enumerate(jobs["title"], start=1)
+    )
+    print(summary + "\n")
     return jobs
 
 
@@ -61,8 +64,10 @@ def main():
         s.jobs_no_duplicates = len(all_jobs)
         print(f"Total jobs to filter: {s.jobs_no_duplicates}")
 
-        vars.companies_blacklist[:] = [ i.lower() for i in vars.companies_blacklist]
-        vars.title_key_word_blacklist[:] = [ i.lower() for i in vars.title_key_word_blacklist]
+        vars.companies_blacklist[:] = [i.lower() for i in vars.companies_blacklist]
+        vars.title_key_word_blacklist[:] = [
+            i.lower() for i in vars.title_key_word_blacklist
+        ]
 
         t = datetime.now()
 
@@ -75,10 +80,7 @@ def main():
         print(f"number of jobs per chunk: {jobs_per_chunk}")
         print(f"number of job chunks: {len(jobs_chunks)}")
         with concurrent.futures.ThreadPoolExecutor() as executor:
-            futures = [
-                executor.submit(filter_jobs, chunk, CV)
-                for chunk in jobs_chunks
-            ]
+            futures = [executor.submit(filter_jobs, chunk, CV) for chunk in jobs_chunks]
             for future in concurrent.futures.as_completed(futures):
                 good_fit_jobs.extend(future.result())
 
