@@ -4,16 +4,33 @@ from ai import generate
 import json
 from google.genai.errors import ServerError, ClientError
 from httpx import RemoteProtocolError
-import os
-import sqlite3
+import database
+import vars
+from stats import s
 
 
 def filter_jobs(jobs, cv):
     good_fit_jobs = []
     for i, job in jobs.iterrows():
+        if job["company"].lower() in vars.companies_blacklist:
+            logging.warning(f"companies filter index {i} skipped {job["title"]}")
+            database.insert_job(
+                job["title"], job["job_url"], None, None, None, "company"
+            )
+            s.jobs_skipped_by_company_filter += 1
+            continue
+        if any(
+            keyword in job["title"].lower() for keyword in vars.title_key_word_blacklist
+        ):
+            logging.warning(f"keywords filter index {i} skipped {job['title']}")
+            database.insert_job(
+                job["title"], job["job_url"], None, None, None, "keyword"
+            )
+            s.jobs_skipped_by_keyword_filter += 1
+            continue
+
         try_count = 3
         while try_count > 0:
-
             try:
                 logging.warning(f"index is {i}")
                 cleaned_description = "\n".join(
@@ -56,21 +73,15 @@ def filter_jobs(jobs, cv):
         else:
             logging.critical("All attempts failed")
             continue
-        with sqlite3.connect(os.getenv("data_path"), timeout=30) as conn:
-            conn.execute(
-                """
-                    INSERT INTO jobs
-                    (title, url, why_good_fit, what_missing, percentage)
-                    VALUES (?, ?, ?, ?, ?)
-                    """,
-                (
-                    job["title"],
-                    job["job_url"],
-                    ai_response_dict["why I'm I a good fit in summary"],
-                    ai_response_dict["what I'm I missing in summary"],
-                    ai_response_dict["percentage"],
-                ),
-            )
+        database.insert_job(
+            job["title"],
+            job["job_url"],
+            ai_response_dict["why I'm I a good fit in summary"],
+            ai_response_dict["what I'm I missing in summary"],
+            ai_response_dict["percentage"],
+            None,
+        )
+        s.total_jobs_rated += 1
 
         if ai_response_dict["percentage"] > 70:
             good_fit_jobs.append(

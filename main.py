@@ -4,13 +4,13 @@ from filter import filter_jobs
 import os
 import logging
 import pandas as pd
-from stats import Stats
+from stats import s
 from datetime import datetime
 import concurrent.futures
 from jobs_to_search import jobs
 from math import ceil
 from dotenv import load_dotenv
-import database
+import vars
 
 load_dotenv()
 
@@ -46,7 +46,6 @@ def get_jobs(job):
 
 def main():
     global all_jobs, good_fit_jobs
-    s = Stats()
     t = datetime.now()
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
         futures = [executor.submit(get_jobs, job) for job in jobs]
@@ -55,13 +54,15 @@ def main():
 
     s.scraping_time = datetime.now() - t
 
-    
     if len(all_jobs) > 0:
         s.jobs_duplicates = len(all_jobs)
         all_jobs.drop_duplicates(subset=["job_url"], inplace=True, ignore_index=True)
         all_jobs = all_jobs.dropna(subset=["description"])
         s.jobs_no_duplicates = len(all_jobs)
         print(f"Total jobs to filter: {s.jobs_no_duplicates}")
+
+        vars.companies_blacklist[:] = [ i.lower() for i in vars.companies_blacklist]
+        vars.title_key_word_blacklist[:] = [ i.lower() for i in vars.title_key_word_blacklist]
 
         t = datetime.now()
 
