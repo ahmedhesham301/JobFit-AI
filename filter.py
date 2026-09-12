@@ -7,8 +7,9 @@ from httpx import RemoteProtocolError
 import database
 import vars
 from stats import s
+import os
 
-rate = True
+rate = os.getenv("rate") == "true"
 
 
 def filter_jobs(jobs, cv):

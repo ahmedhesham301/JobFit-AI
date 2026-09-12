@@ -42,7 +42,8 @@ def get_jobs(job_info):
         job_info["is_remote"],
     )
     summary = (
-        f"\nRole: {job_info['role']} | Country: {job_info['country']}\n"
+        f"\nRole: {job_info['role']}\n"
+        f"Country: {job_info['country']}\n"
         f"Found {len(jobs)} jobs\n"
         f"{'-' * 50}\n"
     )
