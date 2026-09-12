@@ -13,9 +13,9 @@ import re
 rate = os.getenv("rate") == "true"
 
 
-def filter_jobs_by_title(jobs):
-    mask = jobs["title"].str.contains(
-        vars.all_title_skip,
+def filter_jobs_by_regex(jobs, key, regex):
+    mask = jobs[key].str.contains(
+        regex,
         case=False,
         regex=True,
         na=False,

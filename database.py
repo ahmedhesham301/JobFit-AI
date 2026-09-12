@@ -39,3 +39,21 @@ def insert_job(
                 why_skipped,
             ),
         )
+
+
+def bulk_insert(df, why_skipped):
+    rows = (
+        (title, url, description, None, None, None, why_skipped)
+        for title, url, description in df[
+            ["title", "job_url", "description"]
+        ].itertuples(index=False, name=None)
+    )
+    with sqlite3.connect(data_path, timeout=30) as conn:
+        conn.executemany(
+            """
+            INSERT INTO jobs
+            (title, url, description, why_good_fit, what_missing, percentage, why_skipped)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            """,
+            rows,
+        )

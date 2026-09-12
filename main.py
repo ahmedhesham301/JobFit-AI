@@ -4,7 +4,7 @@ load_dotenv()
 
 from jobs import getJobs
 from alert import send_email
-from filter import filter_jobs,filter_jobs_by_title
+from filter import filter_jobs, filter_jobs_by_regex
 import os
 import logging
 import pandas as pd
@@ -14,6 +14,7 @@ import concurrent.futures
 from jobs_to_search import jobs
 from math import ceil
 import vars
+import database
 
 logging.basicConfig(
     level=logging.WARNING, format="%(asctime)s - %(levelname)s - %(message)s"
@@ -71,19 +72,27 @@ def main():
         s.jobs_no_duplicates = len(all_jobs)
 
         # TODO insert the skipped jobs to db
-        title_filtered_jobs, remaining = filter_jobs_by_title(all_jobs)
-        s.jobs_skipped_by_keyword_filter = len(remaining)
-        print(f"Total jobs to filter: {s.jobs_no_duplicates}")
+        title_filtered_jobs, remaining = filter_jobs_by_regex(all_jobs, "title", vars.blocked_titles_regex)
+        database.bulk_insert(remaining,"title")
+        s.jobs_skipped_by_title_filter = len(remaining)
 
-        vars.companies_blacklist[:] = [i.lower() for i in vars.companies_blacklist]
+        company_filtered_jobs, remaining = filter_jobs_by_regex(title_filtered_jobs, "company", vars.blocked_companies_regex)
+        database.bulk_insert(remaining,"company")
+        s.jobs_skipped_by_company_filter = len(remaining)
+
+        description_filtered_jobs, remaining = filter_jobs_by_regex(company_filtered_jobs, "description", vars.blocked_descriptions_regex)
+        database.bulk_insert(remaining,"description")
+        s.jobs_skipped_by_description_filter = len(remaining)
+
+        print(f"Total jobs to filter: {len(description_filtered_jobs)}")
 
         t = datetime.now()
 
-        num_chunks = max(1, 5)
-        jobs_per_chunk = ceil(len(title_filtered_jobs) / num_chunks)
+        num_chunks = 5
+        jobs_per_chunk = max(1, ceil(len(description_filtered_jobs) / num_chunks))
         jobs_chunks = [
-            title_filtered_jobs[i : i + jobs_per_chunk]
-            for i in range(0, len(title_filtered_jobs), jobs_per_chunk)
+            description_filtered_jobs[i : i + jobs_per_chunk]
+            for i in range(0, len(description_filtered_jobs), jobs_per_chunk)
         ]
         print(f"number of jobs per chunk: {jobs_per_chunk}")
         print(f"number of job chunks: {len(jobs_chunks)}")

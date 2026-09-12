@@ -1,5 +1,25 @@
-companies_blacklist = ["alignerr", "Uneeq Interns"]
+companies_blacklist = [r"\balignerr\b", r"\bUneeq Interns\b"]
 
+description_blockers = [
+    r"\bus only\b",
+    r"\bu\.s\. only\b",
+    r"\busa only\b",
+    r"\bremote\s*[-–—]?\s*usa\b",
+    r"\bremote\s*[-–—]?\s*us\b",
+    r"\bus citizenship\b",
+    r"\bu\.s\. citizenship\b",
+    r"\bus citizen\b",
+    r"\bu\.s\. citizen\b",
+    r"\bauthorized to work in the united states\b",
+    r"\bauthorized to work in the u\.s\.\b",
+    r"\bwill not sponsor\b",
+    r"\bno visa sponsorship\b",
+    r"\bvisa sponsorship is not available\b",
+    r"\bnot eligible for visa sponsorship\b",
+    r"\bactive secret clearance\b",
+    r"\bactive top secret clearance\b",
+    r"\bts/sci\b",
+]
 
 levels_to_skip = [
     r"\blead\b",
@@ -69,11 +89,13 @@ title_key_word_blacklist = [
 ]
 
 
-all_title_skip = "|".join(
+blocked_titles_regex = "|".join(
     levels_to_skip
     + abbreviations_to_skip
     + unrelated_tech_to_skip
     + unrelated_non_tech_to_skip,
 ).lower()
 
+blocked_companies_regex = "|".join(companies_blacklist)
 
+blocked_descriptions_regex = "|".join(description_blockers)

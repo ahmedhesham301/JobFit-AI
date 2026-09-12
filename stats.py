@@ -5,15 +5,17 @@ class Stats:
         self.email_time = None
         self.jobs_duplicates = 0
         self.jobs_no_duplicates = 0
+        self.jobs_skipped_by_title_filter = 0
         self.jobs_skipped_by_company_filter = 0
-        self.jobs_skipped_by_keyword_filter = 0
+        self.jobs_skipped_by_description_filter = 0
         self.total_jobs_rated = 0
 
     def print(self):
         jobs_remaining = (
             self.jobs_no_duplicates
             - self.jobs_skipped_by_company_filter
-            - self.jobs_skipped_by_keyword_filter
+            - self.jobs_skipped_by_title_filter
+            - self.jobs_skipped_by_description_filter
         )
         average_filter_time = (
             self.filter_time / self.jobs_no_duplicates
@@ -24,7 +26,8 @@ class Stats:
             ("Total jobs scraped", self.jobs_duplicates),
             ("Unique jobs with descriptions", self.jobs_no_duplicates),
             ("Jobs excluded by company filter", self.jobs_skipped_by_company_filter),
-            ("Jobs excluded by keyword filter", self.jobs_skipped_by_keyword_filter),
+            ("Jobs excluded by keyword filter", self.jobs_skipped_by_title_filter),
+            ("Jobs excluded by description filter", self.jobs_skipped_by_description_filter),
             ("Jobs remaining after filtering", jobs_remaining),
             ("Jobs rated", self.total_jobs_rated),
             ("Scraping time", self.scraping_time),
