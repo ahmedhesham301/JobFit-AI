@@ -4,7 +4,7 @@ load_dotenv()
 
 from jobs import getJobs
 from alert import send_email
-from filter import filter_jobs
+from filter import filter_jobs,filter_jobs_by_title
 import os
 import logging
 import pandas as pd
@@ -67,22 +67,23 @@ def main():
     if len(all_jobs) > 0:
         s.jobs_duplicates = len(all_jobs)
         all_jobs.drop_duplicates(subset=["job_url"], inplace=True, ignore_index=True)
-        all_jobs = all_jobs.dropna(subset=["description"])
+        all_jobs = all_jobs.dropna(subset=["description"], ignore_index=True)
         s.jobs_no_duplicates = len(all_jobs)
+
+        # TODO insert the skipped jobs to db
+        title_filtered_jobs, remaining = filter_jobs_by_title(all_jobs)
+        s.jobs_skipped_by_keyword_filter = len(remaining)
         print(f"Total jobs to filter: {s.jobs_no_duplicates}")
 
         vars.companies_blacklist[:] = [i.lower() for i in vars.companies_blacklist]
-        vars.title_key_word_blacklist[:] = [
-            i.lower() for i in vars.title_key_word_blacklist
-        ]
 
         t = datetime.now()
 
         num_chunks = max(1, 5)
-        jobs_per_chunk = ceil(len(all_jobs) / num_chunks)
+        jobs_per_chunk = ceil(len(title_filtered_jobs) / num_chunks)
         jobs_chunks = [
-            all_jobs[i : i + jobs_per_chunk]
-            for i in range(0, len(all_jobs), jobs_per_chunk)
+            title_filtered_jobs[i : i + jobs_per_chunk]
+            for i in range(0, len(title_filtered_jobs), jobs_per_chunk)
         ]
         print(f"number of jobs per chunk: {jobs_per_chunk}")
         print(f"number of job chunks: {len(jobs_chunks)}")

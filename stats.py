@@ -3,8 +3,8 @@ class Stats:
         self.scraping_time = None
         self.filter_time = None
         self.email_time = None
-        self.jobs_no_duplicates = 0
         self.jobs_duplicates = 0
+        self.jobs_no_duplicates = 0
         self.jobs_skipped_by_company_filter = 0
         self.jobs_skipped_by_keyword_filter = 0
         self.total_jobs_rated = 0

@@ -8,8 +8,23 @@ import database
 import vars
 from stats import s
 import os
+import re
 
 rate = os.getenv("rate") == "true"
+
+
+def filter_jobs_by_title(jobs):
+    mask = jobs["title"].str.contains(
+        vars.all_title_skip,
+        case=False,
+        regex=True,
+        na=False,
+    )
+
+    skipped = jobs[mask].copy()
+    remaining = jobs[~mask].copy()
+
+    return remaining, skipped
 
 
 def filter_jobs(jobs, cv):
@@ -32,21 +47,6 @@ def filter_jobs(jobs, cv):
                 "company",
             )
             s.jobs_skipped_by_company_filter += 1
-            continue
-        if any(
-            keyword in job["title"].lower() for keyword in vars.title_key_word_blacklist
-        ):
-            logging.warning(f"keywords filter index {i} skipped {job['title']}")
-            database.insert_job(
-                job["title"],
-                job["job_url"],
-                cleaned_description,
-                None,
-                None,
-                None,
-                "keyword",
-            )
-            s.jobs_skipped_by_keyword_filter += 1
             continue
 
         if not rate:
