@@ -26,6 +26,7 @@ levels_to_skip = [
     r"\bmanager\b",
     r"\bconsultor\b",
     r"\bconsultant\b",
+    r"\bconsulting\b",
     r"\bprincipal\b",
     r"\bprinciple\b",
     r"\bdirector",
@@ -51,6 +52,7 @@ unrelated_tech_to_skip = [
     r"\bfrontend\b",
     r"\bfront-end\b",
     r"\bfullstack\b",
+    r"\bfull stack\b",
     r"\bfull-stack\b",
     r"\bios\b",
     r"\bandroid\b",
@@ -81,6 +83,10 @@ unrelated_non_tech_to_skip = [
     r"\bCopywriting\b",
     r"\bsales\b",
     r"\bAccountant\b",
+    r"\bcustomer engagements\b",
+    r"\bMechanical Design\b",
+    r"\btruck\b",
+    r"\bMercado\b",
 ]
 
 title_key_word_blacklist = [
