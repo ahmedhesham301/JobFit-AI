@@ -1,3 +1,7 @@
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from jobs import getJobs
 from alert import send_email
 from filter import filter_jobs
@@ -26,7 +30,9 @@ with open("instruction.txt", "r") as f:
 
 
 def get_jobs(job_info):
-    print(f"searching for {job_info["role"]} past {job_info["hours_old"]} hours\n")
+    print(
+        f"searching for {job_info["role"]} past {job_info["hours_old"]} hours in {job_info["country"]}\n"
+    )
     jobs = getJobs(
         job_info["role"],
         job_info["results_wanted"],

@@ -8,14 +8,27 @@ import database
 import vars
 from stats import s
 
+rate = True
+
 
 def filter_jobs(jobs, cv):
+    """Save filtered jobs, optionally rating eligible jobs with Gemini."""
     good_fit_jobs = []
     for i, job in jobs.iterrows():
+        cleaned_description = "\n".join(
+            [line for line in job["description"].splitlines() if line.strip()]
+        )
+
         if job["company"].lower() in vars.companies_blacklist:
             logging.warning(f"companies filter index {i} skipped {job["title"]}")
             database.insert_job(
-                job["title"], job["job_url"], None, None, None, "company"
+                job["title"],
+                job["job_url"],
+                cleaned_description,
+                None,
+                None,
+                None,
+                "company",
             )
             s.jobs_skipped_by_company_filter += 1
             continue
@@ -24,18 +37,33 @@ def filter_jobs(jobs, cv):
         ):
             logging.warning(f"keywords filter index {i} skipped {job['title']}")
             database.insert_job(
-                job["title"], job["job_url"], None, None, None, "keyword"
+                job["title"],
+                job["job_url"],
+                cleaned_description,
+                None,
+                None,
+                None,
+                "keyword",
             )
             s.jobs_skipped_by_keyword_filter += 1
+            continue
+
+        if not rate:
+            database.insert_job(
+                job["title"],
+                job["job_url"],
+                cleaned_description,
+                None,
+                None,
+                None,
+                None,
+            )
             continue
 
         try_count = 3
         while try_count > 0:
             try:
                 logging.warning(f"index is {i}")
-                cleaned_description = "\n".join(
-                    [line for line in job["description"].splitlines() if line.strip()]
-                )
                 ai_response = generate(cleaned_description, cv)
                 ai_response_dict = json.loads(ai_response)
                 break
@@ -76,6 +104,7 @@ def filter_jobs(jobs, cv):
         database.insert_job(
             job["title"],
             job["job_url"],
+            cleaned_description,
             ai_response_dict["why I'm I a good fit in summary"],
             ai_response_dict["what I'm I missing in summary"],
             ai_response_dict["percentage"],

@@ -7,6 +7,7 @@ with sqlite3.connect(os.getenv("data_path"), timeout=30) as conn:
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title TEXT NOT NULL,
         url TEXT NOT NULL,
+        description TEXT NOT NULL,
         why_good_fit TEXT,
         what_missing TEXT,
         percentage INTEGER,
@@ -18,17 +19,20 @@ with sqlite3.connect(os.getenv("data_path"), timeout=30) as conn:
 data_path = os.getenv("data_path")
 
 
-def insert_job(title, url, why_good_fit, what_missing, percentage, why_skipped):
+def insert_job(
+    title, url, description, why_good_fit, what_missing, percentage, why_skipped
+):
     with sqlite3.connect(data_path, timeout=30) as conn:
         conn.execute(
             """
                         INSERT INTO jobs
-                        (title, url, why_good_fit, what_missing, percentage, why_skipped)
-                        VALUES (?, ?, ?, ?, ?, ?)
+                        (title, url, description, why_good_fit, what_missing, percentage, why_skipped)
+                        VALUES (?, ?, ?, ?, ?, ?, ?)
                         """,
             (
                 title,
                 url,
+                description,
                 why_good_fit,
                 what_missing,
                 percentage,
