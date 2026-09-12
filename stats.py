@@ -20,4 +20,5 @@ Filter_time: {self.filter_time if self.jobs_no_duplicates else "N/A"}
 AVG request time: {self.filter_time / self.jobs_no_duplicates if self.jobs_no_duplicates else "N/A"}
 Email time: {self.email_time if self.jobs_no_duplicates else "N/A"}""")
 
+
 s = Stats()
