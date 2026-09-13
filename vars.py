@@ -122,6 +122,7 @@ unrelated_non_tech_to_skip = [
     r"\bCustomer Service\b",
     r"\bTeller\b",
     r"\bContent Creator\b",
+    r"\bRobotics\b",
 ]
 
 title_key_word_blacklist = [
