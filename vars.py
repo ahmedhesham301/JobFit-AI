@@ -85,6 +85,10 @@ unrelated_tech_to_skip = [
     r"\bmainframe developer\b",
     r"\bios developer\b",
     r"\bandroid\b",
+    r"\bjava\b",
+    r"\brust\b",
+    r"\bphp\b",
+    r"\b\.net\b",
 ]
 
 unrelated_non_tech_to_skip = [
@@ -131,13 +135,10 @@ unrelated_non_tech_to_skip = [
     r"\bTeller\b",
     r"\bContent Creator\b",
     r"\bRobotics\b",
+    r"\bcivil\b",
+    r"\bmechanical\b",
+    r"\belectrical\b",
 ]
-
-title_key_word_blacklist = [
-    r"\blatin\b",
-    r"\belixir\b",
-]
-
 
 blocked_titles_regex = "|".join(
     levels_to_skip
