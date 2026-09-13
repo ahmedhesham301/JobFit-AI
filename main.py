@@ -84,7 +84,9 @@ def main():
         database.bulk_insert(remaining, "company")
         s.jobs_skipped_by_company_filter = len(remaining)
 
-        jobs["description"] = jobs["description"].apply(clean_description)
+        company_filtered_jobs["description"] = company_filtered_jobs[
+            "description"
+        ].apply(clean_description)
 
         description_filtered_jobs, remaining = filter_jobs_by_regex(
             company_filtered_jobs, "description", vars.blocked_descriptions_regex
