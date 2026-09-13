@@ -40,6 +40,8 @@ levels_to_skip = [
     r"\bhead of\b",
     r"\bchief\b",
     r"\bdistinguished\b",
+    r"\bproduct owner\b",
+    r"\bbusiness analyst\b",
 ]
 
 abbreviations_to_skip = [
@@ -68,15 +70,21 @@ unrelated_tech_to_skip = [
     r"\bsdet\b",
     r"\bquality assurance\b",
     r"\btest engineer\b",
+    r"\btest automation\b",
     r"\btesting engineer\b",
+    r"\bverification engineer\b",
     r"\bsalesforce\b",
     r"\bdynamics 365\b",
     r"\bservicenow\b",
     r"\bsap\b",
     r"\boracle fusion\b",
+    r"\boracle hcm\b",
     r"\bjava developer\b",
     r"\bdata science\b",
+    r"\berp developer\b",
     r"\bmainframe developer\b",
+    r"\bios developer\b",
+    r"\bandroid\b",
 ]
 
 unrelated_non_tech_to_skip = [
