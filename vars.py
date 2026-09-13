@@ -119,6 +119,8 @@ unrelated_non_tech_to_skip = [
     r"\bpharmacy\b",
     r"\bpharmacist\b",
     r"\bphysician\b",
+    r"\bCustomer Service\b",
+    r"\bTeller\b",
 ]
 
 title_key_word_blacklist = [

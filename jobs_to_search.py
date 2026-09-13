@@ -1,6 +1,6 @@
 jobs = [
     {
-        "role": "devops",
+        "role": "junior devops",
         "results_wanted": 999,
         "hours_old": 2.03,
         "country": "worldwide",
@@ -24,7 +24,7 @@ jobs = [
         "is_remote": True,
     },
     {
-        "role": "platform",
+        "role": "platform Engineer",
         "results_wanted": 999,
         "hours_old": 2.03,
         "country": "worldwide",
