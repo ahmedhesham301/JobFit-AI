@@ -42,6 +42,7 @@ levels_to_skip = [
     r"\bdistinguished\b",
     r"\bproduct owner\b",
     r"\bbusiness analyst\b",
+    r"\bleader\b",
 ]
 
 abbreviations_to_skip = [
@@ -89,6 +90,7 @@ unrelated_tech_to_skip = [
     r"\brust\b",
     r"\bphp\b",
     r"\b\.net\b",
+    r"(?<!\w)\.net\b",
 ]
 
 unrelated_non_tech_to_skip = [
@@ -138,6 +140,11 @@ unrelated_non_tech_to_skip = [
     r"\bcivil\b",
     r"\bmechanical\b",
     r"\belectrical\b",
+    r"\bbridge design\b",
+    r"\bstructural designer\b",
+    r"\bsound system\b",
+    r"\bplumbing\b",
+    r"\bqc engineer\b",
 ]
 
 blocked_titles_regex = "|".join(

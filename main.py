@@ -48,9 +48,11 @@ def get_jobs(job_info):
         f"Found {len(jobs)} jobs\n"
         f"{'-' * 50}\n"
     )
-    summary += "\n".join(
-        f"  {i}. {title}" for i, title in enumerate(jobs["title"], start=1)
-    )
+    # JobSpy can return an empty DataFrame without any columns.
+    if not jobs.empty:
+        summary += "\n".join(
+            f"  {i}. {title}" for i, title in enumerate(jobs["title"], start=1)
+        )
     print(summary + "\n")
     return jobs
 
