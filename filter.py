@@ -27,20 +27,25 @@ def filter_jobs_by_regex(jobs, key, regex):
     return remaining, skipped
 
 
+def clean_description(description):
+    if not isinstance(description, str):
+        return ""
+
+    return "\n".join(
+        line for line in description.replace("\\", "").splitlines() if line.strip()
+    )
+
+
 def filter_jobs(jobs, cv):
     """Save filtered jobs, optionally rating eligible jobs with Gemini."""
     good_fit_jobs = []
     for i, job in jobs.iterrows():
-        cleaned_description = "\n".join(
-            [line for line in job["description"].splitlines() if line.strip()]
-        )
-
         if job["company"].lower() in vars.companies_blacklist:
             logging.warning(f"companies filter index {i} skipped {job["title"]}")
             database.insert_job(
                 job["title"],
                 job["job_url"],
-                cleaned_description,
+                job["description"],
                 None,
                 None,
                 None,
@@ -53,7 +58,7 @@ def filter_jobs(jobs, cv):
             database.insert_job(
                 job["title"],
                 job["job_url"],
-                cleaned_description,
+                job["description"],
                 None,
                 None,
                 None,
@@ -65,7 +70,7 @@ def filter_jobs(jobs, cv):
         while try_count > 0:
             try:
                 logging.warning(f"index is {i}")
-                ai_response = generate(cleaned_description, cv)
+                ai_response = generate(job["description"], cv)
                 ai_response_dict = json.loads(ai_response)
                 break
 
@@ -105,7 +110,7 @@ def filter_jobs(jobs, cv):
         database.insert_job(
             job["title"],
             job["job_url"],
-            cleaned_description,
+            job["description"],
             ai_response_dict["why I'm I a good fit in summary"],
             ai_response_dict["what I'm I missing in summary"],
             ai_response_dict["percentage"],

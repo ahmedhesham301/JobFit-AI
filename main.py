@@ -4,7 +4,7 @@ load_dotenv()
 
 from jobs import getJobs
 from alert import send_email
-from filter import filter_jobs, filter_jobs_by_regex
+from filter import filter_jobs, filter_jobs_by_regex, clean_description
 import os
 import logging
 import pandas as pd
@@ -72,16 +72,24 @@ def main():
         s.jobs_no_duplicates = len(all_jobs)
 
         # TODO insert the skipped jobs to db
-        title_filtered_jobs, remaining = filter_jobs_by_regex(all_jobs, "title", vars.blocked_titles_regex)
-        database.bulk_insert(remaining,"title")
+        title_filtered_jobs, remaining = filter_jobs_by_regex(
+            all_jobs, "title", vars.blocked_titles_regex
+        )
+        database.bulk_insert(remaining, "title")
         s.jobs_skipped_by_title_filter = len(remaining)
 
-        company_filtered_jobs, remaining = filter_jobs_by_regex(title_filtered_jobs, "company", vars.blocked_companies_regex)
-        database.bulk_insert(remaining,"company")
+        company_filtered_jobs, remaining = filter_jobs_by_regex(
+            title_filtered_jobs, "company", vars.blocked_companies_regex
+        )
+        database.bulk_insert(remaining, "company")
         s.jobs_skipped_by_company_filter = len(remaining)
 
-        description_filtered_jobs, remaining = filter_jobs_by_regex(company_filtered_jobs, "description", vars.blocked_descriptions_regex)
-        database.bulk_insert(remaining,"description")
+        jobs["description"] = jobs["description"].apply(clean_description)
+
+        description_filtered_jobs, remaining = filter_jobs_by_regex(
+            company_filtered_jobs, "description", vars.blocked_descriptions_regex
+        )
+        database.bulk_insert(remaining, "description")
         s.jobs_skipped_by_description_filter = len(remaining)
 
         print(f"Total jobs to filter: {len(description_filtered_jobs)}")

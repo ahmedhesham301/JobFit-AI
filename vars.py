@@ -1,24 +1,29 @@
 companies_blacklist = [r"\balignerr\b", r"\bUneeq Interns\b"]
 
 description_blockers = [
-    r"\bus only\b",
-    r"\bu\.s\. only\b",
-    r"\busa only\b",
-    r"\bremote\s*[-–—]?\s*usa\b",
-    r"\bremote\s*[-–—]?\s*us\b",
-    r"\bus citizenship\b",
-    r"\bu\.s\. citizenship\b",
-    r"\bus citizen\b",
-    r"\bu\.s\. citizen\b",
-    r"\bauthorized to work in the united states\b",
-    r"\bauthorized to work in the u\.s\.\b",
-    r"\bwill not sponsor\b",
+    # US work authorization
+    r"\b(?:legally )?authorized to work .*?\b(?:u\.?s\.?|united states)\b",
+    r"\b(?:u\.?s\.?|united states) work authorization\b",
+    # Citizenship requirements
+    r"\bu\.?s\.? citizenship required\b",
+    r"\bmust be (?:a )?u\.?s\.? citizen\b",
+    r"\bmust have (?:u\.?s\.?|united states) citizenship\b",
+    # Visa sponsorship
+    r"\b(?:will|does|do) not sponsor\b",
+    r"\bunable to sponsor\b",
     r"\bno visa sponsorship\b",
     r"\bvisa sponsorship is not available\b",
     r"\bnot eligible for visa sponsorship\b",
-    r"\bactive secret clearance\b",
-    r"\bactive top secret clearance\b",
-    r"\bts/sci\b",
+    r"\bsponsorship is not available\b",
+    r"\bwithout (?:the )?need for (?:visa )?sponsorship\b",
+    # Security clearance requirements
+    r"\b(?:active|required|must have|must possess).*?security clearance\b",
+    r"\b(?:active|required|must have|must possess).*?(?:secret|top secret|ts/sci|dod secret)\b",
+    r"\b(?:secret|top secret|ts/sci|dod secret) clearance required\b",
+    # US-only location restrictions
+    r"\b(?:us|u\.s\.|usa)[ -]?only\b",
+    r"\bremote\s*[-–—]?\s*(?:us|u\.s\.|usa)\b",
+    r"\bremote .*?\b(?:united states only|us only|u\.s\. only|usa only)\b",
 ]
 
 levels_to_skip = [
@@ -46,6 +51,7 @@ abbreviations_to_skip = [
 unrelated_tech_to_skip = [
     r"\bdata engineer\b",
     r"\bdata scientist\b",
+    r"\bdata analyst\b",
     r"\bmachine learning engineer\b",
     r"\bml engineer\b",
     r"\bai engineer\b",
@@ -68,6 +74,9 @@ unrelated_tech_to_skip = [
     r"\bservicenow\b",
     r"\bsap\b",
     r"\boracle fusion\b",
+    r"\bjava developer\b",
+    r"\bdata science\b",
+    r"\bmainframe developer\b",
 ]
 
 unrelated_non_tech_to_skip = [
@@ -87,6 +96,29 @@ unrelated_non_tech_to_skip = [
     r"\bMechanical Design\b",
     r"\btruck\b",
     r"\bMercado\b",
+    r"\bvideo editor\b",
+    r"\bmanufacturing engineer\b",
+    r"\bbusiness development\b",
+    r"\bsales\b",
+    r"\bmarketing\b",
+    r"\baccount executive\b",
+    r"\bcustomer success\b",
+    r"\btalent acquisition\b",
+    r"\brecruiter\b",
+    r"\bhuman resources\b",
+    r"\badministrative assistant\b",
+    r"\bvirtual assistant\b",
+    r"\bexecutive assistant\b",
+    r"\bproject coordinator\b",
+    r"\bprogram coordinator\b",
+    r"\bforklift\b",
+    r"\bproduction associate\b",
+    r"\bmaintenance technician\b",
+    r"\bnurse\b",
+    r"\bnursing\b",
+    r"\bpharmacy\b",
+    r"\bpharmacist\b",
+    r"\bphysician\b",
 ]
 
 title_key_word_blacklist = [
