@@ -17,6 +17,14 @@ jobs = [
         "is_remote": True,
     },
     {
+        "role": "devops intern",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "worldwide",
+        "city": "cairo",
+        "is_remote": True,
+    },
+    {
         "role": "graduate devops engineer",
         "results_wanted": 999,
         "hours_old": 2.03,
@@ -111,6 +119,14 @@ jobs = [
     },
     {
         "role": "junior backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "worldwide",
+        "city": "cairo",
+        "is_remote": True,
+    },
+    {
+        "role": "backend intern",
         "results_wanted": 999,
         "hours_old": 2.03,
         "country": "worldwide",
