@@ -16,14 +16,31 @@ description_blockers = [
     r"\bnot eligible for visa sponsorship\b",
     r"\bsponsorship is not available\b",
     r"\bwithout (?:the )?need for (?:visa )?sponsorship\b",
+    r"\bu\.?s\.? citizenship is required\b",
+    r"\bno sponsorship (?:can|will) be provided\b",
+    r"\bvisa sponsor(?:ship)? is not available\b",
+    r"\bnot eligible for (?:visa|immigration) sponsorship\b",
+    r"\bwithout (?:current or future )?(?:visa )?sponsorship\b",
+    r"\bwe (?:cannot|can't|do not|don't) provide (?:visa )?sponsorship\b",
+    r"\bwe (?:cannot|can't|do not|don't) sponsor\b",
+    r"\b(?:company|employer) does not sponsor\b",
     # Security clearance requirements
     r"\b(?:active|required|must have|must possess).*?security clearance\b",
     r"\b(?:active|required|must have|must possess).*?(?:secret|top secret|ts/sci|dod secret)\b",
     r"\b(?:secret|top secret|ts/sci|dod secret) clearance required\b",
+    r"\bmust be eligible to obtain(?: and maintain)? .*?clearance\b",
+    r"\bability to obtain(?: and maintain)? .*?clearance\b",
+    r"\bmust be able to obtain(?: and maintain)? .*?clearance\b",
+    r"\bactive (?:secret|top secret|ts/sci|dod secret) clearance\b",
+    r"\bts/sci(?: with polygraph)?\b",
     # US-only location restrictions
     r"\b(?:us|u\.s\.|usa)[ -]?only\b",
     r"\bremote\s*[-–—]?\s*(?:us|u\.s\.|usa)\b",
     r"\bremote .*?\b(?:united states only|us only|u\.s\. only|usa only)\b",
+    # Experience requirements — hard skip at 5+ years
+    r"\b(?:minimum(?: of)?|at least)\s+(?:5|6|7|8|9|10|11|12|13|14|15)\+?\s+years?(?: of)? .*?experience\b",
+    r"\b(?:requires?|required|requiring)\s+(?:a )?(?:minimum(?: of)? )?(?:5|6|7|8|9|10|11|12|13|14|15)\+?\s+years?(?: of)? .*?experience\b",
+    r"\bmust have\s+(?:at least )?(?:5|6|7|8|9|10|11|12|13|14|15)\+?\s+years?(?: of)? .*?experience\b",
 ]
 
 levels_to_skip = [
@@ -46,6 +63,10 @@ levels_to_skip = [
     r"\bsupervisor\b",
     r"\bservice owner\b",
     r"\bplatform owner\b",
+    r"\bsenior\b",
+    r"\bsr\.?\b",
+    r"\bsnr\b",
+    r"\barchitect\b",
 ]
 
 abbreviations_to_skip = [
@@ -70,6 +91,8 @@ unrelated_tech_to_skip = [
     r"\bml engineer\b",
     r"\bai engineer\b",
     r"\bArtificial Intelligence Engineer\b",
+    r"\bai researcher\b",
+    r"\bmachine learning researcher\b",
     # frontend, mobile
     r"\bfrontend\b",
     r"\bfront-end\b",
@@ -93,13 +116,17 @@ unrelated_tech_to_skip = [
     r"\btesting engineer\b",
     r"\bQuality Control\b",
     r"\bverification engineer\b",
+    r"\bvalidation engineer\b",
+    # etc
     r"\bsalesforce\b",
     r"\bdynamics 365\b",
     r"\bservicenow\b",
     r"\bsap\b",
     r"\boracle fusion\b",
     r"\boracle hcm\b",
+    # java
     r"\bjava developer\b",
+    r"\bjava software engineer\b",
     r"\bdata science\b",
     r"\berp developer\b",
     r"\bmainframe developer\b",
@@ -134,6 +161,16 @@ unrelated_tech_to_skip = [
     r"\bbusiness intelligence\b",
     r"\brpa developer\b",
     r"\buipath\b",
+    # Hardware
+    r"\bhardware engineer\b",
+    r"\bhardware developer\b",
+    # Make Rust/PHP/.NET filtering title-specific
+    r"\brust developer\b",
+    r"\brust engineer\b",
+    r"\bphp developer\b",
+    r"\bphp engineer\b",
+    r"(?<!\w)\.net developer\b",
+    r"(?<!\w)\.net engineer\b",
 ]
 
 unrelated_non_tech_to_skip = [
@@ -233,6 +270,10 @@ unrelated_non_tech_to_skip = [
     r"\bsecurity guard\b",
     r"\bcontent writer\b",
     r"\bsocial media\b",
+    r"\bquality engineer\b",
+    r"\bplant engineer\b",
+    r"\binjection molding\b",
+    r"\binjection moulding\b",
 ]
 
 languages_to_skip = [
