@@ -34,7 +34,7 @@ levels_to_skip = [
     r"\bconsulting\b",
     r"\bprincipal\b",
     r"\bprinciple\b",
-    r"\bdirector",
+    r"\bdirector\b",
     r"\bvice president\b",
     r"\bstaff\b",
     r"\bhead of\b",
@@ -43,12 +43,21 @@ levels_to_skip = [
     r"\bproduct owner\b",
     r"\bbusiness analyst\b",
     r"\bleader\b",
+    r"\bsupervisor\b",
+    r"\bservice owner\b",
+    r"\bplatform owner\b",
 ]
 
 abbreviations_to_skip = [
     r"\bvp\b",
     r"\bsvp\b",
     r"\bavp\b",
+    r"\bcto\b",
+    r"\bcio\b",
+    r"\bciso\b",
+    r"\bcoo\b",
+    r"\bceo\b",
+    r"\bevp\b",
 ]
 
 unrelated_tech_to_skip = [
@@ -85,12 +94,37 @@ unrelated_tech_to_skip = [
     r"\berp developer\b",
     r"\bmainframe developer\b",
     r"\bios developer\b",
-    r"\bandroid\b",
     r"\bjava\b",
     r"\brust\b",
     r"\bphp\b",
-    r"\b\.net\b",
     r"(?<!\w)\.net\b",
+    # Design and client applications
+    r"\bui[ /-]?ux\b",
+    r"\bui developer\b",
+    r"\bux designer\b",
+    r"\bweb designer\b",
+    r"\bgraphic designer\b",
+    r"\bproduct designer\b",
+    r"\bdesktop developer\b",
+    # Embedded and gaming
+    r"\bembedded(?: systems?| software)? engineer\b",
+    r"\bfirmware engineer\b",
+    r"\bfirmware developer\b",
+    r"\bgame developer\b",
+    r"\bgame engineer\b",
+    # Unrelated development stacks
+    r"\bwordpress\b",
+    r"\bruby developer\b",
+    r"\brails developer\b",
+    r"\belixir developer\b",
+    # Enterprise and analytics platforms
+    r"\bsharepoint\b",
+    r"\bpower platform\b",
+    r"\bpower bi\b",
+    r"\bbi developer\b",
+    r"\bbusiness intelligence\b",
+    r"\brpa developer\b",
+    r"\buipath\b",
 ]
 
 unrelated_non_tech_to_skip = [
@@ -113,7 +147,6 @@ unrelated_non_tech_to_skip = [
     r"\bvideo editor\b",
     r"\bmanufacturing engineer\b",
     r"\bbusiness development\b",
-    r"\bsales\b",
     r"\bmarketing\b",
     r"\baccount executive\b",
     r"\bcustomer success\b",
@@ -130,8 +163,6 @@ unrelated_non_tech_to_skip = [
     r"\bmaintenance technician\b",
     r"\bnurse\b",
     r"\bnursing\b",
-    r"\bpharmacy\b",
-    r"\bpharmacist\b",
     r"\bphysician\b",
     r"\bCustomer Service\b",
     r"\bTeller\b",
@@ -155,11 +186,50 @@ unrelated_non_tech_to_skip = [
     r"\bpresales engineer\b",
     r"\bfire fighting\b",
     r"\bworkshop engineer\b",
+    # Additional construction and physical engineering
+    r"\bsite engineer\b",
+    r"\bmep engineer\b",
+    r"\bmep designer\b",
+    r"\barchitectural engineer\b",
+    r"\barchitectural designer\b",
+    r"\bmarine engineer\b",
+    r"\btechnical superintendent\b",
+    r"\brailway engineer\b",
+    r"\brail engineer\b",
+    r"\bcommissioning engineer\b",
+    r"\bpackaging engineer\b",
+    r"\bquantity surveyor\b",
+    r"\bland surveyor\b",
+    r"\bgeotechnical engineer\b",
+    r"\bpiping engineer\b",
+    r"\binstrumentation engineer\b",
+    r"\bpetroleum engineer\b",
+    r"\bchemical engineer\b",
+    r"\bindustrial engineer\b",
+    r"\bprocess engineer\b",
+    r"\bplanning engineer\b",
+    r"\bestimation engineer\b",
+    r"\bcost engineer\b",
+    r"\bfacilities engineer\b",
+    r"\bfire protection\b",
+    r"\bsmart[ -]?home\b",
+    r"\bknx\b",
+    # Support and field roles
+    r"\bhelp[ -]?desk\b",
+    r"\bservice desk\b",
+    r"\bdesktop support\b",
+    r"\bit support\b",
+    r"\bfield service engineer\b",
+    r"\bcall center\b",
+    r"\bsecurity guard\b",
+    r"\bcontent writer\b",
+    r"\bsocial media\b",
 ]
 
 languages_to_skip = [
-    r"\bfrench speaker\b",
-    r"\bgerman speaker\b",
+    r"\b(?:french|german|dutch|spanish|italian|portuguese|polish|"
+    r"czech|swedish|danish|norwegian|finnish)\s*[- ]?"
+    r"(?:speaker|speaking)\b",
 ]
 
 blocked_titles_regex = "|".join(
@@ -167,7 +237,7 @@ blocked_titles_regex = "|".join(
     + abbreviations_to_skip
     + unrelated_tech_to_skip
     + unrelated_non_tech_to_skip
-    +languages_to_skip,
+    + languages_to_skip,
 ).lower()
 
 blocked_companies_regex = "|".join(companies_blacklist)
