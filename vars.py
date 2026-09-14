@@ -61,12 +61,16 @@ abbreviations_to_skip = [
 ]
 
 unrelated_tech_to_skip = [
+    # data
     r"\bdata engineer\b",
     r"\bdata scientist\b",
     r"\bdata analyst\b",
+    # ml & ai
     r"\bmachine learning engineer\b",
     r"\bml engineer\b",
     r"\bai engineer\b",
+    r"\bArtificial Intelligence Engineer\b",
+    # frontend, mobile
     r"\bfrontend\b",
     r"\bfront-end\b",
     r"\bfullstack\b",
@@ -76,12 +80,18 @@ unrelated_tech_to_skip = [
     r"\bandroid\b",
     r"\bmobile developer\b",
     r"\bmobile engineer\b",
+    # c++
+    r"\bC\+\+ Software Engineer\b",
+    r"\bC\+\+ Developer\b",
+    r"\bC\+\+ Integration Engineer\b",
+    # testing
     r"\bqa\b",
     r"\bsdet\b",
     r"\bquality assurance\b",
     r"\btest engineer\b",
     r"\btest automation\b",
     r"\btesting engineer\b",
+    r"\bQuality Control\b",
     r"\bverification engineer\b",
     r"\bsalesforce\b",
     r"\bdynamics 365\b",
@@ -94,7 +104,6 @@ unrelated_tech_to_skip = [
     r"\berp developer\b",
     r"\bmainframe developer\b",
     r"\bios developer\b",
-    r"\bjava\b",
     r"\brust\b",
     r"\bphp\b",
     r"(?<!\w)\.net\b",
