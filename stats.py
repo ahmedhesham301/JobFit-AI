@@ -8,6 +8,7 @@ class Stats:
         self.jobs_skipped_by_title_filter = 0
         self.jobs_skipped_by_company_filter = 0
         self.jobs_skipped_by_description_filter = 0
+        self.cache_hits = 0
         self.total_jobs_rated = 0
 
     def print(self):
@@ -30,6 +31,7 @@ class Stats:
             ("Jobs excluded by description filter", self.jobs_skipped_by_description_filter),
             ("Jobs remaining after filtering", jobs_remaining),
             ("Jobs rated", self.total_jobs_rated),
+            ("Cache hits", self.cache_hits),
             ("Scraping time", self.scraping_time),
             ("Filtering time", self.filter_time),
             ("Average filtering time per job", average_filter_time),

@@ -33,7 +33,7 @@ def insert_job(title, url, description, description_id, why_skipped):
         conn.execute(
             """
             INSERT INTO jobs
-            (title, url, description, description_id,why_skipped)
+            (title, url, description, description_id, why_skipped)
             VALUES (?, ?, ?, ?, ?)
             """,
             (
