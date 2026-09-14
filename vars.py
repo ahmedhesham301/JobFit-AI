@@ -145,13 +145,29 @@ unrelated_non_tech_to_skip = [
     r"\bsound system\b",
     r"\bplumbing\b",
     r"\bqc engineer\b",
+    r"\bcnc\b",
+    r"\bhvac\b",
+    r"\bbim\b",
+    r"\bpavement\b",
+    r"\bsolar design\b",
+    r"\btechnical office\b",
+    r"\bsales engineer\b",
+    r"\bpresales engineer\b",
+    r"\bfire fighting\b",
+    r"\bworkshop engineer\b",
+]
+
+languages_to_skip = [
+    r"\bfrench speaker\b",
+    r"\bgerman speaker\b",
 ]
 
 blocked_titles_regex = "|".join(
     levels_to_skip
     + abbreviations_to_skip
     + unrelated_tech_to_skip
-    + unrelated_non_tech_to_skip,
+    + unrelated_non_tech_to_skip
+    +languages_to_skip,
 ).lower()
 
 blocked_companies_regex = "|".join(companies_blacklist)

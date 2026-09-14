@@ -8,7 +8,6 @@ import database
 import vars
 from stats import s
 import os
-import re
 
 rate = os.getenv("rate") == "true"
 
@@ -27,109 +26,101 @@ def filter_jobs_by_regex(jobs, key, regex):
     return remaining, skipped
 
 
-def clean_description(description):
-    if not isinstance(description, str):
-        return ""
-
-    return "\n".join(
-        line for line in description.replace("\\", "").splitlines() if line.strip()
-    )
-
-
 def filter_jobs(jobs, cv):
     """Save filtered jobs, optionally rating eligible jobs with Gemini."""
     good_fit_jobs = []
     for i, job in jobs.iterrows():
-        if job["company"].lower() in vars.companies_blacklist:
-            logging.warning(f"companies filter index {i} skipped {job["title"]}")
-            database.insert_job(
-                job["title"],
-                job["job_url"],
-                job["description"],
-                None,
-                None,
-                None,
-                "company",
-            )
-            s.jobs_skipped_by_company_filter += 1
-            continue
+        job = job.to_dict()
 
-        if not rate:
-            database.insert_job(
-                job["title"],
-                job["job_url"],
-                job["description"],
-                None,
-                None,
-                None,
-                None,
-            )
-            continue
+        saved_info = database.get_info_from_hash(job["description_hash"])
+        if saved_info is not None:
+            job["why I'm I a good fit"] = saved_info["why_good_fit"]
+            job["what I'm I missing"] = saved_info["what_missing"]
+            job["percentage"] = saved_info["percentage"]
 
-        try_count = 3
-        while try_count > 0:
-            try:
-                logging.warning(f"index is {i}")
-                ai_response = generate(job["description"], cv)
-                ai_response_dict = json.loads(ai_response)
-                break
+        if rate and not saved_info:
+            try_count = 3
+            while try_count > 0:
+                try:
+                    logging.warning(f"index is {i}")
+                    ai_response = generate(job["description"], cv)
+                    ai_response_dict = json.loads(ai_response)
 
-            except json.JSONDecodeError as e:
-                try_count -= 1
-                logging.warning("JSONDecodeError happend")
+                    job["why I'm I a good fit"] = ai_response_dict[
+                        "why I'm I a good fit in summary"
+                    ]
+                    job["what I'm I missing"] = ai_response_dict[
+                        "what I'm I missing in summary"
+                    ]
+                    job["percentage"] = ai_response_dict["percentage"]
 
-            except ServerError as e:
+                    database.insert_hash(
+                        job["description_hash"],
+                        job["why I'm I a good fit"],
+                        job["what I'm I missing"],
+                        job["percentage"],
+                    )
 
-                if e.details["error"]["code"] == 503:
+                    break
+
+                except json.JSONDecodeError as e:
                     try_count -= 1
-                    logging.warning("sleeping to after The model is overloaded.")
+                    logging.warning("JSONDecodeError happend")
+
+                except ServerError as e:
+
+                    if e.details["error"]["code"] == 503:
+                        try_count -= 1
+                        logging.warning("sleeping to after The model is overloaded.")
+                        time.sleep(3)
+                    else:
+                        logging.critical(e.details)
+                        return 1
+
+                except ClientError as e:
+                    if (
+                        e.details["error"]["code"] == 429
+                        and e.details["error"]["status"] == "RESOURCE_EXHAUSTED"
+                    ):
+                        logging.error("RESOURCE_EXHAUSTED sleeping for 60 seconds")
+                        time.sleep(60)
+                    else:
+                        logging.critical(e.details)
+                        return 1
+
+                except RemoteProtocolError as e:
+                    try_count -= 1
+                    logging.exception("sleeping after RemoteProtocolError")
                     time.sleep(3)
-                else:
-                    logging.critical(e.details)
-                    return 1
 
-            except ClientError as e:
-                if (
-                    e.details["error"]["code"] == 429
-                    and e.details["error"]["status"] == "RESOURCE_EXHAUSTED"
-                ):
-                    logging.error("RESOURCE_EXHAUSTED sleeping for 60 seconds")
-                    time.sleep(60)
-                else:
-                    logging.critical(e.details)
-                    return 1
+            else:
+                logging.critical("All attempts failed")
+                continue
 
-            except RemoteProtocolError as e:
-                try_count -= 1
-                logging.exception("sleeping after RemoteProtocolError")
-                time.sleep(3)
+            s.total_jobs_rated += 1
 
-        else:
-            logging.critical("All attempts failed")
-            continue
+        job["description_id"] = database.insert_hash(
+            job["description_hash"],
+            job.get("why I'm I a good fit in summary"),
+            job.get("what I'm I missing in summary"),
+            job.get("percentage"),
+        )
         database.insert_job(
             job["title"],
             job["job_url"],
             job["description"],
-            ai_response_dict["why I'm I a good fit in summary"],
-            ai_response_dict["what I'm I missing in summary"],
-            ai_response_dict["percentage"],
+            job["description_id"],
             None,
         )
-        s.total_jobs_rated += 1
 
-        if ai_response_dict["percentage"] > 70:
+        if job.get("percentage") is not None and job.get("percentage") > 70:
             good_fit_jobs.append(
                 {
                     "title": job["title"],
                     "url": job["job_url"],
-                    "percentage": ai_response_dict["percentage"],
-                    "why I'm I a good fit": ai_response_dict[
-                        "why I'm I a good fit in summary"
-                    ],
-                    "what I'm I missing": ai_response_dict[
-                        "what I'm I missing in summary"
-                    ],
+                    "why I'm I a good fit": job["why I'm I a good fit"],
+                    "what I'm I missing": job["what I'm I missing"],
+                    "percentage": job["percentage"],
                 }
             )
     return good_fit_jobs

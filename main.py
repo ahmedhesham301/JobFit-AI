@@ -4,7 +4,7 @@ load_dotenv()
 
 from jobs import getJobs
 from alert import send_email
-from filter import filter_jobs, filter_jobs_by_regex, clean_description
+from filter import filter_jobs, filter_jobs_by_regex
 import os
 import logging
 import pandas as pd
@@ -15,6 +15,7 @@ from jobs_to_search import jobs
 from math import ceil
 import vars
 import database
+import utils
 
 logging.basicConfig(
     level=logging.WARNING, format="%(asctime)s - %(levelname)s - %(message)s"
@@ -73,7 +74,6 @@ def main():
         all_jobs = all_jobs.dropna(subset=["description"], ignore_index=True)
         s.jobs_no_duplicates = len(all_jobs)
 
-        # TODO insert the skipped jobs to db
         title_filtered_jobs, remaining = filter_jobs_by_regex(
             all_jobs, "title", vars.blocked_titles_regex
         )
@@ -88,13 +88,19 @@ def main():
 
         company_filtered_jobs["description"] = company_filtered_jobs[
             "description"
-        ].apply(clean_description)
+        ].apply(utils.clean_description)
 
         description_filtered_jobs, remaining = filter_jobs_by_regex(
             company_filtered_jobs, "description", vars.blocked_descriptions_regex
         )
         database.bulk_insert(remaining, "description")
         s.jobs_skipped_by_description_filter = len(remaining)
+
+        description_filtered_jobs["description_hash"] = None
+
+        description_filtered_jobs["description_hash"] = description_filtered_jobs[
+            "description"
+        ].apply(utils.hash_text)
 
         print(f"Total jobs to filter: {len(description_filtered_jobs)}")
 
