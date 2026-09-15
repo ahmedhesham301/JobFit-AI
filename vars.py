@@ -97,6 +97,7 @@ unrelated_tech_to_skip = [
     r"\bArtificial Intelligence Engineer\b",
     r"\bai researcher\b",
     r"\bmachine learning researcher\b",
+    r"\bAI Systems Engineer\b",
     # frontend, mobile
     r"\bfrontend\b",
     r"\bfront-end\b",
