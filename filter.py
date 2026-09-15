@@ -34,7 +34,7 @@ def filter_jobs(jobs, cv):
 
         saved_info = database.get_info_from_hash(job["description_hash"])
         if saved_info is not None:
-            s.cache_hits +=1
+            s.cache_hits += 1
             job["why I'm I a good fit"] = saved_info["why_good_fit"]
             job["what I'm I missing"] = saved_info["what_missing"]
             job["percentage"] = saved_info["percentage"]
@@ -110,6 +110,7 @@ def filter_jobs(jobs, cv):
             job["title"],
             job["job_url"],
             job["description"],
+            job["is_remote"],
             job["description_id"],
             None,
         )

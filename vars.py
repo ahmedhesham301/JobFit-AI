@@ -98,6 +98,7 @@ unrelated_tech_to_skip = [
     r"\bai researcher\b",
     r"\bmachine learning researcher\b",
     r"\bAI Systems Engineer\b",
+    r"\bllm application engineer\b",
     # frontend, mobile
     r"\bfrontend\b",
     r"\bfront-end\b",
@@ -179,7 +180,7 @@ unrelated_tech_to_skip = [
     r"\brpa\b",
     r"\brobotic process automation\b",
     r"\bmern stack\b",
-    r"\bllm application engineer\b",
+    r"\bHPC Engineer\b",
 ]
 
 unrelated_non_tech_to_skip = [
