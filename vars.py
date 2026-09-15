@@ -41,6 +41,10 @@ description_blockers = [
     r"\b(?:minimum(?: of)?|at least)\s+(?:5|6|7|8|9|10|11|12|13|14|15)\+?\s+years?(?: of)? .*?experience\b",
     r"\b(?:requires?|required|requiring)\s+(?:a )?(?:minimum(?: of)? )?(?:5|6|7|8|9|10|11|12|13|14|15)\+?\s+years?(?: of)? .*?experience\b",
     r"\bmust have\s+(?:at least )?(?:5|6|7|8|9|10|11|12|13|14|15)\+?\s+years?(?: of)? .*?experience\b",
+    r"(?<!or )(?<!\d-)(?<!\d–)(?<!\d—)(?<!\d - )(?<!\d – )(?<!\d — )"
+    r"\b(?:5|6|7|8|9|10|11|12|13|14|15)"
+    r"(?:\s*[-–—]\s*\d+)?\+?\s*(?:years?|yrs?)\s+of"
+    r"(?:\s+[\w/-]+){0,5}\s+experience\b",
 ]
 
 levels_to_skip = [
@@ -171,6 +175,10 @@ unrelated_tech_to_skip = [
     r"\bphp engineer\b",
     r"(?<!\w)\.net developer\b",
     r"(?<!\w)\.net engineer\b",
+    r"\brpa\b",
+    r"\brobotic process automation\b",
+    r"\bmern stack\b",
+    r"\bllm application engineer\b",
 ]
 
 unrelated_non_tech_to_skip = [
@@ -274,6 +282,10 @@ unrelated_non_tech_to_skip = [
     r"\bplant engineer\b",
     r"\binjection molding\b",
     r"\binjection moulding\b",
+    r"\bproduct design(?:\s*&\s*innovation)? analyst\b",
+    r"\bmigration analyst\b",
+    r"\bmanufacturing (?:engineering )?specialist\b",
+    r"\bmanufacturing engineering coordinator\b",
 ]
 
 languages_to_skip = [
