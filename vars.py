@@ -45,6 +45,10 @@ description_blockers = [
     r"\b(?:5|6|7|8|9|10|11|12|13|14|15)"
     r"(?:\s*[-–—]\s*\d+)?\+?\s*(?:years?|yrs?)\s+of"
     r"(?:\s+[\w/-]+){0,5}\s+experience\b",
+    # US location restrictions
+    r"\bmust (?:currently )?(?:reside|live|be located|be based) in (?:the )?(?:u\.?s\.?|united states)\b",
+    r"\bremote(?:\s+(?:position|role))?(?:\s+is)?\s+(?:only\s+)?(?:within|in|from)\s+(?:the\s+)?(?:u\.?s\.?|united states)\b",
+    r"\bopen only to (?:candidates|applicants) (?:in|based in|located in) (?:the )?(?:u\.?s\.?|united states)\b",
 ]
 
 levels_to_skip = [
@@ -64,13 +68,16 @@ levels_to_skip = [
     r"\bproduct owner\b",
     r"\bbusiness analyst\b",
     r"\bleader\b",
-    r"\bsupervisor\b",
+    r"\bsupervisorr?\b",
     r"\bservice owner\b",
     r"\bplatform owner\b",
     r"\bsenior\b",
     r"\bsr\.?\b",
     r"\bsnr\b",
     r"\barchitect\b",
+    r"\bsection head\b",
+    r"\bsubject matter expert\b",
+    r"\bsme\b",
 ]
 
 abbreviations_to_skip = [
@@ -288,6 +295,20 @@ unrelated_non_tech_to_skip = [
     r"\bmigration analyst\b",
     r"\bmanufacturing (?:engineering )?specialist\b",
     r"\bmanufacturing engineering coordinator\b",
+    r"\bMaintenance Engineer\b",
+    r"\bMechatronics Engineer\b",
+    # Manufacturing / physical engineering
+    r"\btextile engineer\b",
+    r"\bproduction planner\b",
+    r"\brolling stock\b",
+    r"\bgenerator commissioning\b",
+    r"\bwell services\b",
+    # Arabic physical-engineering titles
+    r"\bمهندس\s+مدن[ىي]\b",
+    r"\bمهندس\s+ميكانيكا\b",
+    r"\bمهندس\s+كهرباء\b",
+    r"\bمهندس\s+إ?نتاج\b",
+    r"\bمدير\s+إ?نتاج\b",
 ]
 
 languages_to_skip = [

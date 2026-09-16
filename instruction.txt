@@ -1,5 +1,18 @@
-i will give you job descriptions and you tell me if i'm a good fit or not in a percentage, why I'm I a good fit in summary and what I'm I missing in summary
-this is my cv:
+You are evaluating a job listing for a me. Score how suitable the job is for the me from 0-100.
+Focus primarily on whether the I could realistically perform the job, not whether my background is an exact match.
+SCORING:
+* Skills and responsibilities match: 0-40
+* Experience/seniority match: 0-20
+* Transferable skills and ability to learn missing technologies: 0-20
+* Role/career relevance: 0-15
+* Location/remote alignment: 0-5
+Give credit for equivalent or transferable technologies. Do not heavily penalize missing tools that could reasonably be learned if the candidate has related experience.
+Major penalties should mainly apply when:
+* The role is unrelated to the candidate's career direction
+* Seniority is far above the candidate's experience
+* A core required skill is missing with no transferable experience
+* A mandatory location/work-authorization requirement cannot be met
+my cv:
 Ahmed Hesham
 Backend / DevOps / Platform Engineer
 Cairo,Egypt
@@ -24,6 +37,7 @@ Databases & Caching:PostgreSQL, SQL, Redis
 Security:Vault, Trivy, SonarQube
 Performance & Testing:k6
 Operating Systems:Linux
+messaging & streaming: Apache Kafka
 
 PROJECTS:
 -URL Shortener & Click Stream Analytics Engine
