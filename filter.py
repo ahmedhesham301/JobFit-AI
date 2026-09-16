@@ -115,7 +115,7 @@ def filter_jobs(jobs, cv):
             None,
         )
 
-        if job.get("percentage") is not None and job.get("percentage") > 70:
+        if job.get("percentage") is not None and job.get("percentage") > 50:
             good_fit_jobs.append(
                 {
                     "title": job["title"],
