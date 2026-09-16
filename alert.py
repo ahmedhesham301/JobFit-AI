@@ -12,7 +12,7 @@ def send_email(sender, receiver, password, good_fit_jobs):
         <ul style="padding-left: 20px;">
     """.format(count=len(good_fit_jobs))
 
-    for job in good_fit_jobs:
+    for job in sorted(good_fit_jobs, key=lambda job: job["percentage"], reverse=True):
         html_body += f"""
         <li style="margin-bottom: 15px;">
             <p><b>Title:</b> {job["title"]}</p>

@@ -140,6 +140,7 @@ unrelated_tech_to_skip = [
     # java
     r"\bjava developer\b",
     r"\bjava software engineer\b",
+    r"\bJava Backend Developer\b",
     r"\bdata science\b",
     r"\berp developer\b",
     r"\bmainframe developer\b",
