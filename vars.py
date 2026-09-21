@@ -304,6 +304,10 @@ unrelated_non_tech_to_skip = [
     r"\brolling stock\b",
     r"\bgenerator commissioning\b",
     r"\bwell services\b",
+    r"\bWelding Engineer\b",
+    r"\bHydrology & Drainage Engineer\b",
+    r"\bElectronics Technician\b",
+    r"\bSteel Production Engineer\b",
     # Arabic physical-engineering titles
     r"\bمهندس\s+مدن[ىي]\b",
     r"\bمهندس\s+ميكانيكا\b",
