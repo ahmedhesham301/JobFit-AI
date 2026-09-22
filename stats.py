@@ -12,7 +12,7 @@ class Stats:
         self.cache_hits = 0
         self.total_jobs_rated = 0
 
-    def print(self):
+    def format_summary(self):
         jobs_remaining = (
             self.jobs_no_duplicates
             - self.jobs_skipped_by_company_filter
@@ -47,11 +47,16 @@ class Stats:
             ("Email time", self.email_time),
         ]
         label_width = max(len(label) for label, _ in rows)
-        print("\nJob search summary")
-        for label, value in rows:
-            print(
+        return "\n".join(
+            ["Job search summary"]
+            + [
                 f"{label + ':':<{label_width + 2}}{value if value is not None else 'N/A'}"
-            )
+                for label, value in rows
+            ]
+        )
+
+    def print(self):
+        print("\n" + self.format_summary())
 
 
 s = Stats()

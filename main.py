@@ -128,7 +128,7 @@ def main():
     s.filter_time = datetime.now() - t
     if len(good_fit_jobs) > 0:
         t = datetime.now()
-        send_email(SENDER, RECEIVER, PASSWORD, good_fit_jobs)
+        send_email(SENDER, RECEIVER, PASSWORD, good_fit_jobs, s.format_summary())
         s.email_time = datetime.now() - t
     else:
         logging.warning("no good fit jobs")

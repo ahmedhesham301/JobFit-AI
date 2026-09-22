@@ -1,9 +1,10 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from html import escape
 
 
-def send_email(sender, receiver, password, good_fit_jobs):
+def send_email(sender, receiver, password, good_fit_jobs, summary=None):
     print("preparing message")
     html_body = """<html>
     <body style="font-family: Arial, sans-serif; line-height: 1.6;">
@@ -23,8 +24,11 @@ def send_email(sender, receiver, password, good_fit_jobs):
         </li>
         """
 
+    html_body += "</ul>"
+    if summary:
+        html_body += f'<pre style="white-space: pre-wrap;">{escape(summary)}</pre>'
+
     html_body += """
-        </ul>
     </body>
     </html>
     """
