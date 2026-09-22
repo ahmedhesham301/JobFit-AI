@@ -322,6 +322,198 @@ languages_to_skip = [
     r"(?:speaker|speaking)\b",
 ]
 
+positive_keywords = [
+    # =========================
+    # Cloud
+    # =========================
+    r"\baws\b",
+    r"\bamazon web services\b",
+    r"\bgcp\b",
+    r"\bgoogle cloud(?: platform)?\b",
+    r"\bazure\b",
+    r"\bmicrosoft azure\b",
+    r"\bhetzner\b",
+    r"\bhetzner cloud\b",
+    r"\bdigitalocean\b",
+    # =========================
+    # Kubernetes / Containers
+    # =========================
+    r"\bkubernetes\b",
+    r"\bk8s\b",
+    r"\bdocker\b",
+    r"\bcontainers?\b",
+    r"\bcontainerization\b",
+    r"\bhelm\b",
+    r"\beks\b",
+    r"\bgke\b",
+    r"\baks\b",
+    r"\bk3s\b",
+    r"\bmicrok8s\b",
+    r"\bopenshift\b",
+    # =========================
+    # Infrastructure as Code
+    # =========================
+    r"\bterraform\b",
+    r"\bansible\b",
+    r"\bpulumi\b",
+    r"\bcloudformation\b",
+    r"\baws cloudformation\b",
+    r"\bcrossplane\b",
+    r"\bpacker\b",
+    # =========================
+    # CI/CD
+    # =========================
+    r"\bgithub actions\b",
+    r"\bjenkins\b",
+    r"\bgitlab ci\b",
+    r"\bgitlab ci\/cd\b",
+    r"\bargo ?cd\b",
+    r"\bargocd\b",
+    r"\bargo workflows?\b",
+    r"\bflux ?cd\b",
+    r"\bfluxcd\b",
+    r"\btekton\b",
+    r"\bcircleci\b",
+    r"\btravis ci\b",
+    r"\bci\/cd\b",
+    r"\bcontinuous integration\b",
+    r"\bcontinuous delivery\b",
+    r"\bcontinuous deployment\b",
+    # =========================
+    # GitOps
+    # =========================
+    r"\bgitops\b",
+    # =========================
+    # Observability / Monitoring
+    # =========================
+    r"\bprometheus\b",
+    r"\bgrafana\b",
+    r"\bopentelemetry\b",
+    r"\bopen telemetry\b",
+    r"\bloki\b",
+    r"\btempo\b",
+    r"\bgrafana alloy\b",
+    r"\bdatadog\b",
+    r"\bnew relic\b",
+    r"\belasticsearch\b",
+    r"\belastic stack\b",
+    r"\belk\b",
+    r"\bmonitoring\b",
+    r"\bobservability\b",
+    # =========================
+    # Linux / Systems
+    # =========================
+    r"\blinux\b",
+    r"\bubuntu\b",
+    r"\bdebian\b",
+    r"\brhel\b",
+    r"\bred hat\b",
+    r"\bcentos\b",
+    r"\bsystemd\b",
+    r"\bbash\b",
+    r"\bshell scripting\b",
+    # =========================
+    # Networking / Proxies
+    # =========================
+    r"\bnginx\b",
+    r"\bhaproxy\b",
+    r"\benvoy\b",
+    r"\btraefik\b",
+    r"\bload balanc(?:er|ing)\b",
+    r"\breverse prox(?:y|ies)\b",
+    r"\bdns\b",
+    r"\btcp\/ip\b",
+    # =========================
+    # Infrastructure / Platform
+    # =========================
+    r"\binfrastructure automation\b",
+    r"\binfrastructure engineering\b",
+    r"\bplatform engineering\b",
+    r"\bplatform engineer(?:ing)?\b",
+    r"\bcloud engineering\b",
+    r"\bcloud infrastructure\b",
+    r"\bdeveloper platform\b",
+    r"\binternal developer platform\b",
+    # =========================
+    # DevOps / SRE
+    # =========================
+    r"\bdevops\b",
+    r"\bdevsecops\b",
+    r"\bsite reliability\b",
+    r"\bsite reliability engineer(?:ing)?\b",
+    r"\bsre\b",
+    r"\breliability engineering\b",
+    r"\bproduction engineering\b",
+    # =========================
+    # Programming
+    # =========================
+    # Don't use \bgo\b because "go" is a very common English word
+    r"\bgolang\b",
+    r"\bpython\b",
+    r"\bnode\.?js\b",
+    r"\btypescript\b",
+    r"\bjava\b",
+    # =========================
+    # Backend
+    # =========================
+    r"\bbackend\b",
+    r"\bback-end\b",
+    r"\brest(?:ful)? api(?:s)?\b",
+    r"\bmicroservices?\b",
+    r"\bapi development\b",
+    r"\bdistributed systems?\b",
+    r"\bhigh availability\b",
+    r"\bfault toleran(?:t|ce)\b",
+    r"\bscalab(?:le|ility)\b",
+    # =========================
+    # Databases / Caches
+    # =========================
+    r"\bpostgres(?:ql)?\b",
+    r"\bmysql\b",
+    r"\bmongodb\b",
+    r"\bredis\b",
+    r"\bdatabases?\b",
+    # =========================
+    # Messaging / Streaming
+    # =========================
+    r"\bkafka\b",
+    r"\bapache kafka\b",
+    r"\brabbitmq\b",
+    r"\bmessage queu(?:e|es|ing)\b",
+    r"\bevent[- ]driven\b",
+    r"\bevent streaming\b",
+    # =========================
+    # Security / DevSecOps
+    # =========================
+    r"\bvault\b",
+    r"\bhashicorp vault\b",
+    r"\btrivy\b",
+    r"\bsonarqube\b",
+    r"\bdevsecops\b",
+    r"\biam\b",
+    r"\bidentity and access management\b",
+    r"\bsecrets management\b",
+    # =========================
+    # Cloud architecture
+    # =========================
+    r"\bvpc\b",
+    r"\bautoscal(?:e|er|ing)\b",
+    r"\bauto[- ]scaling\b",
+    r"\bserverless\b",
+    r"\blambda\b",
+    r"\bcloud native\b",
+    r"\bcloud-native\b",
+    # =========================
+    # Operations concepts
+    # =========================
+    r"\bincident response\b",
+    r"\bon[- ]call\b",
+    r"\broot cause analysis\b",
+    r"\brca\b",
+    r"\bdisaster recovery\b",
+    r"\bcapacity planning\b",
+    r"\bperformance tuning\b",
+]
 blocked_titles_regex = "|".join(
     levels_to_skip
     + abbreviations_to_skip
@@ -329,6 +521,8 @@ blocked_titles_regex = "|".join(
     + unrelated_non_tech_to_skip
     + languages_to_skip,
 ).lower()
+
+positive_keywords_regex = "|".join(positive_keywords)
 
 blocked_companies_regex = "|".join(companies_blacklist)
 

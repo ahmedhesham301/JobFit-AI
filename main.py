@@ -96,21 +96,27 @@ def main():
         database.bulk_insert(remaining, "description")
         s.jobs_skipped_by_description_filter = len(remaining)
 
-        description_filtered_jobs["description_hash"] = None
+        remaining, positive_filtered_jobs = filter_jobs_by_regex(
+            description_filtered_jobs, "description", vars.positive_keywords_regex
+        )
+        database.bulk_insert(remaining, "no_positive_keyword")
+        s.jobs_skipped_by_positive_filter = len(remaining)
 
-        description_filtered_jobs["description_hash"] = description_filtered_jobs[
+        positive_filtered_jobs["description_hash"] = None
+
+        positive_filtered_jobs["description_hash"] = positive_filtered_jobs[
             "description"
         ].apply(utils.hash_text)
 
-        print(f"Total jobs to filter: {len(description_filtered_jobs)}")
+        print(f"Total jobs to filter: {len(positive_filtered_jobs)}")
 
         t = datetime.now()
 
         num_chunks = 5
-        jobs_per_chunk = max(1, ceil(len(description_filtered_jobs) / num_chunks))
+        jobs_per_chunk = max(1, ceil(len(positive_filtered_jobs) / num_chunks))
         jobs_chunks = [
-            description_filtered_jobs[i : i + jobs_per_chunk]
-            for i in range(0, len(description_filtered_jobs), jobs_per_chunk)
+            positive_filtered_jobs[i : i + jobs_per_chunk]
+            for i in range(0, len(positive_filtered_jobs), jobs_per_chunk)
         ]
         print(f"number of jobs per chunk: {jobs_per_chunk}")
         print(f"number of job chunks: {len(jobs_chunks)}")

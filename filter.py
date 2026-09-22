@@ -5,7 +5,6 @@ import json
 from google.genai.errors import ServerError, ClientError
 from httpx import RemoteProtocolError
 import database
-import vars
 from stats import s
 import os
 
