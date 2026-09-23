@@ -738,7 +738,7 @@ job description:
     ]
     generate_content_config = types.GenerateContentConfig(
         thinking_config=types.ThinkingConfig(
-            thinking_level="LOW",
+            thinking_level="MINIMAL",
         ),
         response_mime_type="application/json",
         response_schema=genai.types.Schema(
