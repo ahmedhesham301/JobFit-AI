@@ -94,18 +94,20 @@ abbreviations_to_skip = [
 
 unrelated_tech_to_skip = [
     # data
-    r"\bdata engineer\b",
+    r"\bdata engineer(?:ing)?\b",
     r"\bdata scientist\b",
+    r"\bdata developer\b",
     r"\bdata analyst\b",
+    r"\bdatabricks\b",
     # ml & ai
-    r"\bmachine learning engineer\b",
-    r"\bml engineer\b",
-    r"\bai engineer\b",
-    r"\bArtificial Intelligence Engineer\b",
+    r"\bmachine learning engineer(?:ing)?\b",
+    r"\bml engineer(?:ing)?\b",
+    r"\bai engineer(?:ing)?\b",
+    r"\bArtificial Intelligence Engineer(?:ing)?\b",
     r"\bai researcher\b",
     r"\bmachine learning researcher\b",
-    r"\bAI Systems Engineer\b",
-    r"\bllm application engineer\b",
+    r"\bAI Systems Engineer(?:ing)?\b",
+    r"\bllm application engineer(?:ing)?\b",
     # frontend, mobile
     r"\bfrontend\b",
     r"\bfront-end\b",
