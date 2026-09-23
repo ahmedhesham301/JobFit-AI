@@ -43,7 +43,9 @@ def filter_jobs(jobs, cv):
             while try_count > 0:
                 try:
                     logging.warning(f"index is {i}")
-                    ai_response = generate(job["description"], cv)
+                    ai_response = generate(
+                        job["title"], job["location"], job["description"], cv
+                    )
                     ai_response_dict = json.loads(ai_response)
 
                     job["why I'm I a good fit"] = ai_response_dict[
@@ -114,7 +116,7 @@ def filter_jobs(jobs, cv):
             None,
         )
 
-        if job.get("percentage") is not None and job.get("percentage") > 50:
+        if job.get("percentage") is not None and job.get("percentage") > 65:
             good_fit_jobs.append(
                 {
                     "title": job["title"],
