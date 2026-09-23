@@ -97,6 +97,8 @@ def filter_jobs(jobs, cv):
         if saved_info is not None and saved_info["percentage"] >= 60:
             good_fit_jobs.append(
                 {
+                    **saved_info,
+                    "location": job.get("location"),
                     "title": job["title"],
                     "url": job["job_url"],
                     "why I'm I a good fit": saved_info["why_good_fit"],

@@ -9,7 +9,7 @@ from utils import hash_text
 
 data_path = os.getenv("data_path")
 # Bump these when changing the evaluation instructions or profile interpretation.
-PROMPT_VERSION = 1
+PROMPT_VERSION = 4
 CANDIDATE_PROFILE_VERSION = 1
 
 SCHEMA = """
