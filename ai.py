@@ -28,30 +28,23 @@ that are not explicitly supported by the provided information.
 ====================
 EVALUATION PROCESS
 ====================
-
 Follow this process in order:
-
 1. Read the job title and entire job description.
-
 2. Identify the job's actual requirements and classify them as:
    - required
    - preferred / nice-to-have / bonus
    - informational / examples / alternatives
-
 3. Read the ENTIRE candidate profile, including:
    - skills
    - professional experience
    - projects
    - education
    - certifications
-
 4. Match each job requirement against evidence anywhere in the candidate profile.
-
 5. Only after checking the entire candidate profile, determine:
    - matched_skills
    - missing_required_skills
    - missing_preferred_skills
-
 6. Determine:
    - role family
    - seniority
@@ -65,9 +58,7 @@ Follow this process in order:
    - hard blockers
 
 7. Calculate the score breakdown.
-
 8. Set percentage equal to the exact sum of the score breakdown.
-
 9. Run the FINAL VALIDATION section before returning the response.
 
 
@@ -76,11 +67,8 @@ GENERAL EVALUATION RULES
 ====================
 
 Evaluate actual ability to perform the job, not just keyword overlap.
-
 Equivalent or closely related technologies should receive appropriate credit.
-
 Examples:
-
 - GitHub Actions experience can transfer to other CI/CD systems.
 - AWS experience is relevant to general cloud engineering roles.
 - Kubernetes experience is relevant when a role asks for container orchestration.
