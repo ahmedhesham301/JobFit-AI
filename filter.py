@@ -2,6 +2,7 @@ import logging
 import time
 from ai import generate
 import json
+import sqlite3
 from google.genai.errors import ServerError, ClientError
 from httpx import RemoteProtocolError
 import database
@@ -31,12 +32,12 @@ def filter_jobs(jobs, cv):
     for i, job in jobs.iterrows():
         job = job.to_dict()
 
-        saved_info = database.get_info_from_hash(job["description_hash"])
+        description_id = database.insert_description(job["description"])
+        evaluation_hash = database.get_evaluation_hash(job, cv)
+        saved_info = database.get_info_from_hash(evaluation_hash)
+        evaluation_id = saved_info["id"] if saved_info is not None else None
         if saved_info is not None:
             s.cache_hits += 1
-            job["why I'm I a good fit"] = saved_info["why_good_fit"]
-            job["what I'm I missing"] = saved_info["what_missing"]
-            job["percentage"] = saved_info["percentage"]
 
         if rate and not saved_info:
             try_count = 3
@@ -48,26 +49,16 @@ def filter_jobs(jobs, cv):
                     )
                     ai_response_dict = json.loads(ai_response)
 
-                    job["why I'm I a good fit"] = ai_response_dict[
-                        "why I'm I a good fit in summary"
-                    ]
-                    job["what I'm I missing"] = ai_response_dict[
-                        "what I'm I missing in summary"
-                    ]
-                    job["percentage"] = ai_response_dict["percentage"]
-
-                    database.insert_hash(
-                        job["description_hash"],
-                        job["why I'm I a good fit"],
-                        job["what I'm I missing"],
-                        job["percentage"],
+                    evaluation_id = database.insert_evaluation(
+                        evaluation_hash, description_id, ai_response_dict
                     )
+                    saved_info = database.get_info_from_hash(evaluation_hash)
 
                     break
 
-                except json.JSONDecodeError as e:
+                except (ValueError, KeyError, TypeError, sqlite3.IntegrityError) as e:
                     try_count -= 1
-                    logging.warning("JSONDecodeError happend")
+                    logging.warning("Invalid AI evaluation: %s", e)
 
                 except ServerError as e:
 
@@ -101,29 +92,16 @@ def filter_jobs(jobs, cv):
 
             s.total_jobs_rated += 1
 
-        job["description_id"] = database.insert_hash(
-            job["description_hash"],
-            job.get("why I'm I a good fit in summary"),
-            job.get("what I'm I missing in summary"),
-            job.get("percentage"),
-        )
-        database.insert_job(
-            job["title"],
-            job["job_url"],
-            job["description"],
-            job["is_remote"],
-            job["description_id"],
-            None,
-        )
+        database.insert_job(job, evaluation_id=evaluation_id)
 
-        if job.get("percentage") is not None and job.get("percentage") > 65:
+        if saved_info is not None and saved_info["percentage"] >= 60:
             good_fit_jobs.append(
                 {
                     "title": job["title"],
                     "url": job["job_url"],
-                    "why I'm I a good fit": job["why I'm I a good fit"],
-                    "what I'm I missing": job["what I'm I missing"],
-                    "percentage": job["percentage"],
+                    "why I'm I a good fit": saved_info["why_good_fit"],
+                    "what I'm I missing": saved_info["what_is_missing"],
+                    "percentage": saved_info["percentage"],
                 }
             )
     return good_fit_jobs
