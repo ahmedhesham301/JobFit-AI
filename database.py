@@ -173,7 +173,6 @@ CREATE TABLE IF NOT EXISTS jobs (
     source_job_id TEXT,
 
     location TEXT,
-    country TEXT,
 
     -- What JobSpy/source says, separate from AI classification.
     source_is_remote INTEGER
@@ -181,8 +180,6 @@ CREATE TABLE IF NOT EXISTS jobs (
             source_is_remote IS NULL
             OR source_is_remote IN (0, 1)
         ),
-
-    date_posted TEXT,
 
     description_id INTEGER NOT NULL,
     evaluation_id INTEGER,
@@ -308,7 +305,6 @@ def _insert_job(conn, job, why_skipped, evaluation_id):
         if evaluation is None or evaluation["description_id"] != description_id:
             raise ValueError("Evaluation does not belong to the job description")
     source_is_remote = _nullable(job.get("is_remote"))
-    date_posted = _nullable(job.get("date_posted"))
     values = (
         job["title"],
         _nullable(job.get("company")),
@@ -316,27 +312,23 @@ def _insert_job(conn, job, why_skipped, evaluation_id):
         _nullable(job.get("site")),
         _nullable(job.get("id")),
         _nullable(job.get("location")),
-        _nullable(job.get("country")),
         int(source_is_remote) if source_is_remote is not None else None,
-        str(date_posted) if date_posted is not None else None,
         description_id,
         evaluation_id,
         why_skipped,
     )
     return conn.execute(
         """INSERT INTO jobs (
-            title, company, url, source, source_job_id, location, country,
-            source_is_remote, date_posted, description_id, evaluation_id, why_skipped
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            title, company, url, source, source_job_id, location,
+            source_is_remote, description_id, evaluation_id, why_skipped
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(url) DO UPDATE SET
             title = excluded.title,
             company = excluded.company,
             source = excluded.source,
             source_job_id = excluded.source_job_id,
             location = excluded.location,
-            country = excluded.country,
             source_is_remote = excluded.source_is_remote,
-            date_posted = excluded.date_posted,
             description_id = excluded.description_id,
             evaluation_id = excluded.evaluation_id,
             why_skipped = excluded.why_skipped,

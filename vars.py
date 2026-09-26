@@ -25,13 +25,14 @@ description_blockers = [
     r"\bwe (?:cannot|can't|do not|don't) sponsor\b",
     r"\b(?:company|employer) does not sponsor\b",
     # Security clearance requirements
-    r"\b(?:active|required|must have|must possess).*?security clearance\b",
-    r"\b(?:active|required|must have|must possess).*?(?:secret|top secret|ts/sci|dod secret)\b",
-    r"\b(?:secret|top secret|ts/sci|dod secret) clearance required\b",
-    r"\bmust be eligible to obtain(?: and maintain)? .*?clearance\b",
-    r"\bability to obtain(?: and maintain)? .*?clearance\b",
-    r"\bmust be able to obtain(?: and maintain)? .*?clearance\b",
-    r"\bactive (?:secret|top secret|ts/sci|dod secret) clearance\b",
+    # Security clearance requirements
+    r"\b(?:active|required|must have|must possess)\b.{0,100}?\bsecurity clearance\b",
+    r"\b(?:active|required|must have|must possess)\b.{0,100}?\b(?:secret|top secret|ts/sci|dod secret)\s+clearance\b",
+    r"\b(?:secret|top secret|ts/sci|dod secret)\s+clearance\s+required\b",
+    r"\bmust be eligible to obtain(?: and maintain)?\b.{0,100}?\bclearance\b",
+    r"\bability to obtain(?: and maintain)?\b.{0,100}?\bclearance\b",
+    r"\bmust be able to obtain(?: and maintain)?\b.{0,100}?\bclearance\b",
+    r"\bactive\s+(?:secret|top secret|ts/sci|dod secret)\s+clearance\b",
     r"\bts/sci(?: with polygraph)?\b",
     # US-only location restrictions
     r"\b(?:us|u\.s\.|usa)[ -]?only\b",
@@ -49,6 +50,64 @@ description_blockers = [
     r"\bmust (?:currently )?(?:reside|live|be located|be based) in (?:the )?(?:u\.?s\.?|united states)\b",
     r"\bremote(?:\s+(?:position|role))?(?:\s+is)?\s+(?:only\s+)?(?:within|in|from)\s+(?:the\s+)?(?:u\.?s\.?|united states)\b",
     r"\bopen only to (?:candidates|applicants) (?:in|based in|located in) (?:the )?(?:u\.?s\.?|united states)\b",
+    # Mandatory German language
+    r"\bgerman(?: language)?(?: skills| proficiency)?\s*(?:at\s*)?(?:b2|c1|c2)\b",
+    r"\bgerman\s*\(\s*(?:min(?:imum)?\.?\s*)?(?:b2|c1|c2)",
+    r"\bgerman\s*:\s*(?:b2|c1|c2)\s+(?:minimum|required)\b",
+    r"\bproficiency in german\s*\(\s*(?:min(?:imum)?\.?\s*)?(?:b2|c1|c2)",
+    r"\bgerman(?: language)?(?: skills| proficiency)?\s+(?:(?:is|are)\s+)?(?:required|mandatory)\b",
+    r"\b(?:german|deutsch)\s*[-:]\s*(?:fluent|native|b2|c1|c2|fließend|fliessend|verhandlungssicher)\b",
+    r"\bdeutschkenntnisse\s+(?:mindestens\s+)?(?:auf\s+)?(?:b2|c1|c2)(?:[- ]niveau)?\b",
+    r"\b(?:b2|c1|c2)(?:[- ]niveau)?\s+(?:in\s+)?deutsch\b",
+    r"\bdeutschkenntnisse\s+auf\s+muttersprachlichem\s+niveau\b",
+    r"\bverhandlungssichere?s?\s+deutsch(?:kenntnisse)?\b",
+    r"\bverhandlungssicheres\s+deutsch\b",
+    # Current student enrollment required
+    r"\bcurrently enrolled in\b(?!\s+or\s+(?:recently|already))",
+    r"\bactive enrollment in\b",
+    r"\bmust be (?:currently )?enrolled\b",
+    r"\bimmatrikuliert\w*\b",
+    r"\bimmatrikulationsbescheinigung\b",
+    r"\beingeschriebene\w*\s+student\w*\b",
+    r"\benrolled student\b",
+    r"\bregistered student\b",
+    r"\bactive student status\b",
+    # Existing local work authorization required
+    r"\b(?:existing|current)\s+work authori[sz]ation for "
+    r"(?:germany|the eu|eu|european union|dach)\b",
+    r"\bwork authori[sz]ation for "
+    r"(?:germany|the eu|eu|european union|dach)"
+    r"\s+(?:is\s+)?required\b",
+    r"\b(?:valid|unrestricted|valid,\s*unrestricted)\s+work permit for "
+    r"(?:germany|the eu|eu|european union|dach)"
+    r"\s+(?:is\s+)?required\b",
+    r"\bonly consider candidates who have a valid,?\s+unrestricted "
+    r"work permit for (?:the )?(?:eu|european union)\b",
+    r"\b(?:must|need to|required to)\b.{0,25}"
+    r"\b(?:already\s+)?(?:have|hold|possess)\b.{0,30}"
+    r"\b(?:valid\s+)?(?:work permit|work authori[sz]ation|right to work)\b",
+    r"\balready legally authori[sz]ed to work in\b",
+    r"\bvalid authori[sz]ation to live and work in "
+    r"(?:germany|the eu|eu|european union)\b",
+    r"\barbeitserlaubnis für "
+    r"(?:deutschland|die dach-region|dach)\b.{0,25}\berforderlich\b",
+    r"\bgültige arbeitserlaubnis\b.{0,60}" r"\b(?:liegt|liegen)\b.{0,20}\bvor\b",
+    # Nationality restrictions
+    r"\bonly\s+(?:saudi|emirati|uae)\s+nationals?\b",
+    r"\b(?:saudi|emirati|uae)\s+nationals?\s+only\b",
+    r"\b(?:saudi|emirati|uae)\s+national(?:ity)?" r"\s+(?:is\s+)?required\b",
+    r"\b(?:open|available)\s+(?:only\s+)?to\s+" r"(?:saudi|emirati|uae)\s+nationals?\b",
+    r"\bonly\s+(?:for\s+)?local\s+" r"(?:uae|saudi|emirati)?\s*nationals?\b",
+    r"\bfamily[- ]book\b.{0,30}\brequired\b",
+    r"\b(?:must be (?:a )?)?national of an eu member state\b",
+    r"\beu nationals?\s+only\b",
+    r"\bunable to offer (?:visa )?sponsorship\b",
+    r"\bwe(?:'re| are) not able to provide (?:visa )?sponsorship\b",
+    r"\b(?:the company|company|employer) "
+    r"(?:is|are) not able to provide (?:visa )?sponsorship\b",
+    r"\bdoes not (?:currently )?have a sponsorship licen[cs]e\b",
+    r"\bwithout (?:company|employer) sponsorship\b",
+    r"\bfamily\s*/\s*university sponsorship is a must\b",
 ]
 
 levels_to_skip = [
@@ -108,6 +167,7 @@ unrelated_tech_to_skip = [
     r"\bmachine learning researcher\b",
     r"\bAI Systems Engineer(?:ing)?\b",
     r"\bllm application engineer(?:ing)?\b",
+    r"\bArtificial Intelligence Researcher\b",
     # frontend, mobile
     r"\bfrontend\b",
     r"\bfront-end\b",
@@ -316,6 +376,13 @@ unrelated_non_tech_to_skip = [
     r"\bمهندس\s+كهرباء\b",
     r"\bمهندس\s+إ?نتاج\b",
     r"\bمدير\s+إ?نتاج\b",
+    # student
+    r"\bworking student\b",
+    r"\bwerkstudent(?:in|en)?\b",
+    r"\bstudent assistant\b",
+    r"\bstudent helper\b",
+    r"\bstudent worker\b",
+    r"\bstudentische hilfskraft\b",
 ]
 
 languages_to_skip = [

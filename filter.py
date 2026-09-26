@@ -94,7 +94,11 @@ def filter_jobs(jobs, cv):
 
         database.insert_job(job, evaluation_id=evaluation_id)
 
-        if saved_info is not None and saved_info["percentage"] >= 60:
+        if (
+            saved_info is not None
+            and saved_info["percentage"] >= 60
+            and not saved_info["hard_blockers"]
+        ):
             good_fit_jobs.append(
                 {
                     **saved_info,
