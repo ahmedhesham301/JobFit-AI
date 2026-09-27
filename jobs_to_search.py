@@ -750,4 +750,4 @@ de = [
 ]
 
 
-jobs = egypt + uae + sa + de
+jobs = egypt

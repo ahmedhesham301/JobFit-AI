@@ -63,7 +63,7 @@ description_blockers = [
     r"\bverhandlungssichere?s?\s+deutsch(?:kenntnisse)?\b",
     r"\bverhandlungssicheres\s+deutsch\b",
     # Current student enrollment required
-    r"\bcurrently enrolled in\b(?!\s+or\s+(?:recently|already))",
+    r"\bcurrently enrolled in\b(?!\s+or\s+(?:a\s+)?recent(?:ly|\s+graduate))",
     r"\bactive enrollment in\b",
     r"\bmust be (?:currently )?enrolled\b",
     r"\bimmatrikuliert\w*\b",

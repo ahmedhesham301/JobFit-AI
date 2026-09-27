@@ -727,7 +727,7 @@ job title: {title}
 job location: {location}
 job description:
 {description}"""
-    model = "gemini-3.5-flash-lite"
+    model = "gemini-2.5-flash-lite"
     contents = [
         types.Content(
             role="user",
@@ -738,7 +738,7 @@ job description:
     ]
     generate_content_config = types.GenerateContentConfig(
         thinking_config=types.ThinkingConfig(
-            thinking_level="MINIMAL",
+            # thinking_level="MINIMAL",
         ),
         response_mime_type="application/json",
         response_schema=genai.types.Schema(
