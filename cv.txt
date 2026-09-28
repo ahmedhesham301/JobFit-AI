@@ -101,3 +101,15 @@ Freelance Ops
 - Containerized application services with Docker and deployed them to Kubernetes using Deployments, Services, ConfigMaps, and Horizontal Pod Autoscaling.
 - Integrated PostgreSQL, Redis, and S3 for persistent storage, caching, and object storage.
 - Automated EKS infrastructure and cluster configuration using Terraform and shell scripts.
+
+Primary target roles:
+
+- Backend Engineer
+- Go Backend Engineer
+- DevOps Engineer
+- Platform Engineer
+- Cloud Engineer
+- Site Reliability Engineer
+- Infrastructure Engineer
+- Graduate / Junior Software Engineer with relevant backend, cloud,
+  infrastructure, or distributed-systems work.

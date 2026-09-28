@@ -27,7 +27,9 @@ RECEIVER = os.getenv("receiver_email")
 
 all_jobs = pd.DataFrame()
 good_fit_jobs = []
-with open("instruction.txt", "r") as f:
+with open("system_instruction.txt", "r") as f:
+    SYSTEM_INSTRUCTIONS = f.read()
+with open("cv.txt", "r") as f:
     CV = f.read()
 
 
@@ -121,7 +123,10 @@ def main():
         print(f"number of jobs per chunk: {jobs_per_chunk}")
         print(f"number of job chunks: {len(jobs_chunks)}")
         with concurrent.futures.ThreadPoolExecutor() as executor:
-            futures = [executor.submit(filter_jobs, chunk, CV) for chunk in jobs_chunks]
+            futures = [
+                executor.submit(filter_jobs, chunk, SYSTEM_INSTRUCTIONS, CV)
+                for chunk in jobs_chunks
+            ]
             for future in concurrent.futures.as_completed(futures):
                 good_fit_jobs.extend(future.result())
 

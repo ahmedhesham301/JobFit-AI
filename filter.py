@@ -26,14 +26,14 @@ def filter_jobs_by_regex(jobs, key, regex):
     return remaining, skipped
 
 
-def filter_jobs(jobs, cv):
+def filter_jobs(jobs, system_instruction, cv):
     """Save filtered jobs, optionally rating eligible jobs with Gemini."""
     good_fit_jobs = []
     for i, job in jobs.iterrows():
         job = job.to_dict()
 
         description_id = database.insert_description(job["description"])
-        evaluation_hash = database.get_evaluation_hash(job, cv)
+        evaluation_hash = database.get_evaluation_hash(job, system_instruction, cv)
         saved_info = database.get_info_from_hash(evaluation_hash)
         evaluation_id = saved_info["id"] if saved_info is not None else None
         if saved_info is not None:
@@ -45,7 +45,11 @@ def filter_jobs(jobs, cv):
                 try:
                     logging.warning(f"index is {i}")
                     ai_response = generate(
-                        job["title"], job["location"], job["description"], cv
+                        job["title"],
+                        job["location"],
+                        job["description"],
+                        system_instruction,
+                        cv,
                     )
                     ai_response_dict = json.loads(ai_response)
 

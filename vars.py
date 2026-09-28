@@ -117,6 +117,11 @@ description_blockers = [
     r"\bfamily\s*/\s*university sponsorship is a must\b",
     r"\bEU citizenship (required)\b",
     r"\bEU work eligibility required\b",
+    #
+    r"\b(?:gute|sehr\s+gute)\s+deutschkenntnisse\b",
+    r"\bdeutsch\s*\(\s*(?:b2|c1|c2)[- ]?niveau\s*\)",
+    r"\bdeutsch\s+(?:mind\.?|mindestens)\s+verhandlungssicher\b",
+    r"\bkommunizier\w*\s+verhandlungssicher\s+auf\s+deutsch\b",
 ]
 
 levels_to_skip = [

@@ -261,11 +261,11 @@ def _nullable(value):
     return value.item() if hasattr(value, "item") else value
 
 
-def get_evaluation_hash(job, cv):
+def get_evaluation_hash(job, system_instruction, cv):
     """Key the cache by job context, profile contents, and evaluation versions."""
     context = {
         "description_hash": hash_text(job["description"]),
-        "prompt_version": PROMPT_VERSION,
+        "prompt_hash": hash_text(system_instruction),
         "candidate_profile_hash": hash_text(cv),
     }
     return hash_text(json.dumps(context, sort_keys=True, ensure_ascii=False))
