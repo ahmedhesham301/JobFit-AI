@@ -221,9 +221,6 @@ unrelated_tech_to_skip = [
     r"\berp developer\b",
     r"\bmainframe developer\b",
     r"\bios developer\b",
-    r"\brust\b",
-    r"\bphp\b",
-    r"(?<!\w)\.net\b",
     # Design and client applications
     r"\bui[ /-]?ux\b",
     r"\bui developer\b",
