@@ -99,6 +99,11 @@ def filter_jobs(jobs, cv):
             saved_info is not None
             and saved_info["percentage"] >= 60
             and not saved_info["hard_blockers"]
+            and not (
+                saved_info["work_authorization"]
+                in ["specific_authorization_required", "local_authorization_required"]
+                and saved_info["visa_sponsorship"] in ["not_available"]
+            )
         ):
             good_fit_jobs.append(
                 {

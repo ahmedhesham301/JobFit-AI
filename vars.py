@@ -1,4 +1,5 @@
 companies_blacklist = [r"\balignerr\b", r"\bUneeq Interns\b"]
+allowd_locations = ["worldwide", "egypt", "emea", "africa"]
 
 description_blockers = [
     # US work authorization
@@ -114,6 +115,8 @@ description_blockers = [
     r"\bdoes not (?:currently )?have a sponsorship licen[cs]e\b",
     r"\bwithout (?:company|employer) sponsorship\b",
     r"\bfamily\s*/\s*university sponsorship is a must\b",
+    r"\bEU citizenship (required)\b",
+    r"\bEU work eligibility required\b",
 ]
 
 levels_to_skip = [
@@ -262,6 +265,7 @@ unrelated_tech_to_skip = [
     r"\brobotic process automation\b",
     r"\bmern stack\b",
     r"\bHPC Engineer\b",
+    r"\bdeutschsprachig\w*\b",  # german speaker
 ]
 
 unrelated_non_tech_to_skip = [
