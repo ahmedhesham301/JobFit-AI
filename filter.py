@@ -76,6 +76,7 @@ def filter_jobs(jobs, cv):
                         and e.details["error"]["status"] == "RESOURCE_EXHAUSTED"
                     ):
                         logging.error("RESOURCE_EXHAUSTED sleeping for 60 seconds")
+                        try_count -= 1
                         time.sleep(60)
                     else:
                         logging.critical(e.details)

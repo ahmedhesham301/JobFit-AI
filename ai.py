@@ -594,6 +594,15 @@ The job specifies a particular:
 unknown:
 Authorization wording is ambiguous or contradictory.
 
+Never infer a work-authorization hard blocker solely from:
+- the candidate living in another country,
+- the role being onsite or hybrid,
+- the role requiring relocation,
+- or visa sponsorship not being mentioned.
+
+Only set a work-authorization hard blocker when the job explicitly states
+that existing authorization/residency/citizenship/nationality is required,
+or explicitly states that sponsorship is unavailable.
 
 visa_sponsorship:
 
@@ -652,21 +661,6 @@ Primary target roles:
 - Infrastructure Engineer
 - Graduate / Junior Software Engineer with relevant backend, cloud,
   infrastructure, or distributed-systems work.
-
-
-====================
-JOB INFORMATION
-====================
-
-JOB TITLE:
-{title}
-
-JOB LOCATION:
-{location}
-
-JOB DESCRIPTION:
-{description}
-
 
 ====================
 FINAL VALIDATION

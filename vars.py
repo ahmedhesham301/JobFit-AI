@@ -46,6 +46,8 @@ description_blockers = [
     r"\b(?:5|6|7|8|9|10|11|12|13|14|15)"
     r"(?:\s*[-–—]\s*\d+)?\+?\s*(?:years?|yrs?)\s+of"
     r"(?:\s+[\w/-]+){0,5}\s+experience\b",
+    r"\b(?:mindestens|min\.?)\s*(?:5|6|7|8|9|10|[1-9]\d)\s+jahre\s+(?:relevante\s+|berufs)?erfahrung\b",
+    r"\b(?:mindestens|min\.?)\s*(?:5|6|7|8|9|10|[1-9]\d)[-\s]?jährig\w*\s+(?:berufs)?erfahrung\b",
     # US location restrictions
     r"\bmust (?:currently )?(?:reside|live|be located|be based) in (?:the )?(?:u\.?s\.?|united states)\b",
     r"\bremote(?:\s+(?:position|role))?(?:\s+is)?\s+(?:only\s+)?(?:within|in|from)\s+(?:the\s+)?(?:u\.?s\.?|united states)\b",
@@ -92,6 +94,10 @@ description_blockers = [
     r"\barbeitserlaubnis für "
     r"(?:deutschland|die dach-region|dach)\b.{0,25}\berforderlich\b",
     r"\bgültige arbeitserlaubnis\b.{0,60}" r"\b(?:liegt|liegen)\b.{0,20}\bvor\b",
+    r"\bdeutsch(?:kenntnisse)?\s+in\s+wort\s+und\s+schrift\b",
+    r"\bdeutsch\s+und\s+englisch\s+(?:sehr\s+)?gut\s+in\s+wort\s+und\s+schrift\b",
+    r"\b(?:beherrsch\w*|kommunizier\w*)\s+(?:sicher\s+)?(?:auf\s+)?deutsch\b",
+    r"\bsichere\s+kommunikation\s+auf\s+deutsch\b",
     # Nationality restrictions
     r"\bonly\s+(?:saudi|emirati|uae)\s+nationals?\b",
     r"\b(?:saudi|emirati|uae)\s+nationals?\s+only\b",
@@ -168,6 +174,14 @@ unrelated_tech_to_skip = [
     r"\bAI Systems Engineer(?:ing)?\b",
     r"\bllm application engineer(?:ing)?\b",
     r"\bArtificial Intelligence Researcher\b",
+    r"\bAI Automation Intern\b",
+    r"\bNLP Intern\b",
+    r"\bComputer Vision Intern\b",
+    r"\bAI & Data Analytics Engineer\b",
+    r"\bAI Product Engineer\b",
+    r"\bDeep Learning Intern\b",
+    r"\bAI/ML Developer Level II\b",
+    r"\b(?:instructor|trainer|teacher)\b",
     # frontend, mobile
     r"\bfrontend\b",
     r"\bfront-end\b",
@@ -383,6 +397,8 @@ unrelated_non_tech_to_skip = [
     r"\bstudent helper\b",
     r"\bstudent worker\b",
     r"\bstudentische hilfskraft\b",
+    r"\b(?:emirati\s+talent|uae\s+national|saudi\s+national)\b",
+    r"\b(?:werkstudent(?:in)?|working student|duales studium|masterarbeit|abschlussarbeit|bachelorarbeit)\b",
 ]
 
 languages_to_skip = [

@@ -264,17 +264,10 @@ def _nullable(value):
 def get_evaluation_hash(job, cv):
     """Key the cache by job context, profile contents, and evaluation versions."""
     context = {
-        "title": _nullable(job["title"]),
         "description_hash": hash_text(job["description"]),
-        "location": _nullable(job.get("location")),
-        "country": _nullable(job.get("country")),
-        "source_is_remote": _nullable(job.get("is_remote")),
         "prompt_version": PROMPT_VERSION,
-        "candidate_profile_version": CANDIDATE_PROFILE_VERSION,
         "candidate_profile_hash": hash_text(cv),
     }
-    if context["source_is_remote"] is not None:
-        context["source_is_remote"] = int(context["source_is_remote"])
     return hash_text(json.dumps(context, sort_keys=True, ensure_ascii=False))
 
 
