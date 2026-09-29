@@ -27,7 +27,7 @@ RECEIVER = os.getenv("receiver_email")
 
 all_jobs = pd.DataFrame()
 good_fit_jobs = []
-with open("system_instruction.txt", "r") as f:
+with open("system_instruction.md", "r") as f:
     SYSTEM_INSTRUCTIONS = f.read()
 with open("cv.txt", "r") as f:
     CV = f.read()

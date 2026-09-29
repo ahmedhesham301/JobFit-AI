@@ -192,29 +192,23 @@ CANDIDATE CV:
                         "skills",
                         "experience",
                         "role_alignment",
-                        "location",
                         "growth_potential",
                     ],
                     properties={
                         "skills": genai.types.Schema(
                             type=genai.types.Type.INTEGER,
                             minimum=0,
-                            maximum=30,
+                            maximum=35,
                         ),
                         "experience": genai.types.Schema(
                             type=genai.types.Type.INTEGER,
                             minimum=0,
-                            maximum=25,
+                            maximum=30,
                         ),
                         "role_alignment": genai.types.Schema(
                             type=genai.types.Type.INTEGER,
                             minimum=0,
-                            maximum=15,
-                        ),
-                        "location": genai.types.Schema(
-                            type=genai.types.Type.INTEGER,
-                            minimum=0,
-                            maximum=15,
+                            maximum=20,
                         ),
                         "growth_potential": genai.types.Schema(
                             type=genai.types.Type.INTEGER,
@@ -226,7 +220,6 @@ CANDIDATE CV:
                         "skills",
                         "experience",
                         "role_alignment",
-                        "location",
                         "growth_potential",
                     ],
                 ),

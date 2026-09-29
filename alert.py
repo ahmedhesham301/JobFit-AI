@@ -58,10 +58,9 @@ def _job_details(job):
     scores = job.get("score_breakdown")
     if scores:
         limits = {
-            "skills": 30,
-            "experience": 25,
-            "role_alignment": 15,
-            "location": 15,
+            "skills": 35,
+            "experience": 30,
+            "role_alignment": 20,
             "growth_potential": 15,
         }
         rows.append(

@@ -135,16 +135,13 @@ CREATE TABLE IF NOT EXISTS evaluations (
 
     -- Score breakdown
     skills_score INTEGER NOT NULL
-        CHECK (skills_score BETWEEN 0 AND 30),
+        CHECK (skills_score BETWEEN 0 AND 35),
 
     experience_score INTEGER NOT NULL
-        CHECK (experience_score BETWEEN 0 AND 25),
+        CHECK (experience_score BETWEEN 0 AND 30),
 
     role_alignment_score INTEGER NOT NULL
-        CHECK (role_alignment_score BETWEEN 0 AND 15),
-
-    location_score INTEGER NOT NULL
-        CHECK (location_score BETWEEN 0 AND 15),
+        CHECK (role_alignment_score BETWEEN 0 AND 20),
 
     growth_potential_score INTEGER NOT NULL
         CHECK (growth_potential_score BETWEEN 0 AND 15),
@@ -228,7 +225,6 @@ SCORE_FIELDS = (
     "skills",
     "experience",
     "role_alignment",
-    "location",
     "growth_potential",
 )
 
@@ -346,8 +342,6 @@ def bulk_insert(df, why_skipped):
 
 def insert_evaluation(evaluation_hash, description_id, evaluation):
     scores = evaluation["score_breakdown"]
-    if sum(scores[field] for field in SCORE_FIELDS) != evaluation["percentage"]:
-        raise ValueError("Percentage must equal the score breakdown total")
     for field in JSON_FIELDS:
         if not isinstance(evaluation[field], list) or not all(
             isinstance(item, str) for item in evaluation[field]
