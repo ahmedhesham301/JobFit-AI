@@ -468,7 +468,8 @@ But:
 "Dubai-based OR available for immediate relocation"
 -> []
 
-For onsite/hybrid roles, never populate this field merely from the workplace city/country.
+If the job description does not mention anything about the location use the provided "job location".
+The field should only hold country name only.
 
 # Work Authorization
 
@@ -768,6 +769,7 @@ Calculate LAST:
 
 percentage =
 skills_score
+
 - experience_score
 - role_alignment_score
 - growth_potential_score
