@@ -1,5 +1,8 @@
+from lingua import Language
+
 companies_blacklist = [r"\balignerr\b", r"\bUneeq Interns\b"]
-allowd_locations = ["worldwide", "egypt", "emea", "africa"]
+allowed_locations = ["worldwide", "egypt", "emea", "africa"]
+accepted_languages = [Language.ENGLISH, Language.ARABIC]
 
 description_blockers = [
     # US work authorization

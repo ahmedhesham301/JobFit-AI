@@ -4,7 +4,7 @@ load_dotenv()
 
 from jobs import getJobs
 from alert import send_email
-from filter import filter_jobs, filter_jobs_by_regex
+from filter import filter_jobs, filter_jobs_by_regex, filter_jobs_by_language
 import os
 import logging
 import pandas as pd
@@ -79,29 +79,43 @@ def main():
         title_filtered_jobs, remaining = filter_jobs_by_regex(
             all_jobs, "title", vars.blocked_titles_regex
         )
-        database.bulk_insert(remaining, "title")
+        database.bulk_insert(remaining, "title_keyword_filter")
         s.jobs_skipped_by_title_filter = len(remaining)
 
         company_filtered_jobs, remaining = filter_jobs_by_regex(
             title_filtered_jobs, "company", vars.blocked_companies_regex
         )
-        database.bulk_insert(remaining, "company")
+        database.bulk_insert(remaining, "company_filter")
         s.jobs_skipped_by_company_filter = len(remaining)
 
         company_filtered_jobs["description"] = company_filtered_jobs[
             "description"
         ].apply(utils.clean_description)
 
-        description_filtered_jobs, remaining = filter_jobs_by_regex(
-            company_filtered_jobs, "description", vars.blocked_descriptions_regex
+        a = datetime.now()
+
+        jobs_filtered_by_description_language, remaining = filter_jobs_by_language(
+            company_filtered_jobs
         )
-        database.bulk_insert(remaining, "description")
+        database.bulk_insert(remaining, "description_language")
+        s.jobs_skipped_by_description_language_filter = len(remaining)
+
+        s.language_filter_time = datetime.now() - a
+
+        jobs_filtered_by_description_keyword, remaining = filter_jobs_by_regex(
+            jobs_filtered_by_description_language,
+            "description",
+            vars.blocked_descriptions_regex,
+        )
+        database.bulk_insert(remaining, "description_keyword_filter")
         s.jobs_skipped_by_description_filter = len(remaining)
 
         remaining, positive_filtered_jobs = filter_jobs_by_regex(
-            description_filtered_jobs, "description", vars.positive_keywords_regex
+            jobs_filtered_by_description_keyword,
+            "description",
+            vars.positive_keywords_regex,
         )
-        database.bulk_insert(remaining, "no_positive_keyword")
+        database.bulk_insert(remaining, "positive_keyword_filter")
         s.jobs_skipped_by_positive_filter = len(remaining)
 
         positive_filtered_jobs["description_hash"] = None

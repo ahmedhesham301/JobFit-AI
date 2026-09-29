@@ -8,6 +8,8 @@ from httpx import RemoteProtocolError
 import database
 from stats import s
 import os
+from lingua import LanguageDetector, LanguageDetectorBuilder
+import vars
 
 rate = os.getenv("rate") == "true"
 
@@ -22,6 +24,20 @@ def filter_jobs_by_regex(jobs, key, regex):
 
     skipped = jobs[mask].copy()
     remaining = jobs[~mask].copy()
+
+    return remaining, skipped
+
+
+def filter_jobs_by_language(jobs):
+    detector = LanguageDetectorBuilder.from_all_languages().build()
+    remaining = jobs.iloc[0:0].copy()
+    skipped = jobs.iloc[0:0].copy()
+    for _, row in jobs.iterrows():
+        language = detector.detect_language_of(row["description"])
+        if language in vars.accepted_languages:
+            remaining.loc[len(remaining)] = row
+        else:
+            skipped.loc[len(skipped)] = row
 
     return remaining, skipped
 

@@ -239,7 +239,8 @@ The total score is 100 points.
 
 ### Skills — 0–30 points
 
-Evaluate required technical skills and transferable technical knowledge.
+Score ONLY skills/capabilities requested or clearly implied by the job.
+Do NOT reward the candidate simply for having many technical skills.
 
 General guidance:
 - 27–30: nearly all important required skills are demonstrated
@@ -469,9 +470,9 @@ If no candidate-location restriction is explicitly stated:
 
 ### `role_families`
 
-Classify THE JOB, not the candidate.
+Classify THE JOB ITSELF, not the candidate.
 
-The candidate's skills, projects, target roles, or transferable experience
+The candidate's skills, projects, target roles, background, or transferable experience
 MUST NOT influence role_families.
 
 Determine the role primarily from:
@@ -480,12 +481,11 @@ Determine the role primarily from:
 2. the role's primary responsibilities
 3. what the employee will spend most of their time doing
 
-Technology mentions alone do not determine role family.
+Technology mentions alone do NOT determine role family.
 
 Return at most 2 role families.
 
-Use a second family only when the job genuinely combines two substantial
-areas of responsibility.
+Use a second family only when the job genuinely combines two substantial areas of responsibility.
 
 Available values:
 
@@ -502,6 +502,9 @@ Available values:
 - ai_ml
 - networking
 - other
+- non_target
+
+Use non_target when the job's primary function is outside the candidate's target technical career families.
 
 Examples:
 
@@ -520,10 +523,8 @@ backups, and infrastructure:
 ["sysadmin", "infrastructure"]
 
 Administrative Assistant using technical systems:
-["other"]
+["non_target"]
 
-Business reporting or business analytics role:
-["data"] or ["other"], depending on the primary responsibilities.
 
 A job must NOT be classified as backend, DevOps, platform, cloud,
 infrastructure, or SRE merely because:
@@ -567,9 +568,12 @@ If signals conflict, use the overall evidence rather than relying on one word.
 
 ### `matched_skills`
 
-List relevant skills or capabilities demonstrated anywhere in the candidate profile.
+List only skills or capabilities that satisfy both conditions:
 
-Evidence may come from:
+1. The skill is explicitly requested, mentioned, or clearly implied by the job description.
+2. The candidate demonstrates that skill somewhere in their profile.
+
+Candidate evidence may come from:
 - skills
 - work experience
 - projects

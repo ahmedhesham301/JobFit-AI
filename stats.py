@@ -1,12 +1,14 @@
 class Stats:
     def __init__(self):
         self.scraping_time = None
+        self.language_filter_time = None
         self.filter_time = None
         self.email_time = None
         self.jobs_duplicates = 0
         self.jobs_no_duplicates = 0
         self.jobs_skipped_by_title_filter = 0
         self.jobs_skipped_by_company_filter = 0
+        self.jobs_skipped_by_description_language_filter = 0
         self.jobs_skipped_by_description_filter = 0
         self.jobs_skipped_by_positive_filter = 0
         self.cache_hits = 0
@@ -17,6 +19,7 @@ class Stats:
             self.jobs_no_duplicates
             - self.jobs_skipped_by_company_filter
             - self.jobs_skipped_by_title_filter
+            - self.jobs_skipped_by_description_language_filter
             - self.jobs_skipped_by_description_filter
             - self.jobs_skipped_by_positive_filter
         )
@@ -31,6 +34,10 @@ class Stats:
             ("Jobs excluded by company filter", self.jobs_skipped_by_company_filter),
             ("Jobs excluded by keyword filter", self.jobs_skipped_by_title_filter),
             (
+                "Jobs excluded by description language filter",
+                self.jobs_skipped_by_description_language_filter,
+            ),
+            (
                 "Jobs excluded by description filter",
                 self.jobs_skipped_by_description_filter,
             ),
@@ -42,6 +49,7 @@ class Stats:
             ("Jobs rated", self.total_jobs_rated),
             ("Cache hits", self.cache_hits),
             ("Scraping time", self.scraping_time),
+            ("Language filtering time", self.language_filter_time),
             ("Filtering time", self.filter_time),
             ("Average filtering time per job", average_filter_time),
             ("Email time", self.email_time),
