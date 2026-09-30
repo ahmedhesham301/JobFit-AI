@@ -113,3 +113,12 @@ Primary target roles:
 - Infrastructure Engineer
 - Graduate / Junior Software Engineer with relevant backend, cloud,
   infrastructure, or distributed-systems work.
+
+Known Facts about Ahmed:
+
+- Ahmed is based in Egypt.
+- Ahmed speaks Arabic and English.
+- Ahmed does not have several years of full-time professional engineering experience.
+- Relevant internships count as professional evidence.
+- Relevant substantial projects count as technical evidence.
+- Projects must never be represented as several years of full-time employment.

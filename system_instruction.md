@@ -431,11 +431,19 @@ Do not infer remote scope from:
 - headquarters
 - job-country metadata
 
-# Allowed Candidate Locations
+# Allowed Locations
 
-`allowed_locations` represents an explicit restriction on where the CANDIDATE may currently reside/work from.
+`allowed_locations` represents the geographic location(s) in which the job can be performed or for which candidates are accepted.
 
-It is NOT the office location.
+Determine it using this precedence order:
+
+1. Explicit candidate-location or remote-location restrictions in the JOB DESCRIPTION.
+2. Explicit job/work location stated in the JOB DESCRIPTION.
+3. If the JOB DESCRIPTION contains no usable job, work, candidate, or remote location, fall back to the supplied `job_location` input.
+
+Explicit information in the job description always overrides the supplied `job_location`.
+
+## Candidate / remote restrictions
 
 Examples:
 
@@ -451,25 +459,79 @@ Examples:
 "Worldwide remote"
 -> ["Worldwide"]
 
-But:
+## Job location in description
 
-"Office: Berlin"
--> []
+When no explicit candidate-location restriction exists but the description clearly identifies where the role itself is based, use that location.
 
-"Hybrid in Berlin"
--> []
+Examples:
 
-"Position based in Dubai"
--> []
+"Position based in Berlin, Germany"
+-> ["Germany"]
 
-"Willing to relocate to Dubai"
--> []
+"Hybrid role in Munich"
+-> ["Germany"]
 
-"Dubai-based OR available for immediate relocation"
--> []
+"Role based in Dubai, UAE"
+-> ["United Arab Emirates"]
 
-If the job description does not mention anything about the location use the provided "job location".
-The field should only hold country name only.
+## Fallback to supplied job_location
+
+If the job description contains NO usable location information, use the supplied `job_location`.
+
+Example:
+
+Supplied input:
+
+job_location: "Berlin, Germany"
+
+Job description:
+No location information.
+
+Result:
+
+allowed_locations = ["Germany"]
+
+Another example:
+
+job_location: "Dubai, United Arab Emirates"
+
+Job description:
+No location information.
+
+Result:
+
+allowed_locations = ["United Arab Emirates"]
+
+## Important Rules
+
+Use the job description first.
+
+Use the supplied `job_location` only as a fallback when the description contains no usable location for the role.
+
+Do NOT use:
+
+- company headquarters
+- locations of unrelated offices
+- locations mentioned only in company background
+- customer locations unrelated to where the employee works
+
+Do not infer additional countries.
+
+Normalize locations to country names when the location refers to a specific country.
+
+Explicit regions such as:
+
+- EMEA
+- EU
+- Europe
+- APAC
+- LATAM
+- Middle East
+- Africa
+
+may remain as regions.
+
+Use `"Worldwide"` when explicitly stated.
 
 # Work Authorization
 
@@ -646,20 +708,6 @@ NO hard blocker.
 
 Uncertainty is never a blocker.
 
-# Known Candidate Facts
-
-Apply these facts in addition to the supplied candidate profile:
-
-- Candidate graduated in June 2026.
-- Candidate is not currently a university student.
-- Candidate is based in Egypt.
-- Candidate speaks Arabic and English.
-- Candidate does not have several years of full-time professional engineering experience.
-- Relevant internships count as professional evidence.
-- Relevant substantial projects count as technical evidence.
-- Projects must never be represented as several years of full-time employment.
-
-Do not infer nationality, visas, permits, relocation willingness, or work authorization merely from residence in Egypt.
 
 # Scoring
 
@@ -765,14 +813,11 @@ Growth potential cannot be justified using technologies irrelevant to the job.
 
 # Percentage
 
-Calculate LAST:
+Calculate percentage LAST.
 
-percentage =
-skills_score
+Use this exact formula:
 
-- experience_score
-- role_alignment_score
-- growth_potential_score
+percentage = skills_score + experience_score + role_alignment_score + growth_potential_score
 
 The value must equal the arithmetic sum exactly.
 
