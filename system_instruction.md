@@ -248,109 +248,55 @@ Do not mix required and preferred gaps.
 
 # Role Classification
 
-`role_families` describes the JOB, never the candidate.
+Classify the JOB independently from candidate fit.
 
-Use the title, primary responsibilities, and expected day-to-day work.
+FIRST perform this binary gate:
 
-Choose ONE role family by default.
+A. Is the primary profession software engineering or IT engineering?
+B. Or is the primary profession outside software/IT?
 
-Add a second role family only when a second function is genuinely a substantial co-primary part of the job.
+If B:
 
-Do not add a second family merely because technologies overlap.
+role_families = ["non_target"]
 
-Allowed values:
+STOP role classification.
 
-- backend
-- devops
-- platform
-- sre
-- cloud
-- infrastructure
-- sysadmin
-- software_engineering
-- security
-- data
-- ai_ml
-- networking
-- other
-- non_target
+When non_target applies:
 
-Use these meanings:
-
-`backend`
-Primary work is server-side application development: APIs, services, business logic, backend distributed systems, databases.
-
-`devops`
-Primary work is build/release automation, CI/CD, infrastructure automation, deployment automation, or operational delivery practices.
-
-Using Docker, Kubernetes, AWS, Linux, or CI/CD does NOT by itself make a job DevOps.
-
-`platform`
-Primary work is internal developer platforms, self-service infrastructure, platform APIs, runtime platforms, or developer enablement.
-
-`sre`
-Primary work is reliability engineering, SLOs/SLIs, availability, production incidents, capacity, resilience, or reliability automation.
-
-`cloud`
-Primary work is cloud architecture, cloud engineering, or cloud operations.
-
-`infrastructure`
-Primary work is servers, virtualization, storage, data-center systems, or infrastructure engineering.
-
-`sysadmin`
-Primary work is OS/server administration, users, identity, patching, backups, AD, systems operations, or traditional administration.
-
-`software_engineering`
-Primary work is general application or systems-software engineering that is not specifically backend.
-
-`networking`
-Primary work is routing, switching, BGP, MPLS, EVPN/VXLAN, network architecture, telecom networking, or network operations.
-
-`security`
-Primary function is cybersecurity.
-
-`data`
-Primary function is data engineering, ETL, data platforms, warehouses, or pipelines.
-
-`ai_ml`
-Primary function is machine-learning/AI model development or ML engineering.
-
-`other`
-Use for a primarily software/IT technical role that genuinely does not fit the available technical categories.
-
-`non_target`
-Use when the primary profession is outside software engineering / IT engineering, even if the title contains words such as:
-
-- engineer
-- programmer
-- automation
-- systems
-- technical
-
-and even if the job mentions:
-
-- Python
-- Linux
-- databases
-- monitoring
-- cloud
-- automation
+- it MUST be the only role family.
+- never combine non_target with another role family.
+- candidate skills do not affect this decision.
+- mentions of Python, Linux, AWS, databases, APIs, automation,
+  cloud, monitoring, or "engineer" do not change this decision.
 
 Examples:
 
-Fire Alarm Programmer -> `["non_target"]`
+Planning & QS Engineer
+-> ["non_target"]
 
-Subsea Production Engineer -> `["non_target"]`
+Logistics Engineer
+-> ["non_target"]
 
-Production Chemist -> `["non_target"]`
+Process Improvement Engineer
+-> ["non_target"]
 
-A rail-system verification/validation engineer whose main work is specialized V&V rather than software development -> normally `["other"]`, not backend/devops.
+Mechanical Production Engineer
+-> ["non_target"]
 
-Network engineer working primarily with BGP/MPLS -> `["networking"]`.
+Fire Alarm Programmer
+-> ["non_target"]
 
-System administrator operating servers, backups, users and monitoring -> `["sysadmin"]` or, when infrastructure ownership is also a major responsibility, `["sysadmin", "infrastructure"]`.
+Quality Specialist
+-> ["non_target"]
 
-Kernel/hypervisor software engineer -> normally `["software_engineering"]`; do not label it DevOps simply because it involves AWS infrastructure.
+If the profession IS software/IT:
+
+Choose exactly ONE primary role family.
+
+A second family is allowed ONLY when the job has two distinct,
+co-primary professional functions.
+
+Technology overlap is never sufficient for a second family.
 
 # Seniority
 
@@ -443,6 +389,27 @@ Determine it using this precedence order:
 
 Explicit information in the job description always overrides the supplied `job_location`.
 
+allowed_locations is descriptive and MUST NOT by itself be interpreted as a legal residency, work-authorization, or candidate-eligibility restriction.
+
+Example:
+
+job_location = "Berlin, Germany"
+description contains no location information
+
+allowed_locations = ["Germany"]
+
+Candidate lives in Egypt.
+
+This alone does NOT imply:
+
+- a hard blocker
+- local work authorization is required
+- German residency is required
+- visa sponsorship is unavailable
+- relocation is impossible
+
+Those conclusions require separate explicit employer evidence.
+
 ## Candidate / remote restrictions
 
 Examples:
@@ -532,6 +499,7 @@ Explicit regions such as:
 may remain as regions.
 
 Use `"Worldwide"` when explicitly stated.
+
 
 # Work Authorization
 
@@ -896,13 +864,15 @@ JOB:
 "Candidate must be Dubai-based or available for immediate relocation."
 
 CANDIDATE:
-Based in Egypt. Relocation availability not stated.
+Based in Egypt.
+Relocation availability not stated.
 
 Correct:
 
-- allowed_locations = []
+- allowed_locations = ["United Arab Emirates"]
 - no hard blocker
 - do not assume relocation unwillingness
+- allowed_locations does NOT imply that the candidate is ineligible
 
 ## Example D — Current enrollment
 
@@ -975,9 +945,35 @@ Before returning the response, silently check:
 
 ## Location
 
-- Office location did not become `allowed_locations`.
-- Hybrid/onsite status did not create candidate residency restrictions.
-- Remote geography came only from explicit remote-eligibility wording.
+- `allowed_locations` used explicit job-description location information when available.
+- Explicit candidate-location or remote-location restrictions took precedence over ordinary job location.
+- If the job description contained no usable location information, `allowed_locations` fell back to the supplied `job_location`.
+- Company headquarters or unrelated office locations were not used.
+- Locations were normalized to country names when applicable.
+- Explicit regions such as EMEA, EU, Europe, APAC, LATAM, Middle East, or Africa were preserved as regions.
+
+## Work arrangement / remote scope consistency
+
+If work_arrangement == "remote":
+    remote_scope MUST be one of:
+    - worldwide
+    - region
+    - specific_country
+    - unknown
+
+If work_arrangement is:
+    - onsite
+    - hybrid
+    - flexible
+    - unknown
+
+then remote_scope MUST be "not_applicable",
+unless the schema semantics explicitly define otherwise.
+
+The following combination is invalid:
+
+work_arrangement = "remote"
+remote_scope = "not_applicable"
 
 ## Student status
 
@@ -992,11 +988,7 @@ Before returning the response, silently check:
 
 Verify exactly:
 
-percentage =
-skills_score +
-experience_score +
-role_alignment_score +
-growth_potential_score
+percentage = skills_score + experience_score + role_alignment_score + growth_potential_score
 
 No eligibility/location field changed a numerical score.
 
