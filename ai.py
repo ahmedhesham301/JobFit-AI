@@ -7,18 +7,41 @@ import os
 
 client = genai.Client(api_key=os.getenv("gemini_api_key"))
 
+MODEL = os.getenv("gemini_model")
 
-def generate(title, location, description, system_instruction, cv):
+
+def create_job_evaluator_cache(system_instruction, cv):
+    cache = client.caches.create(
+        model=MODEL,
+        config=types.CreateCachedContentConfig(
+            system_instruction=system_instruction,
+            contents=[
+                types.Content(
+                    role="user",
+                    parts=[types.Part.from_text(text=f"""
+CANDIDATE CV:
+
+{cv}
+""")],
+                )
+            ],
+            display_name="jobfit-evaluator",
+            ttl="3600s",  # 1 hour
+        ),
+    )
+
+    return cache.name
+
+
+def generate(title, description, cache_name):
     evaluation_input = f"""
 JOB TITLE:
 {title}
 
 JOB DESCRIPTION:
 {description}
-
-CANDIDATE CV:
-{cv}"""
-    model = "gemini-3.1-flash-lite"
+"""
+    model = MODEL
     contents = [
         types.Content(
             role="user",
@@ -31,6 +54,7 @@ CANDIDATE CV:
         thinking_config=types.ThinkingConfig(
             thinking_level="MINIMAL",
         ),
+        cached_content=cache_name,
         response_mime_type="application/json",
         response_schema=genai.types.Schema(
             type=genai.types.Type.OBJECT,
@@ -241,9 +265,6 @@ CANDIDATE CV:
                 "score_breakdown",
             ],
         ),
-        system_instruction=[
-            types.Part.from_text(text=system_instruction),
-        ],
     )
 
     response = client.models.generate_content(

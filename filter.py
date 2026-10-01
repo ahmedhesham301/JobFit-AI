@@ -42,7 +42,7 @@ def filter_jobs_by_language(jobs):
     return remaining, skipped
 
 
-def filter_jobs(jobs, system_instruction, cv):
+def filter_jobs(jobs, system_instruction, cv, cache_name):
     """Save filtered jobs, optionally rating eligible jobs with Gemini."""
     good_fit_jobs = []
     for i, job in jobs.iterrows():
@@ -62,10 +62,8 @@ def filter_jobs(jobs, system_instruction, cv):
                     logging.warning(f"index is {i}")
                     ai_response = generate(
                         job["title"],
-                        job["location"],
                         job["description"],
-                        system_instruction,
-                        cv,
+                        cache_name,
                     )
                     ai_response_dict = json.loads(ai_response)
 
