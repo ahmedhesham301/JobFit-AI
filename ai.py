@@ -18,7 +18,7 @@ JOB DESCRIPTION:
 
 CANDIDATE CV:
 {cv}"""
-    model = "gemini-2.5-flash-lite"
+    model = "gemini-3.1-flash-lite"
     contents = [
         types.Content(
             role="user",
@@ -29,7 +29,7 @@ CANDIDATE CV:
     ]
     generate_content_config = types.GenerateContentConfig(
         thinking_config=types.ThinkingConfig(
-            # thinking_level="MINIMAL",
+            thinking_level="MINIMAL",
         ),
         response_mime_type="application/json",
         response_schema=genai.types.Schema(
