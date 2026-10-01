@@ -13,8 +13,6 @@ def generate(title, location, description, system_instruction, cv):
 JOB TITLE:
 {title}
 
-JOB_LOCATION: {location}
-
 JOB DESCRIPTION:
 {description}
 

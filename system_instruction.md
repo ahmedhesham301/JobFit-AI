@@ -385,30 +385,14 @@ Determine it using this precedence order:
 
 1. Explicit candidate-location or remote-location restrictions in the JOB DESCRIPTION.
 2. Explicit job/work location stated in the JOB DESCRIPTION.
-3. If the JOB DESCRIPTION contains no usable job, work, candidate, or remote location, fall back to the supplied `job_location` input.
-
-Explicit information in the job description always overrides the supplied `job_location`.
 
 allowed_locations is descriptive and MUST NOT by itself be interpreted as a legal residency, work-authorization, or candidate-eligibility restriction.
 
 Example:
 
-job_location = "Berlin, Germany"
-description contains no location information
+description contains candidate must reside in Germany
 
 allowed_locations = ["Germany"]
-
-Candidate lives in Egypt.
-
-This alone does NOT imply:
-
-- a hard blocker
-- local work authorization is required
-- German residency is required
-- visa sponsorship is unavailable
-- relocation is impossible
-
-Those conclusions require separate explicit employer evidence.
 
 ## Candidate / remote restrictions
 
@@ -441,39 +425,22 @@ Examples:
 "Role based in Dubai, UAE"
 -> ["United Arab Emirates"]
 
-## Fallback to supplied job_location
+## Fallback when no location is mentioned  
 
-If the job description contains NO usable location information, use the supplied `job_location`.
+If the job description contains NO usable location information, use allowed_locations = ["not_mentioned"].
 
 Example:
 
 Supplied input:
 
-job_location: "Berlin, Germany"
-
 Job description:
 No location information.
 
 Result:
 
-allowed_locations = ["Germany"]
+allowed_locations = ["not_mentioned"]
 
 Another example:
-
-job_location: "Dubai, United Arab Emirates"
-
-Job description:
-No location information.
-
-Result:
-
-allowed_locations = ["United Arab Emirates"]
-
-## Important Rules
-
-Use the job description first.
-
-Use the supplied `job_location` only as a fallback when the description contains no usable location for the role.
 
 Do NOT use:
 
@@ -499,7 +466,6 @@ Explicit regions such as:
 may remain as regions.
 
 Use `"Worldwide"` when explicitly stated.
-
 
 # Work Authorization
 
@@ -946,8 +912,7 @@ Before returning the response, silently check:
 ## Location
 
 - `allowed_locations` used explicit job-description location information when available.
-- Explicit candidate-location or remote-location restrictions took precedence over ordinary job location.
-- If the job description contained no usable location information, `allowed_locations` fell back to the supplied `job_location`.
+- If the job description contained no usable location information, `allowed_locations` fell back to `not_mentioned`.
 - Company headquarters or unrelated office locations were not used.
 - Locations were normalized to country names when applicable.
 - Explicit regions such as EMEA, EU, Europe, APAC, LATAM, Middle East, or Africa were preserved as regions.

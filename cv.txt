@@ -115,7 +115,7 @@ Primary target roles:
   infrastructure, or distributed-systems work.
 
 Known Facts about Ahmed:
-
+- Ahmed has a Bachelor's degree in Computer Science
 - Ahmed is based in Egypt.
 - Ahmed speaks Arabic and English.
 - Ahmed does not have several years of full-time professional engineering experience.
