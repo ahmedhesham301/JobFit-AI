@@ -26,7 +26,7 @@ CANDIDATE CV:
                 )
             ],
             display_name="jobfit-evaluator",
-            ttl="3600s",  # 1 hour
+            ttl="60s",
         ),
     )
 
