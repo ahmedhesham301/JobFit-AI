@@ -38,7 +38,7 @@ Examples:
 
 Follow this order.
 
-1. Read the job title, metadata, location, and entire job description.
+1. Read the job title, and entire job description.
 2. Determine the job's primary function.
 3. Classify the job's role family using JOB information only.
 4. Extract the job's requirements and classify each as:
@@ -250,53 +250,84 @@ Do not mix required and preferred gaps.
 
 Classify the JOB independently from candidate fit.
 
-FIRST perform this binary gate:
+Use only JOB information. Candidate skills, experience, projects, education, or goals must NOT influence `role_families`.
 
-A. Is the primary profession software engineering or IT engineering?
-B. Or is the primary profession outside software/IT?
+`role_families` is a classification, not a tag list.
 
-If B:
+## Step 1 — Software/IT Gate
 
-role_families = ["non_target"]
+First determine whether the job's primary profession is software/IT.
 
-STOP role classification.
+If it is outside software/IT: role_families = ["non_target"]
+`non_target` MUST be the only family.
 
-When non_target applies:
+Mentions of Python, Linux, AWS, databases, APIs, automation, monitoring, networking, or the word "engineer" do not make a non-software/IT job a software/IT role.
+Examples:
+- Solar Engineer → `["non_target"]`
+- Mechanical Engineer → `["non_target"]`
+- Fire Alarm Programmer → `["non_target"]`
 
-- it MUST be the only role family.
-- never combine non_target with another role family.
-- candidate skills do not affect this decision.
-- mentions of Python, Linux, AWS, databases, APIs, automation,
-  cloud, monitoring, or "engineer" do not change this decision.
+## Step 2 — Choose the Primary Family
+
+If the job is software/IT, choose exactly ONE primary role family by default.
+
+Determine it mainly from:
+
+1. core responsibilities
+2. primary outcomes/ownership
+3. required capabilities
+4. job title as supporting evidence
+
+Do NOT add role families merely because technologies overlap.
 
 Examples:
 
-Planning & QS Engineer
--> ["non_target"]
+DevOps Engineer using Go, AWS, Kubernetes, and Terraform:
 
-Logistics Engineer
--> ["non_target"]
+```text
+["devops"]
+```
 
-Process Improvement Engineer
--> ["non_target"]
+NOT:
 
-Mechanical Production Engineer
--> ["non_target"]
+```text
+["backend", "devops", "platform", "cloud", "sre"]
+```
 
-Fire Alarm Programmer
--> ["non_target"]
+Backend Engineer using Docker, AWS, and CI/CD:
 
-Quality Specialist
--> ["non_target"]
+```text
+["backend"]
+```
 
-If the profession IS software/IT:
+NOT:
 
-Choose exactly ONE primary role family.
+```text
+["backend", "devops", "cloud"]
+```
 
-A second family is allowed ONLY when the job has two distinct,
-co-primary professional functions.
+Technology overlap is NOT role overlap.
 
-Technology overlap is never sufficient for a second family.
+## Second Family
+
+A second family is allowed ONLY when the job has two distinct, substantial, co-primary professional functions.
+
+Shared tools or occasional responsibilities are not enough.
+
+Return:
+
+- ONE family normally
+- TWO only for genuine co-primary roles
+- NEVER more than TWO
+- `["non_target"]` alone for non-software/IT jobs
+
+Before returning, ask:
+
+- Does this describe the job itself?
+- Am I adding a family only because of shared technologies?
+- Can one family accurately describe the primary work?
+
+If yes, return only that one family.
 
 # Seniority
 
@@ -336,14 +367,17 @@ Work is expected onsite.
 The employer explicitly offers a CHOICE between multiple location arrangements such as remote, hybrid, or onsite.
 
 Important:
+A physical job location does NOT automatically mean onsite.
 
-"Flexible hours"
-"Flexible working hours"
-"Flexible schedule"
+"Location: Berlin"
+does NOT establish:
+work_arrangement = "onsite"
 
-do NOT mean `work_arrangement = flexible`.
+A company having offices does NOT establish onsite or hybrid work.
+A remote-friendly company does NOT establish this specific role as remote.
+If the JOB DESCRIPTION does not explicitly establish the arrangement: work_arrangement = "unknown"
 
-Those statements concern working time, not work location.
+"Flexible hours", "Flexible working hours", "Flexible schedule" do NOT mean `work_arrangement = flexible`. Those statements concern working time, not work location.
 
 When arrangement cannot reliably be determined, use `unknown`.
 
@@ -377,95 +411,114 @@ Do not infer remote scope from:
 - headquarters
 - job-country metadata
 
+# Job Location Evidence Boundary
+
+allowed_locations is a JOB fact.
+
+It must be derived ONLY from explicit geographic evidence in the JOB DESCRIPTION.
+
+NEVER use information from the CANDIDATE PROFILE when determining:
+
+- allowed_locations
+- work_arrangement
+- remote_scope
+- work_authorization
+- visa_sponsorship
+- student_status_required
+- minimum_experience_years
+
+Candidate residence, nationality, current city, desired location, relocation willingness, or past employment locations are NEVER evidence about where the job can be performed.
+
+Before reading the candidate profile, determine and freeze all job-location facts. Do not revise them after reading the candidate profile.
+
 # Allowed Locations
 
-`allowed_locations` represents the geographic location(s) in which the job can be performed or for which candidates are accepted.
+allowed_locations represents the geographic location(s) where the role itself can be performed or where candidates are explicitly permitted to work.
 
-Determine it using this precedence order:
+Use ONLY the JOB DESCRIPTION.
 
-1. Explicit candidate-location or remote-location restrictions in the JOB DESCRIPTION.
-2. Explicit job/work location stated in the JOB DESCRIPTION.
+Use this precedence:
 
-allowed_locations is descriptive and MUST NOT by itself be interpreted as a legal residency, work-authorization, or candidate-eligibility restriction.
+1. Explicit candidate-location restriction.
+2. Explicit remote-work geographic restriction.
+3. Explicit statement identifying where THIS ROLE is based/performed.
+4. Otherwise ["not_mentioned"].
 
-Example:
-
-description contains candidate must reside in Germany
-
-allowed_locations = ["Germany"]
-
-## Candidate / remote restrictions
+## Valid evidence
 
 Examples:
+
+"Candidates must reside in Germany"
+-> ["Germany"]
 
 "Remote anywhere in Germany"
 -> ["Germany"]
 
-"Candidates must reside in Germany or Netherlands"
--> ["Germany", "Netherlands"]
-
 "Remote within EMEA"
 -> ["EMEA"]
 
-"Worldwide remote"
--> ["Worldwide"]
-
-## Job location in description
-
-When no explicit candidate-location restriction exists but the description clearly identifies where the role itself is based, use that location.
-
-Examples:
-
-"Position based in Berlin, Germany"
+"This position is based in Berlin"
 -> ["Germany"]
+
+"Location: Dubai, UAE"
+-> ["United Arab Emirates"]
 
 "Hybrid role in Munich"
 -> ["Germany"]
 
-"Role based in Dubai, UAE"
--> ["United Arab Emirates"]
+## Invalid evidence
 
-## Fallback when no location is mentioned  
+Do NOT derive allowed_locations from:
 
-If the job description contains NO usable location information, use allowed_locations = ["not_mentioned"].
+- candidate location
+- candidate nationality
+- candidate employment history
+- candidate education location
+- company headquarters
+- company origin
+- company office locations unless explicitly tied to THIS ROLE
+- locations mentioned in company background
+- customer locations
+- product markets
+- countries where the company operates
+- language requirements
+- nationality preferences
+- currencies
+- country-specific regulations
+- employer name
+- general knowledge about where a company is based
 
-Example:
+## Evidence requirement
 
-Supplied input:
+Before returning any value other than ["not_mentioned"], internally identify
+the exact phrase in the JOB DESCRIPTION that supports the location.
 
-Job description:
-No location information.
-
-Result:
+If no exact job-description phrase supports the geographic conclusion:
 
 allowed_locations = ["not_mentioned"]
 
-Another example:
+Do not guess.
 
-Do NOT use:
+Do not use the candidate profile to fill missing job-location information.
 
-- company headquarters
-- locations of unrelated offices
-- locations mentioned only in company background
-- customer locations unrelated to where the employee works
+Unknown job location is preferable to an inferred or invented location.
 
-Do not infer additional countries.
+## Normalization
 
-Normalize locations to country names when the location refers to a specific country.
+When the description explicitly provides a city belonging to a known country,
+normalize the final output to the country.
 
-Explicit regions such as:
+"Berlin" -> ["Germany"]
+"Munich" -> ["Germany"]
+"Dubai" -> ["United Arab Emirates"]
 
-- EMEA
-- EU
-- Europe
-- APAC
-- LATAM
-- Middle East
-- Africa
+Do not return both city and country.
 
-may remain as regions.
+Wrong:
+["Dubai", "Abu Dhabi", "United Arab Emirates"]
 
-Use `"Worldwide"` when explicitly stated.
+Correct:
+["United Arab Emirates"]
 
 # Work Authorization
 
