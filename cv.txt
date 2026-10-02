@@ -1,13 +1,17 @@
 Ahmed Hesham
-Backend / DevOps / Platform Engineer
+Backend / DevOps / Platform / Infrastructure Engineer
 Cairo, Egypt
 
 SUMMARY:
-Computer Science graduate and AWS Certified Solutions Architect – Associate with hands-on experience in backend engineering, cloud infrastructure, DevOps, and platform engineering.
 
-Strongest areas include Go, Node.js, AWS, Kubernetes, Terraform, PostgreSQL, Redis, CI/CD, observability, infrastructure automation, and cloud-native systems.
+Computer Science graduate and AWS Certified Solutions Architect – Associate with hands-on experience across backend engineering, cloud infrastructure, DevOps, platform engineering, Linux system administration, and infrastructure automation.
 
-Built REST APIs and distributed backend services, a three-service Go cloud control plane, asynchronous workflows with Temporal, Kubernetes infrastructure, CI/CD and GitOps pipelines, observability systems, VM autoscaling, PostgreSQL provisioning workflows, URL shortening and click-stream analytics systems, and automated job/freelance opportunity analysis pipelines.
+Strongest areas include Go, Node.js, Python, Linux, AWS, Kubernetes, Terraform, PostgreSQL, Redis, CI/CD, GitOps, observability, networking, infrastructure automation, and cloud-native systems.
+
+Built REST APIs and distributed backend services, a three-service Go cloud control plane, asynchronous infrastructure workflows with Temporal, Kubernetes platforms, CI/CD and GitOps pipelines, observability systems, VM autoscaling, PostgreSQL provisioning workflows, highly available Redis infrastructure, URL shortening and click-stream analytics systems, and automated job/freelance opportunity analysis pipelines.
+
+Experienced operating and troubleshooting Linux servers, cloud infrastructure, networking, application services, databases, containers, Kubernetes workloads, monitoring systems, and PostgreSQL infrastructure.
+
 
 EDUCATION:
 Bachelor of Computer Science
@@ -29,14 +33,15 @@ DevOps Intern | Orange Digital Centre
 Jan 2025 – Feb 2025
 - Built a Jenkins CI/CD pipeline to build and publish Docker images, provision AWS infrastructure with Terraform, and deploy containers with Ansible.
 - Provisioned a multi-AZ AWS architecture using Terraform, including public/private subnets, NAT gateways, EC2 web servers, a bastion host, security groups, and an Application Load Balancer.
-- Developed dynamic Ansible inventory from Terraform outputs to discover private EC2 instances and deploy containers through a bastion host.
+- Developed dynamic Ansible inventory from Terraform outputs to automatically discover private EC2 instances and deploy containers through a bastion host without exposing application servers publicly.
+
 
 SKILLS:
 
 Programming:
-Go, JavaScript / Node.js, Python, Bash
+Go, JavaScript, Node.js, Python, Bash
 
-Backend:
+Backend Engineering:
 Gin, Express.js, Flask, REST APIs, Temporal, Authentication, Session Management, Zod
 
 Databases & Caching:
@@ -46,63 +51,95 @@ Messaging & Streaming:
 Apache Kafka
 
 Cloud:
-AWS, EC2, S3, VPC, IAM, RDS, EKS, Application Load Balancer
+AWS, Hetzner Cloud, EC2, S3, VPC, IAM, RDS, EKS, Application Load Balancer
 
 Infrastructure as Code & Automation:
-Terraform, Packer, Ansible
+Terraform, Packer, Ansible, Bash
 
-Containers & Platform:
-Docker, Kubernetes, Helm, Talos Linux, Cilium, Kubernetes Gateway API
+Containers & Platform Engineering:
+Docker, Docker Compose, Kubernetes, Helm, Talos Linux, Cilium, Kubernetes Gateway API
 
 CI/CD & GitOps:
 GitHub Actions, GitLab CI, Jenkins, Argo CD
 
 Observability:
-OpenTelemetry, Prometheus, Grafana, Grafana Alloy, Loki, Mimir, Tempo, Alertmanager
+OpenTelemetry, Prometheus, Grafana, Grafana Alloy, Loki, Mimir, Tempo, Alertmanager, node_exporter, PostgreSQL Exporter
+
+Linux & System Administration:
+Linux, Debian, Ubuntu, systemd, SSH, users/groups, file permissions, package management, cron, journalctl
+
+Networking:
+TCP/IP, DNS, HTTP/HTTPS, routing, NAT, firewalls, Nginx, HAProxy, tcpdump, Wireshark
 
 Security:
-Vault, Trivy, SonarQube, Snyk
+SSH hardening, Fail2ban, TLS/SSL, IAM, Vault, Trivy, SonarQube, Snyk
 
 Performance & Testing:
 k6
 
-Operating Systems:
-Linux
 
 PROJECTS:
 
+
 URL Shortener & Click Stream Analytics Engine
+
 - Built a URL shortening and redirection backend using Base62 identifiers, collision handling, and Redis cache-aside caching with a 24-hour TTL, achieving sub-millisecond redirect latency.
 - Developed click-stream analytics with minute-, hour-, and day-level aggregation using PostgreSQL atomic upserts and timestamp truncation.
 - Implemented authentication using Argon2 password hashing, Redis-backed distributed sessions, and Zod request validation.
 - Instrumented database and cache operations with OpenTelemetry, exposed RED metrics through Prometheus, and centralized structured logs using Grafana Alloy and Loki.
-- Provisioned Kubernetes infrastructure with Terraform and Talos Linux using Cilium eBPF networking, Gateway API, Helm, and Horizontal Pod Autoscaling.
-- Designed highly available Redis using Redis Sentinel and HAProxy.
-- Built CI/CD and GitOps delivery using GitHub Actions and Argo CD with Trivy vulnerability scanning and SARIF reporting.
-- Validated application performance and resilience with k6.
+- Provisioned immutable Kubernetes infrastructure with Terraform and Talos Linux using Cilium eBPF networking, Kubernetes Gateway API, Helm, and Horizontal Pod Autoscaling.
+- Designed a highly available Redis layer using Redis Sentinel and HAProxy for failover and traffic distribution.
+- Built CI/CD and GitOps delivery using GitHub Actions and Argo CD with Trivy vulnerability scanning and automated SARIF reporting.
+- Implemented Kubernetes observability using Grafana Alloy, Prometheus, Loki, and Tempo.
+- Validated application performance, throughput, and resilience with k6 load testing.
+
 
 Hetzner Cloud Control Plane
+
 - Built a cloud control plane composed of three Go services using Gin REST APIs and PostgreSQL for managing VMs, networks, firewalls, templates, autoscaling groups, and managed services.
-- Implemented CPU- and memory-triggered VM autoscaling using Grafana webhooks and Hetzner Cloud APIs with configurable capacity bounds and alert persistence.
+- Implemented CPU- and memory-triggered VM autoscaling using Prometheus metrics, Grafana webhooks, and Hetzner Cloud APIs with configurable capacity bounds, scaling thresholds, and alert persistence to filter transient threshold breaches.
 - Implemented multi-datacenter VM placement for scale-up and scale-down operations.
 - Developed asynchronous PostgreSQL provisioning workflows using Temporal and Packer, coordinating image discovery, conditional image builds, firewall configuration, VM deployment, and metadata persistence outside the HTTP request lifecycle.
-- Built reusable PostgreSQL machine images with Packer and configuration-based snapshot discovery.
-- Automated monitoring target discovery using database-backed HTTP endpoints consumed by Grafana Alloy and Prometheus.
+- Provisioned and administered Debian-based PostgreSQL servers on Hetzner Cloud with private networking, firewalls, and SSH access.
+- Automated repeatable server provisioning and PostgreSQL machine-image creation using Terraform, Go, and Packer.
+- Built reusable PostgreSQL machine images with configuration-based snapshot discovery to avoid unnecessary rebuilds and support safe image reuse.
+- Automated monitoring target discovery through database-backed HTTP endpoints consumed by Grafana Alloy and Prometheus.
+- Integrated node_exporter and PostgreSQL Exporter with Grafana Alloy and Prometheus for centralized host and database monitoring.
+- Exposed VM and managed-service inventories with resource metadata labels for monitoring and service discovery.
+- Evaluated pgBackRest, WAL-G, and Barman for PostgreSQL backup and recovery.
+- Built a Patroni and etcd lab to explore PostgreSQL high availability, leader election, replication, and failover.
 
 Freelance Ops
+
 - Built an asynchronous Python/Flask pipeline that aggregates and scores freelance opportunities from multiple platforms against candidate CVs.
-- Developed a fault-tolerant extraction pipeline with deduplication and automatic retry handling.
-- Integrated Gemini using schema-constrained responses and a rule-based scoring rubric to generate structured fit assessments.
-- Designed a normalized PostgreSQL schema using psycopg3 connection pooling, array fields, and parameterized filtering.
-- Added exponential-backoff retry handling for API rate limits and remote failures.
+- Developed a fault-tolerant extraction pipeline for dynamic listings with deduplication and automatic retry handling.
+- Integrated Gemini using schema-constrained responses and a rule-based scoring rubric to generate structured candidate/job fit assessments.
+- Designed a normalized PostgreSQL schema using psycopg3 connection pooling, PostgreSQL array fields, and parameterized filtering.
+- Added exponential-backoff retry handling for API rate limits and remote service failures.
+- Containerized the local database stack using Docker Compose.
+
 
 3akarati – Cloud-Native Real Estate Platform
-- Designed and provisioned a multi-tier AWS architecture with Terraform including VPC networking, public/private subnets, ALB, EKS, RDS, and S3.
+
+- Designed and provisioned a multi-tier AWS architecture with Terraform including VPC networking, public/private subnets, NAT, security groups, Application Load Balancer, EKS, RDS, and S3.
 - Containerized application services with Docker and deployed them to Kubernetes using Deployments, Services, ConfigMaps, and Horizontal Pod Autoscaling.
 - Integrated PostgreSQL, Redis, and S3 for persistent storage, caching, and object storage.
-- Automated EKS infrastructure and cluster configuration using Terraform and shell scripts.
+- Automated EKS infrastructure and cluster configuration using Terraform and shell scripts for repeatable environment deployments.
+- Operated Docker and Kubernetes workloads and managed PostgreSQL on Amazon RDS and Redis-backed application services.
+- Implemented monitoring with Prometheus, Grafana, and OpenTelemetry.
+- Troubleshot connectivity between applications, databases, AWS infrastructure, and Kubernetes workloads.
 
-Primary target roles:
+
+Linux PostgreSQL Infrastructure
+
+- Provisioned and administered Debian-based PostgreSQL servers on Hetzner Cloud, configuring private networking, firewalls, and SSH access.
+- Automated repeatable server provisioning and PostgreSQL machine-image creation using Terraform, Go, and Packer.
+- Integrated node_exporter and PostgreSQL Exporter with Grafana Alloy and Prometheus to centralize host and database monitoring.
+- Evaluated pgBackRest, WAL-G, and Barman for PostgreSQL backup and recovery.
+- Built a Patroni and etcd lab to explore PostgreSQL high availability, leader election, and failover.
+
+
+PRIMARY TARGET ROLES:
 
 - Backend Engineer
 - Go Backend Engineer
@@ -111,14 +148,16 @@ Primary target roles:
 - Cloud Engineer
 - Site Reliability Engineer
 - Infrastructure Engineer
-- Graduate / Junior Software Engineer with relevant backend, cloud,
-  infrastructure, or distributed-systems work.
+- Linux System Administrator
 
-Known Facts about Ahmed:
-- Ahmed has a Bachelor's degree in Computer Science
+KNOWN FACTS ABOUT AHMED:
+
+- Ahmed has a Bachelor's degree in Computer Science.
 - Ahmed is based in Egypt.
 - Ahmed speaks Arabic and English.
+- Ahmed is AWS Certified Solutions Architect – Associate.
 - Ahmed does not have several years of full-time professional engineering experience.
-- Relevant internships count as professional evidence.
+- Relevant internships and trainee experience count as professional evidence.
 - Relevant substantial projects count as technical evidence.
 - Projects must never be represented as several years of full-time employment.
+- Project experience may be used as evidence of hands-on experience with technologies, architectures, tools, and engineering concepts.
