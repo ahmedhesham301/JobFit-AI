@@ -186,7 +186,7 @@ egypt = [
 ]
 
 
-uae = [
+United_Arab_Emirates = [
     # DevOps
     {
         "role": "junior devops engineer",
@@ -374,7 +374,7 @@ uae = [
 ]
 
 
-sa = [
+Saudi_Arabia = [
     # DevOps
     {
         "role": "junior devops engineer",
@@ -562,7 +562,7 @@ sa = [
 ]
 
 
-de = [
+Germany = [
     # DevOps
     {
         "role": "junior devops engineer",
@@ -749,7 +749,7 @@ de = [
     },
 ]
 
-uk = [
+United_Kingdom = [
     # DevOps
     {
         "role": "junior devops engineer",
@@ -936,4 +936,762 @@ uk = [
     },
 ]
 
-jobs = egypt + uae + sa + de + uk
+Australia_and_NewZealand = [
+    # DevOps
+    {
+        "role": "junior devops engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "devops engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "devops intern",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "graduate devops engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Platform
+    {
+        "role": "platform engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "junior platform engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # SRE
+    {
+        "role": "site reliability engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "junior site reliability engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Cloud
+    {
+        "role": "cloud engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "junior cloud engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "aws cloud engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Infrastructure
+    {
+        "role": "infrastructure engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "cloud infrastructure engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Backend
+    {
+        "role": "backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "junior backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "backend intern",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Your strongest backend languages
+    {
+        "role": "golang backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "node.js backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "python backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Other relevant early-career titles
+    {
+        "role": "systems engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "production engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "system admin",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Australia and New Zealand",
+        "city": "cairo",
+        "is_remote": False,
+    },
+]
+
+Ireland = [
+    # DevOps
+    {
+        "role": "junior devops engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "devops engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "devops intern",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "graduate devops engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Platform
+    {
+        "role": "platform engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "junior platform engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # SRE
+    {
+        "role": "site reliability engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "junior site reliability engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Cloud
+    {
+        "role": "cloud engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "junior cloud engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "aws cloud engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Infrastructure
+    {
+        "role": "infrastructure engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "cloud infrastructure engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Backend
+    {
+        "role": "backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "junior backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "backend intern",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Your strongest backend languages
+    {
+        "role": "golang backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "node.js backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "python backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Other relevant early-career titles
+    {
+        "role": "systems engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "production engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "system admin",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Ireland",
+        "city": "cairo",
+        "is_remote": False,
+    },
+]
+
+Netherlands = [
+    # DevOps
+    {
+        "role": "junior devops engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "devops engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "devops intern",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "graduate devops engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Platform
+    {
+        "role": "platform engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "junior platform engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # SRE
+    {
+        "role": "site reliability engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "junior site reliability engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Cloud
+    {
+        "role": "cloud engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "junior cloud engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "aws cloud engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Infrastructure
+    {
+        "role": "infrastructure engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "cloud infrastructure engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Backend
+    {
+        "role": "backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "junior backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "backend intern",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Your strongest backend languages
+    {
+        "role": "golang backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "node.js backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "python backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Other relevant early-career titles
+    {
+        "role": "systems engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "production engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "system admin",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Netherlands",
+        "city": "cairo",
+        "is_remote": False,
+    },
+]
+
+Qatar = [
+    # DevOps
+    {
+        "role": "junior devops engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "devops engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "devops intern",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "graduate devops engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Platform
+    {
+        "role": "platform engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "junior platform engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # SRE
+    {
+        "role": "site reliability engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "junior site reliability engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Cloud
+    {
+        "role": "cloud engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "junior cloud engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "aws cloud engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Infrastructure
+    {
+        "role": "infrastructure engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "cloud infrastructure engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Backend
+    {
+        "role": "backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "junior backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "backend intern",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Your strongest backend languages
+    {
+        "role": "golang backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "node.js backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "python backend engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    # Other relevant early-career titles
+    {
+        "role": "systems engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "production engineer",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+    {
+        "role": "system admin",
+        "results_wanted": 999,
+        "hours_old": 2.03,
+        "country": "Qatar",
+        "city": "cairo",
+        "is_remote": False,
+    },
+]
+
+jobs = (
+    egypt
+    + United_Arab_Emirates
+    + Saudi_Arabia
+    + Germany
+    + United_Kingdom
+    + Australia_and_NewZealand
+    + Ireland
+    + Netherlands
+    + Qatar
+)
