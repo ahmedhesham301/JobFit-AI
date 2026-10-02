@@ -1,6 +1,11 @@
 from lingua import Language
 
-companies_blacklist = [r"\balignerr\b", r"\bUneeq Interns\b"]
+companies_blacklist = [
+    r"\balignerr\b",
+    r"\bUneeq Interns\b",
+    r"\bTaskVerse\b",
+    r"\bHaystack\b",
+]
 allowed_locations = ["worldwide", "egypt", "emea", "africa"]
 accepted_languages = [Language.ENGLISH, Language.ARABIC]
 
