@@ -123,7 +123,7 @@ description_blockers = [
     r"\bdoes not (?:currently )?have a sponsorship licen[cs]e\b",
     r"\bwithout (?:company|employer) sponsorship\b",
     r"\bfamily\s*/\s*university sponsorship is a must\b",
-    r"\bEU citizenship (required)\b",
+    r"\beu\s+citizenship\s+(?:is\s+)?required\b",
     r"\bEU work eligibility required\b",
     #
     r"\b(?:gute|sehr\s+gute)\s+deutschkenntnisse\b",
@@ -411,7 +411,10 @@ unrelated_non_tech_to_skip = [
     r"\bstudent helper\b",
     r"\bstudent worker\b",
     r"\bstudentische hilfskraft\b",
-    r"\b(?:emirati\s+talent|uae\s+national|saudi\s+national)\b",
+    r"\bonly\s+(?:saudi|emirati|uae)\s+nationals?\b",
+    r"\b(?:saudi|emirati|uae)\s+nationals?\s+only\b",
+    r"\b(?:saudi|emirati|uae)\s+national(?:ity)?\s+(?:is\s+)?required\b",
+    r"\b(?:open|available)\s+(?:only\s+)?to\s+(?:saudi|emirati|uae)\s+nationals?\b",
     r"\b(?:werkstudent(?:in)?|working student|duales studium|masterarbeit|abschlussarbeit|bachelorarbeit)\b",
 ]
 

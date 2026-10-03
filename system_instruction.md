@@ -534,13 +534,24 @@ Use `specific_authorization_required` for explicit citizenship, nationality, per
 
 Use `unknown` only when authorization wording exists but is genuinely unclear or contradictory.
 
-Never infer authorization requirements from:
+Do NOT infer work authorization requirements from:
 
+- physical job location
 - onsite/hybrid status
-- foreign job location
+- candidate location
+- company location
+- country of employment
 - office address
+- foreign job location
 - candidate needing relocation
 - common hiring practices
+
+Set local_authorization_required or specific_authorization_required
+ONLY when the job description explicitly establishes a work-right,
+citizenship, residency, visa, or authorization requirement.
+
+If the job description is silent:
+work_authorization = "no_restriction_mentioned"
 
 # Visa Sponsorship
 
@@ -952,6 +963,20 @@ Before returning the response, silently check:
 - A second family exists only for a genuine co-primary function.
 - Non-software/IT professions use `non_target`.
 - Tool mentions did not create backend/devops/platform classifications.
+
+Skills must only receive credit when they satisfy requirements
+or responsibilities of THIS job.
+
+Do not award points merely because the candidate has strong
+technical skills.
+
+Transferable skills that are not requested by the job:
+0 points.
+
+If role_family = non_target:
+
+- role_alignment_score = 0
+- do not compensate with unrelated technical strengths
 
 ## Eligibility
 
