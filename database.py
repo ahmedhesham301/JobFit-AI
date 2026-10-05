@@ -185,6 +185,7 @@ CREATE TABLE IF NOT EXISTS jobs (
 
     first_seen_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     last_seen_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    sent_at TEXT,
 
     FOREIGN KEY (description_id)
         REFERENCES descriptions(id),
@@ -330,6 +331,16 @@ def _insert_job(conn, job, why_skipped, evaluation_id):
 def insert_job(job, why_skipped=None, evaluation_id=None):
     with connect() as conn:
         return _insert_job(conn, job, why_skipped, evaluation_id)
+
+
+def mark_jobs_sent(job_urls):
+    """Record the latest successful email time in UTC for the included jobs."""
+    with connect() as conn:
+        sent_at = conn.execute("SELECT CURRENT_TIMESTAMP").fetchone()[0]
+        conn.executemany(
+            "UPDATE jobs SET sent_at = ? WHERE url = ?",
+            ((sent_at, url) for url in job_urls),
+        )
 
 
 def bulk_insert(df, why_skipped):

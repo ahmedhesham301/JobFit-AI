@@ -158,6 +158,7 @@ def main():
     if len(good_fit_jobs) > 0:
         t = datetime.now()
         send_email(SENDER, RECEIVER, PASSWORD, good_fit_jobs, s.format_summary())
+        database.mark_jobs_sent(job["url"] for job in good_fit_jobs)
         s.email_time = datetime.now() - t
     else:
         logging.warning("no good fit jobs")
