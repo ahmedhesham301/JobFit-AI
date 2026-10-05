@@ -1686,12 +1686,12 @@ Qatar = [
 
 jobs = (
     egypt
-    + United_Arab_Emirates
-    + Saudi_Arabia
-    + Germany
-    + United_Kingdom
-    + Australia_and_NewZealand
-    + Ireland
-    + Netherlands
-    + Qatar
+    # + United_Arab_Emirates
+    # + Saudi_Arabia
+    # + Germany
+    # + United_Kingdom
+    # + Australia_and_NewZealand
+    # + Ireland
+    # + Netherlands
+    # + Qatar
 )

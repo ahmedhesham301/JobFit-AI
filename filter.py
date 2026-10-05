@@ -122,6 +122,14 @@ def filter_jobs(jobs, system_instruction, cv, cache_name):
                 in ["specific_authorization_required", "local_authorization_required"]
                 and saved_info["visa_sponsorship"] in ["not_available"]
             )
+            and (
+                not saved_info["allowed_locations"]
+                or any(
+                    item.lower()
+                    in [allowed.lower() for allowed in vars.allowed_locations]
+                    for item in saved_info["allowed_locations"]
+                )
+            )
         ):
             good_fit_jobs.append(
                 {

@@ -1,12 +1,15 @@
 from lingua import Language
 
 companies_blacklist = [
+    # pay for internship companies
     r"\balignerr\b",
+    # ai interview, data gathering, ai training, task based
     r"\bUneeq Interns\b",
     r"\bTaskVerse\b",
     r"\bHaystack\b",
+    r"\bCrossing Hurdles\b",
 ]
-allowed_locations = ["worldwide", "egypt", "emea", "africa"]
+allowed_locations = ["worldwide", "egypt", "emea", "africa", "not_mentioned", ]
 accepted_languages = [Language.ENGLISH, Language.ARABIC]
 
 description_blockers = [
