@@ -13,7 +13,7 @@ def getJobs(
 ):
     jobs = scrape_jobs(
         site_name=[
-            "indeed",
+            # "indeed",
             "linkedin",
             # "zip_recruiter",
             # "google",
