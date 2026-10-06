@@ -42,7 +42,44 @@ def filter_jobs_by_language(jobs):
     return remaining, skipped
 
 
-def filter_jobs(jobs, system_instruction, cv, cache_name):
+def is_location_accepted(
+    scrape_location, ai_locations, allowed_locations, work_arrangement=None
+):
+    # Unknown work arrangements remain eligible regardless of location metadata.
+    if work_arrangement == "unknown":
+        return True
+
+    scrape_location = (
+        scrape_location.strip().lower() if isinstance(scrape_location, str) else ""
+    )
+    ai_locations = {
+        item.strip().lower()
+        for item in (ai_locations or [])
+        if item and item.strip().lower() not in {"", "not_mentioned"}
+    }
+    # Remote jobs can pass without an explicit AI location restriction.
+    if work_arrangement == "remote" and not ai_locations:
+        return True
+
+    # Otherwise, missing location evidence must be absent from both sources.
+    if not scrape_location and not ai_locations:
+        return True
+
+    allowed_locations = {allowed.strip().lower() for allowed in allowed_locations} - {
+        "",
+        "not_mentioned",
+    }
+    if ai_locations:
+        return bool(ai_locations & allowed_locations)
+
+    if scrape_location and (
+        scrape_location.rsplit(",", 1)[-1].strip() in allowed_locations
+    ):
+        return True
+    return False
+
+
+def filter_jobs(jobs, system_instruction, cv, cache):
     """Save filtered jobs, optionally rating eligible jobs with Gemini."""
     good_fit_jobs = []
     for i, job in jobs.iterrows():
@@ -63,7 +100,7 @@ def filter_jobs(jobs, system_instruction, cv, cache_name):
                     ai_response = generate(
                         job["title"],
                         job["description"],
-                        cache_name,
+                        cache,
                     )
                     ai_response_dict = json.loads(ai_response)
 
@@ -122,13 +159,11 @@ def filter_jobs(jobs, system_instruction, cv, cache_name):
                 in ["specific_authorization_required", "local_authorization_required"]
                 and saved_info["visa_sponsorship"] in ["not_available"]
             )
-            and (
-                not saved_info["allowed_locations"]
-                or any(
-                    item.lower()
-                    in [allowed.lower() for allowed in vars.allowed_locations]
-                    for item in saved_info["allowed_locations"]
-                )
+            and is_location_accepted(
+                job.get("location"),
+                saved_info["allowed_locations"],
+                vars.allowed_locations,
+                work_arrangement=saved_info["work_arrangement"],
             )
         ):
             good_fit_jobs.append(

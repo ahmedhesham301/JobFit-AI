@@ -16,7 +16,7 @@ from math import ceil
 import vars
 import database
 import utils
-from ai import create_job_evaluator_cache
+from ai import JobEvaluatorCache
 
 logging.basicConfig(
     level=logging.WARNING, format="%(asctime)s - %(levelname)s - %(message)s"
@@ -128,16 +128,8 @@ def main():
         print(f"Total jobs to filter: {len(positive_filtered_jobs)}")
 
         t = datetime.now()
-        # TODO: clean this mess
-        # if rate is disabled filter_jobs crashes because cache_name is undeclared
-        # TODO: Create cache only if it is needed
-        if os.getenv("rate") == "true":
-            cache_name = create_job_evaluator_cache(
-                SYSTEM_INSTRUCTIONS,
-                CV,
-            )
-        else:
-            cache_name = "bla"
+        # The shared cache is created lazily when a job actually needs rating.
+        cache = JobEvaluatorCache(SYSTEM_INSTRUCTIONS, CV)
         num_chunks = 5
         jobs_per_chunk = max(1, ceil(len(positive_filtered_jobs) / num_chunks))
         jobs_chunks = [
@@ -148,7 +140,7 @@ def main():
         print(f"number of job chunks: {len(jobs_chunks)}")
         with concurrent.futures.ThreadPoolExecutor() as executor:
             futures = [
-                executor.submit(filter_jobs, chunk, SYSTEM_INSTRUCTIONS, CV, cache_name)
+                executor.submit(filter_jobs, chunk, SYSTEM_INSTRUCTIONS, CV, cache)
                 for chunk in jobs_chunks
             ]
             for future in concurrent.futures.as_completed(futures):

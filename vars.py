@@ -9,7 +9,7 @@ companies_blacklist = [
     r"\bHaystack\b",
     r"\bCrossing Hurdles\b",
 ]
-allowed_locations = ["worldwide", "egypt", "emea", "africa", "not_mentioned", ]
+allowed_locations = ["worldwide", "egypt", "emea", "africa"]
 accepted_languages = [Language.ENGLISH, Language.ARABIC]
 
 description_blockers = [

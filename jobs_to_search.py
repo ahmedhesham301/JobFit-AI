@@ -3,7 +3,7 @@ egypt = [
     {
         "role": "junior devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -11,7 +11,7 @@ egypt = [
     {
         "role": "devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -19,7 +19,7 @@ egypt = [
     {
         "role": "devops intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -27,7 +27,7 @@ egypt = [
     {
         "role": "graduate devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -36,7 +36,7 @@ egypt = [
     {
         "role": "platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -44,7 +44,7 @@ egypt = [
     {
         "role": "junior platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -53,7 +53,7 @@ egypt = [
     {
         "role": "site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -61,7 +61,7 @@ egypt = [
     {
         "role": "junior site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -70,7 +70,7 @@ egypt = [
     {
         "role": "cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -78,7 +78,7 @@ egypt = [
     {
         "role": "junior cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -86,7 +86,7 @@ egypt = [
     {
         "role": "aws cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -95,7 +95,7 @@ egypt = [
     {
         "role": "infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -103,7 +103,7 @@ egypt = [
     {
         "role": "cloud infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -112,7 +112,7 @@ egypt = [
     {
         "role": "backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -120,7 +120,7 @@ egypt = [
     {
         "role": "junior backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -128,7 +128,7 @@ egypt = [
     {
         "role": "backend intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -137,7 +137,7 @@ egypt = [
     {
         "role": "golang backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -145,7 +145,7 @@ egypt = [
     {
         "role": "node.js backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -153,7 +153,7 @@ egypt = [
     {
         "role": "python backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -162,7 +162,7 @@ egypt = [
     {
         "role": "systems engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -170,7 +170,7 @@ egypt = [
     {
         "role": "production engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -178,7 +178,7 @@ egypt = [
     {
         "role": "system admin",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Egypt",
         "city": "cairo",
         "is_remote": False,
@@ -191,7 +191,7 @@ United_Arab_Emirates = [
     {
         "role": "junior devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -199,7 +199,7 @@ United_Arab_Emirates = [
     {
         "role": "devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -207,7 +207,7 @@ United_Arab_Emirates = [
     {
         "role": "devops intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -215,7 +215,7 @@ United_Arab_Emirates = [
     {
         "role": "graduate devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -224,7 +224,7 @@ United_Arab_Emirates = [
     {
         "role": "platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -232,7 +232,7 @@ United_Arab_Emirates = [
     {
         "role": "junior platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -241,7 +241,7 @@ United_Arab_Emirates = [
     {
         "role": "site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -249,7 +249,7 @@ United_Arab_Emirates = [
     {
         "role": "junior site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -258,7 +258,7 @@ United_Arab_Emirates = [
     {
         "role": "cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -266,7 +266,7 @@ United_Arab_Emirates = [
     {
         "role": "junior cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -274,7 +274,7 @@ United_Arab_Emirates = [
     {
         "role": "aws cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -283,7 +283,7 @@ United_Arab_Emirates = [
     {
         "role": "infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -291,7 +291,7 @@ United_Arab_Emirates = [
     {
         "role": "cloud infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -300,7 +300,7 @@ United_Arab_Emirates = [
     {
         "role": "backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -308,7 +308,7 @@ United_Arab_Emirates = [
     {
         "role": "junior backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -316,7 +316,7 @@ United_Arab_Emirates = [
     {
         "role": "backend intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -325,7 +325,7 @@ United_Arab_Emirates = [
     {
         "role": "golang backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -333,7 +333,7 @@ United_Arab_Emirates = [
     {
         "role": "node.js backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -341,7 +341,7 @@ United_Arab_Emirates = [
     {
         "role": "python backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -350,7 +350,7 @@ United_Arab_Emirates = [
     {
         "role": "systems engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -358,7 +358,7 @@ United_Arab_Emirates = [
     {
         "role": "production engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -366,7 +366,7 @@ United_Arab_Emirates = [
     {
         "role": "system admin",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Arab Emirates",
         "city": "cairo",
         "is_remote": False,
@@ -379,7 +379,7 @@ Saudi_Arabia = [
     {
         "role": "junior devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -387,7 +387,7 @@ Saudi_Arabia = [
     {
         "role": "devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -395,7 +395,7 @@ Saudi_Arabia = [
     {
         "role": "devops intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -403,7 +403,7 @@ Saudi_Arabia = [
     {
         "role": "graduate devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -412,7 +412,7 @@ Saudi_Arabia = [
     {
         "role": "platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -420,7 +420,7 @@ Saudi_Arabia = [
     {
         "role": "junior platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -429,7 +429,7 @@ Saudi_Arabia = [
     {
         "role": "site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -437,7 +437,7 @@ Saudi_Arabia = [
     {
         "role": "junior site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -446,7 +446,7 @@ Saudi_Arabia = [
     {
         "role": "cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -454,7 +454,7 @@ Saudi_Arabia = [
     {
         "role": "junior cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -462,7 +462,7 @@ Saudi_Arabia = [
     {
         "role": "aws cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -471,7 +471,7 @@ Saudi_Arabia = [
     {
         "role": "infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -479,7 +479,7 @@ Saudi_Arabia = [
     {
         "role": "cloud infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -488,7 +488,7 @@ Saudi_Arabia = [
     {
         "role": "backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -496,7 +496,7 @@ Saudi_Arabia = [
     {
         "role": "junior backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -504,7 +504,7 @@ Saudi_Arabia = [
     {
         "role": "backend intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -513,7 +513,7 @@ Saudi_Arabia = [
     {
         "role": "golang backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -521,7 +521,7 @@ Saudi_Arabia = [
     {
         "role": "node.js backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -529,7 +529,7 @@ Saudi_Arabia = [
     {
         "role": "python backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -538,7 +538,7 @@ Saudi_Arabia = [
     {
         "role": "systems engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -546,7 +546,7 @@ Saudi_Arabia = [
     {
         "role": "production engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -554,7 +554,7 @@ Saudi_Arabia = [
     {
         "role": "system admin",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Saudi Arabia",
         "city": "cairo",
         "is_remote": False,
@@ -567,7 +567,7 @@ Germany = [
     {
         "role": "junior devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -575,7 +575,7 @@ Germany = [
     {
         "role": "devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -583,7 +583,7 @@ Germany = [
     {
         "role": "devops intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -591,7 +591,7 @@ Germany = [
     {
         "role": "graduate devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -600,7 +600,7 @@ Germany = [
     {
         "role": "platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -608,7 +608,7 @@ Germany = [
     {
         "role": "junior platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -617,7 +617,7 @@ Germany = [
     {
         "role": "site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -625,7 +625,7 @@ Germany = [
     {
         "role": "junior site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -634,7 +634,7 @@ Germany = [
     {
         "role": "cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -642,7 +642,7 @@ Germany = [
     {
         "role": "junior cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -650,7 +650,7 @@ Germany = [
     {
         "role": "aws cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -659,7 +659,7 @@ Germany = [
     {
         "role": "infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -667,7 +667,7 @@ Germany = [
     {
         "role": "cloud infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -676,7 +676,7 @@ Germany = [
     {
         "role": "backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -684,7 +684,7 @@ Germany = [
     {
         "role": "junior backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -692,7 +692,7 @@ Germany = [
     {
         "role": "backend intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -701,7 +701,7 @@ Germany = [
     {
         "role": "golang backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -709,7 +709,7 @@ Germany = [
     {
         "role": "node.js backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -717,7 +717,7 @@ Germany = [
     {
         "role": "python backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -726,7 +726,7 @@ Germany = [
     {
         "role": "systems engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -734,7 +734,7 @@ Germany = [
     {
         "role": "production engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -742,7 +742,7 @@ Germany = [
     {
         "role": "system admin",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Germany",
         "city": "cairo",
         "is_remote": False,
@@ -754,7 +754,7 @@ United_Kingdom = [
     {
         "role": "junior devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -762,7 +762,7 @@ United_Kingdom = [
     {
         "role": "devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -770,7 +770,7 @@ United_Kingdom = [
     {
         "role": "devops intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -778,7 +778,7 @@ United_Kingdom = [
     {
         "role": "graduate devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -787,7 +787,7 @@ United_Kingdom = [
     {
         "role": "platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -795,7 +795,7 @@ United_Kingdom = [
     {
         "role": "junior platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -804,7 +804,7 @@ United_Kingdom = [
     {
         "role": "site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -812,7 +812,7 @@ United_Kingdom = [
     {
         "role": "junior site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -821,7 +821,7 @@ United_Kingdom = [
     {
         "role": "cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -829,7 +829,7 @@ United_Kingdom = [
     {
         "role": "junior cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -837,7 +837,7 @@ United_Kingdom = [
     {
         "role": "aws cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -846,7 +846,7 @@ United_Kingdom = [
     {
         "role": "infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -854,7 +854,7 @@ United_Kingdom = [
     {
         "role": "cloud infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -863,7 +863,7 @@ United_Kingdom = [
     {
         "role": "backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -871,7 +871,7 @@ United_Kingdom = [
     {
         "role": "junior backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -879,7 +879,7 @@ United_Kingdom = [
     {
         "role": "backend intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -888,7 +888,7 @@ United_Kingdom = [
     {
         "role": "golang backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -896,7 +896,7 @@ United_Kingdom = [
     {
         "role": "node.js backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -904,7 +904,7 @@ United_Kingdom = [
     {
         "role": "python backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -913,7 +913,7 @@ United_Kingdom = [
     {
         "role": "systems engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -921,7 +921,7 @@ United_Kingdom = [
     {
         "role": "production engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -929,7 +929,7 @@ United_Kingdom = [
     {
         "role": "system admin",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "United Kingdom",
         "city": "cairo",
         "is_remote": False,
@@ -941,7 +941,7 @@ Australia_and_NewZealand = [
     {
         "role": "junior devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -949,7 +949,7 @@ Australia_and_NewZealand = [
     {
         "role": "devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -957,7 +957,7 @@ Australia_and_NewZealand = [
     {
         "role": "devops intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -965,7 +965,7 @@ Australia_and_NewZealand = [
     {
         "role": "graduate devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -974,7 +974,7 @@ Australia_and_NewZealand = [
     {
         "role": "platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -982,7 +982,7 @@ Australia_and_NewZealand = [
     {
         "role": "junior platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -991,7 +991,7 @@ Australia_and_NewZealand = [
     {
         "role": "site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -999,7 +999,7 @@ Australia_and_NewZealand = [
     {
         "role": "junior site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -1008,7 +1008,7 @@ Australia_and_NewZealand = [
     {
         "role": "cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -1016,7 +1016,7 @@ Australia_and_NewZealand = [
     {
         "role": "junior cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -1024,7 +1024,7 @@ Australia_and_NewZealand = [
     {
         "role": "aws cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -1033,7 +1033,7 @@ Australia_and_NewZealand = [
     {
         "role": "infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -1041,7 +1041,7 @@ Australia_and_NewZealand = [
     {
         "role": "cloud infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -1050,7 +1050,7 @@ Australia_and_NewZealand = [
     {
         "role": "backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -1058,7 +1058,7 @@ Australia_and_NewZealand = [
     {
         "role": "junior backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -1066,7 +1066,7 @@ Australia_and_NewZealand = [
     {
         "role": "backend intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -1075,7 +1075,7 @@ Australia_and_NewZealand = [
     {
         "role": "golang backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -1083,7 +1083,7 @@ Australia_and_NewZealand = [
     {
         "role": "node.js backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -1091,7 +1091,7 @@ Australia_and_NewZealand = [
     {
         "role": "python backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -1100,7 +1100,7 @@ Australia_and_NewZealand = [
     {
         "role": "systems engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -1108,7 +1108,7 @@ Australia_and_NewZealand = [
     {
         "role": "production engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -1116,7 +1116,7 @@ Australia_and_NewZealand = [
     {
         "role": "system admin",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Australia and New Zealand",
         "city": "cairo",
         "is_remote": False,
@@ -1128,7 +1128,7 @@ Ireland = [
     {
         "role": "junior devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1136,7 +1136,7 @@ Ireland = [
     {
         "role": "devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1144,7 +1144,7 @@ Ireland = [
     {
         "role": "devops intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1152,7 +1152,7 @@ Ireland = [
     {
         "role": "graduate devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1161,7 +1161,7 @@ Ireland = [
     {
         "role": "platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1169,7 +1169,7 @@ Ireland = [
     {
         "role": "junior platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1178,7 +1178,7 @@ Ireland = [
     {
         "role": "site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1186,7 +1186,7 @@ Ireland = [
     {
         "role": "junior site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1195,7 +1195,7 @@ Ireland = [
     {
         "role": "cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1203,7 +1203,7 @@ Ireland = [
     {
         "role": "junior cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1211,7 +1211,7 @@ Ireland = [
     {
         "role": "aws cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1220,7 +1220,7 @@ Ireland = [
     {
         "role": "infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1228,7 +1228,7 @@ Ireland = [
     {
         "role": "cloud infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1237,7 +1237,7 @@ Ireland = [
     {
         "role": "backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1245,7 +1245,7 @@ Ireland = [
     {
         "role": "junior backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1253,7 +1253,7 @@ Ireland = [
     {
         "role": "backend intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1262,7 +1262,7 @@ Ireland = [
     {
         "role": "golang backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1270,7 +1270,7 @@ Ireland = [
     {
         "role": "node.js backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1278,7 +1278,7 @@ Ireland = [
     {
         "role": "python backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1287,7 +1287,7 @@ Ireland = [
     {
         "role": "systems engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1295,7 +1295,7 @@ Ireland = [
     {
         "role": "production engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1303,7 +1303,7 @@ Ireland = [
     {
         "role": "system admin",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Ireland",
         "city": "cairo",
         "is_remote": False,
@@ -1315,7 +1315,7 @@ Netherlands = [
     {
         "role": "junior devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1323,7 +1323,7 @@ Netherlands = [
     {
         "role": "devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1331,7 +1331,7 @@ Netherlands = [
     {
         "role": "devops intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1339,7 +1339,7 @@ Netherlands = [
     {
         "role": "graduate devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1348,7 +1348,7 @@ Netherlands = [
     {
         "role": "platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1356,7 +1356,7 @@ Netherlands = [
     {
         "role": "junior platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1365,7 +1365,7 @@ Netherlands = [
     {
         "role": "site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1373,7 +1373,7 @@ Netherlands = [
     {
         "role": "junior site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1382,7 +1382,7 @@ Netherlands = [
     {
         "role": "cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1390,7 +1390,7 @@ Netherlands = [
     {
         "role": "junior cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1398,7 +1398,7 @@ Netherlands = [
     {
         "role": "aws cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1407,7 +1407,7 @@ Netherlands = [
     {
         "role": "infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1415,7 +1415,7 @@ Netherlands = [
     {
         "role": "cloud infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1424,7 +1424,7 @@ Netherlands = [
     {
         "role": "backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1432,7 +1432,7 @@ Netherlands = [
     {
         "role": "junior backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1440,7 +1440,7 @@ Netherlands = [
     {
         "role": "backend intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1449,7 +1449,7 @@ Netherlands = [
     {
         "role": "golang backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1457,7 +1457,7 @@ Netherlands = [
     {
         "role": "node.js backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1465,7 +1465,7 @@ Netherlands = [
     {
         "role": "python backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1474,7 +1474,7 @@ Netherlands = [
     {
         "role": "systems engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1482,7 +1482,7 @@ Netherlands = [
     {
         "role": "production engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1490,7 +1490,7 @@ Netherlands = [
     {
         "role": "system admin",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Netherlands",
         "city": "cairo",
         "is_remote": False,
@@ -1502,7 +1502,7 @@ Qatar = [
     {
         "role": "junior devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1510,7 +1510,7 @@ Qatar = [
     {
         "role": "devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1518,7 +1518,7 @@ Qatar = [
     {
         "role": "devops intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1526,7 +1526,7 @@ Qatar = [
     {
         "role": "graduate devops engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1535,7 +1535,7 @@ Qatar = [
     {
         "role": "platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1543,7 +1543,7 @@ Qatar = [
     {
         "role": "junior platform engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1552,7 +1552,7 @@ Qatar = [
     {
         "role": "site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1560,7 +1560,7 @@ Qatar = [
     {
         "role": "junior site reliability engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1569,7 +1569,7 @@ Qatar = [
     {
         "role": "cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1577,7 +1577,7 @@ Qatar = [
     {
         "role": "junior cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1585,7 +1585,7 @@ Qatar = [
     {
         "role": "aws cloud engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1594,7 +1594,7 @@ Qatar = [
     {
         "role": "infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1602,7 +1602,7 @@ Qatar = [
     {
         "role": "cloud infrastructure engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1611,7 +1611,7 @@ Qatar = [
     {
         "role": "backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1619,7 +1619,7 @@ Qatar = [
     {
         "role": "junior backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1627,7 +1627,7 @@ Qatar = [
     {
         "role": "backend intern",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1636,7 +1636,7 @@ Qatar = [
     {
         "role": "golang backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1644,7 +1644,7 @@ Qatar = [
     {
         "role": "node.js backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1652,7 +1652,7 @@ Qatar = [
     {
         "role": "python backend engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1661,7 +1661,7 @@ Qatar = [
     {
         "role": "systems engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1669,7 +1669,7 @@ Qatar = [
     {
         "role": "production engineer",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
@@ -1677,7 +1677,7 @@ Qatar = [
     {
         "role": "system admin",
         "results_wanted": 999,
-        "hours_old": 2.03,
+        "hours_old": 2,
         "country": "Qatar",
         "city": "cairo",
         "is_remote": False,
