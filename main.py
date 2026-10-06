@@ -9,7 +9,7 @@ import os
 import logging
 import pandas as pd
 from stats import s
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import concurrent.futures
 from jobs_to_search import jobs
 from math import ceil
@@ -34,14 +34,22 @@ with open("cv.txt", "r") as f:
     CV = f.read()
 
 
-def get_jobs(job_info):
+def get_jobs(job_info, scrape_from):
+    # Convert the fixed cutoff when this search starts, including any queue delay.
+    # JobSpy's LinkedIn filter uses seconds; round up to avoid narrowing the window.
+    seconds_old = max(
+        1, ceil((datetime.now(timezone.utc) - scrape_from).total_seconds())
+    )
+    hours_old = seconds_old / 3600
+    hours, minutes = divmod(seconds_old // 60, 60)
     print(
-        f"searching for {job_info["role"]} past {job_info["hours_old"]} hours in {job_info["country"]}\n"
+        f"search for job {job_info['role']} for the past {hours}:{minutes:02d} "
+        f"in {job_info['country']}\n"
     )
     jobs = getJobs(
         job_info["role"],
         job_info["results_wanted"],
-        job_info["hours_old"],
+        hours_old,
         job_info["country"],
         job_info["city"],
         job_info["is_remote"],
@@ -63,9 +71,18 @@ def get_jobs(job_info):
 
 def main():
     global all_jobs, good_fit_jobs
+    run_started_at = datetime.now(timezone.utc)
+    previous_run_started_at = database.start_scrape_run(run_started_at)
     t = datetime.now()
     with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
-        futures = [executor.submit(get_jobs, job) for job in jobs]
+        futures = []
+        for job in jobs:
+            scrape_from = (
+                previous_run_started_at
+                if previous_run_started_at is not None
+                else run_started_at - timedelta(hours=job["hours_old"])
+            )
+            futures.append(executor.submit(get_jobs, job, scrape_from))
         for future in concurrent.futures.as_completed(futures):
             all_jobs = pd.concat([all_jobs, future.result()], ignore_index=True)
 

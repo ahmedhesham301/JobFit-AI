@@ -2,6 +2,7 @@ import json
 import os
 import sqlite3
 from contextlib import contextmanager
+from datetime import datetime, timezone
 
 import pandas as pd
 
@@ -13,6 +14,14 @@ PROMPT_VERSION = 4
 CANDIDATE_PROFILE_VERSION = 1
 
 SCHEMA = """
+CREATE TABLE IF NOT EXISTS scrape_runs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    started_at TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_scrape_runs_started_at
+ON scrape_runs(started_at);
+
 CREATE TABLE IF NOT EXISTS descriptions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 
@@ -249,6 +258,21 @@ def initialize_database():
         for statement in SCHEMA.split(";"):
             if statement.strip():
                 conn.execute(statement)
+
+
+def start_scrape_run(run_started_at):
+    """Record a run's UTC start and atomically return the previous run's start."""
+    started_at = run_started_at.astimezone(timezone.utc).isoformat(
+        timespec="microseconds"
+    )
+    with connect() as conn:
+        conn.execute("BEGIN IMMEDIATE")
+        previous_run = conn.execute(
+            "SELECT started_at FROM scrape_runs "
+            "ORDER BY started_at DESC, id DESC LIMIT 1"
+        ).fetchone()
+        conn.execute("INSERT INTO scrape_runs (started_at) VALUES (?)", (started_at,))
+    return datetime.fromisoformat(previous_run["started_at"]) if previous_run else None
 
 
 def _nullable(value):

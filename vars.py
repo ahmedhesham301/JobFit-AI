@@ -155,7 +155,6 @@ levels_to_skip = [
     r"\bsupervisorr?\b",
     r"\bservice owner\b",
     r"\bplatform owner\b",
-    r"\bsenior\b",
     r"\bsr\.?\b",
     r"\bsnr\b",
     r"\barchitect\b",
