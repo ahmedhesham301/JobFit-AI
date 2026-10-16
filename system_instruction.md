@@ -49,8 +49,8 @@ Follow this order.
 5. Extract eligibility facts from the job.
 6. Only after the job requirements are established, read the entire candidate profile.
 7. Compare each material job requirement against candidate evidence.
-8. Determine matched skills and missing skills.
-9. Determine genuine hard blockers.
+8. Determine matched skills and missing skills (skills are discrete technical/functional tools or capabilities; experience duration or required years must NOT be included).
+9. Determine genuine hard blockers (required experience, minimum years, or experience gaps are NEVER hard blockers).
 10. Calculate the four score components.
 11. Calculate `percentage` as their exact sum.
 12. Run the final validation rules.
@@ -87,6 +87,12 @@ establishes Kubernetes/container-orchestration experience as a requirement even 
 
 Do NOT use implicit reasoning for legal, geographic, authorization, sponsorship, student-status, or other eligibility restrictions. Those always require explicit evidence.
 
+Required experience (e.g., "3+ years of experience required", "must have 5 years experience"):
+- Represents an experience duration expectation, NOT a skill and NOT a hard blocker.
+- Extract overall years into `minimum_experience_years`.
+- Evaluate candidate experience level and score experience gaps under `experience_score` (0 to 30).
+- Must NEVER be placed in `missing_required_skills` or `hard_blockers`.
+
 ## Preferred
 
 Treat something as preferred when wording includes:
@@ -102,6 +108,7 @@ Treat something as preferred when wording includes:
 - a plus
 
 Preferred qualifications must never be placed in `missing_required_skills`.
+Required experience and years of experience must never be placed in `missing_required_skills` or `missing_preferred_skills`.
 
 ## Informational / Examples
 
@@ -229,11 +236,13 @@ If either answer is no, remove it.
 Include only capabilities or qualifications that:
 
 1. are actually required,
-2. are not demonstrated anywhere in the candidate profile, and
-3. are not satisfied by an accepted alternative.
+2. are specific technical tools, technologies, methodologies, or functional capabilities (skills),
+3. are not demonstrated anywhere in the candidate profile, and
+4. are not satisfied by an accepted alternative.
 
 Do not include:
 
+- required experience, years of experience, or experience durations (e.g., "3+ years experience", "5 years in backend development", "minimum 2 years of DevOps") — experience is NOT a skill. Experience level is evaluated solely under `minimum_experience_years` and scored in `experience_score`.
 - preferred qualifications
 - examples
 - unrelated technologies
@@ -245,6 +254,8 @@ Do not include:
 Include only explicitly preferred/optional capabilities that the candidate does not demonstrate.
 
 Do not mix required and preferred gaps.
+
+Do not include preferred years of experience, experience durations, or seniority expectations.
 
 # Role Classification
 
@@ -631,6 +642,8 @@ When no explicit overall minimum in years exists:
 
 null
 
+`minimum_experience_years` captures the required duration of experience. Required experience is scored under `experience_score` and must NEVER be placed in `hard_blockers`, `missing_required_skills`, or `missing_preferred_skills`.
+
 # Mandatory Languages
 
 A language is mandatory only when the employer explicitly requires proficiency.
@@ -667,10 +680,11 @@ Typical blockers:
 
 Do NOT create blockers for:
 
+- required experience, minimum years of experience, or years-of-experience gaps (e.g., "5+ years of experience required", "must have at least 3 years experience", "minimum 4 years professional experience"). Even if the employer explicitly states that experience is "required", "mandatory", "essential", or a "must", required experience is NEVER a hard blocker. Experience differences are evaluated and penalized solely in `experience_score` (0 to 30) and captured in `minimum_experience_years`.
 - programming-language gaps
 - missing frameworks or technologies
 - general technical skill gaps
-- years-of-experience gaps
+- seniority level or lack of senior/lead experience
 - ordinary degree/education mismatches
 - preferred qualifications
 - relocation being necessary
@@ -681,6 +695,14 @@ Do NOT create blockers for:
 - assumed authorization
 - assumed residency
 - assumed language ability
+
+### Required Experience Is Never a Hard Blocker
+
+Employers routinely specify required or minimum years of experience (e.g., "5+ years of experience required", "Must have minimum 3 years experience").
+- Required experience is NOT a binary eligibility condition.
+- Never add items such as "Candidate has less than 5 years of experience", "Lacks required 3+ years experience", or "Requires 5 years experience" to `hard_blockers`.
+- Do NOT treat phrases like "must have 5 years", "minimum 3 years required", or "mandatory 4+ years" as hard blockers.
+- Any deficit in candidate experience is handled entirely by scoring in `experience_score` (e.g., awarding a lower score between 0 and 25) and recording the number in `minimum_experience_years`.
 
 An OR condition is blocked only if the candidate clearly fails EVERY acceptable branch.
 
@@ -939,6 +961,26 @@ work_arrangement = "onsite"
 
 not `"flexible"`.
 
+## Example G — Required years of experience
+
+JOB:
+"Senior Backend Engineer. Requirements:
+- Bachelor's degree in Computer Science
+- Minimum 5+ years of professional backend experience (Required)
+- Strong experience with Go and PostgreSQL
+- Experience with Kubernetes"
+
+CANDIDATE:
+Computer Science graduate with internships and hands-on projects (~1 year experience). Demonstrated skills: Go, PostgreSQL, Kubernetes.
+
+Correct:
+
+- minimum_experience_years = 5
+- matched_skills includes ["Go", "PostgreSQL", "Kubernetes"]
+- missing_required_skills = [] (do NOT include "5+ years experience", "5 years backend", or "required experience")
+- hard_blockers = [] (do NOT include "5+ years required experience" or any experience blocker)
+- The candidate's experience gap is reflected in `experience_score` (e.g., 8-14 range for major experience gap), NOT in `hard_blockers` and NOT in `missing_required_skills`.
+
 # Final Validation
 
 Before returning the response, silently check:
@@ -955,6 +997,7 @@ Before returning the response, silently check:
 - Every preferred gap is actually preferred.
 - OR alternatives have been handled as alternatives.
 - Example technologies have not been converted into individual requirements.
+- No required experience, minimum years of experience, or experience durations (e.g., "3+ years", "5 years experience") were placed in `missing_required_skills` or `missing_preferred_skills`.
 
 ## Role classification
 
@@ -982,6 +1025,7 @@ If role_family = non_target:
 
 - Every hard blocker is an explicit binary eligibility condition.
 - Candidate evidence clearly proves failure.
+- Required experience, minimum experience years, and experience gaps are NEVER hard blockers, even when phrased as mandatory, required, or a minimum expectation.
 - Technical gaps are not blockers.
 - Uncertainty is not a blocker.
 - Relocation needs alone are not blockers.
