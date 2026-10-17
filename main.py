@@ -17,6 +17,7 @@ import vars
 import database
 import utils
 from ai import JobEvaluatorCache
+import time
 
 logging.basicConfig(
     level=logging.WARNING, format="%(asctime)s - %(levelname)s - %(message)s"
@@ -66,6 +67,7 @@ def get_jobs(job_info, scrape_from):
             f"  {i}. {title}" for i, title in enumerate(jobs["title"], start=1)
         )
     print(summary + "\n")
+    time.sleep(15)
     return jobs
 
 
