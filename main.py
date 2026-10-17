@@ -67,7 +67,7 @@ def get_jobs(job_info, scrape_from):
             f"  {i}. {title}" for i, title in enumerate(jobs["title"], start=1)
         )
     print(summary + "\n")
-    time.sleep(15)
+    time.sleep(60)
     return jobs
 
 
