@@ -477,6 +477,19 @@ Examples:
 "Hybrid role in Munich"
 -> ["Germany"]
 
+## Remote Roles and Optional Relocation
+
+When a role allows remote work (worldwide, regional, or unstated):
+
+- An **optional relocation offer, relocation assistance, or office relocation perk** (e.g., "relocation to Portugal available", "option to relocate to Berlin", "relocation support provided") is an OPTIONAL employee benefit, NEVER a mandatory candidate location restriction.
+- **NEVER** set `allowed_locations` to an optional relocation destination when the job can be performed remotely without relocating.
+- If the role is remote worldwide / anywhere in the world with no mandatory location restrictions:
+  `allowed_locations = ["not_mentioned"]`
+  `remote_scope = "worldwide"`
+- If the role is remote within stated regions (e.g., "Remote: Europe, Middle East"):
+  `allowed_locations = ["Europe", "Middle East"]` (record the permitted remote regions; do NOT set to the relocation destination).
+- Only set a location in `allowed_locations` if physical presence or relocation to that destination is **strictly mandatory** for the role.
+
 ## Invalid evidence
 
 Do NOT derive allowed_locations from:
@@ -498,6 +511,7 @@ Do NOT derive allowed_locations from:
 - country-specific regulations
 - employer name
 - general knowledge about where a company is based
+- optional relocation offers, relocation assistance destinations, or office relocation options when the role can be performed remotely (e.g., "relocation to Portugal available", "option to relocate to our Berlin hub")
 
 ## Evidence requirement
 
@@ -926,6 +940,17 @@ Correct:
 - do not assume relocation unwillingness
 - allowed_locations does NOT imply that the candidate is ineligible
 
+## Example C2 — Remote role with optional relocation
+
+JOB:
+"Junior Backend Developer. Remote (Europe; Middle East; North America). Location: Remote (relocation to Portugal available). About us: We are an innovative SaaS startup based in Portugal. Benefits: Remote work flexibility from anywhere in the world, option to relocate to Portugal and be part of our vibrant local team."
+
+Correct:
+- work_arrangement = "remote"
+- remote_scope = "worldwide" (because benefits state "from anywhere in the world")
+- allowed_locations = ["not_mentioned"]
+- Do NOT set allowed_locations = ["Portugal"]. Relocation to Portugal is an optional employee benefit and the company's base, NOT a geographic restriction on remote candidates.
+
 ## Example D — Current enrollment
 
 JOB:
@@ -1038,6 +1063,7 @@ If role_family = non_target:
 - Company headquarters or unrelated office locations were not used.
 - Locations were normalized to country names when applicable.
 - Explicit regions such as EMEA, EU, Europe, APAC, LATAM, Middle East, or Africa were preserved as regions.
+- For remote roles, optional relocation destinations or office hubs (e.g., "relocation available to Portugal") were NOT set as allowed_locations.
 
 ## Work arrangement / remote scope consistency
 

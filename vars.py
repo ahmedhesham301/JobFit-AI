@@ -279,6 +279,9 @@ unrelated_tech_to_skip = [
     r"\bmern stack\b",
     r"\bHPC Engineer\b",
     r"\bdeutschsprachig\w*\b",  # german speaker
+    ######
+    r"\bScientific Computing Expert — Physical Sciences\b",
+    r"\bLow Current Engineer\b",
 ]
 
 unrelated_non_tech_to_skip = [

@@ -43,8 +43,20 @@ def filter_jobs_by_language(jobs):
 
 
 def is_location_accepted(
-    scrape_location, ai_locations, allowed_locations, work_arrangement=None
+    scrape_location,
+    ai_locations,
+    allowed_locations,
+    website,
+    work_arrangement,
+    remote_scope,
 ):
+    if website == "himalayas":
+        return True
+
+    allowed_locations = {location.strip().lower() for location in allowed_locations} - {
+        "",
+        "not_mentioned",
+    }
     # Unknown work arrangements remain eligible regardless of location metadata.
     if work_arrangement == "unknown":
         return True
@@ -60,15 +72,13 @@ def is_location_accepted(
     # Remote jobs can pass without an explicit AI location restriction.
     if work_arrangement == "remote" and not ai_locations:
         return True
-
+    # # Allow worldwide remote jobs regardless of any company HQ / office locations mentioned
+    if work_arrangement == "remote" and remote_scope.lower() in allowed_locations:
+        return True
     # Otherwise, missing location evidence must be absent from both sources.
     if not scrape_location and not ai_locations:
         return True
 
-    allowed_locations = {allowed.strip().lower() for allowed in allowed_locations} - {
-        "",
-        "not_mentioned",
-    }
     if ai_locations:
         return bool(ai_locations & allowed_locations)
 
@@ -163,7 +173,9 @@ def filter_jobs(jobs, system_instruction, cv, cache):
                 job.get("location"),
                 saved_info["allowed_locations"],
                 vars.allowed_locations,
+                job.get("site"),
                 work_arrangement=saved_info["work_arrangement"],
+                remote_scope=saved_info.get("remote_scope"),
             )
         ):
             good_fit_jobs.append(

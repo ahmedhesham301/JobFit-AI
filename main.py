@@ -17,7 +17,6 @@ import vars
 import database
 import utils
 from ai import JobEvaluatorCache
-import time
 
 logging.basicConfig(
     level=logging.WARNING, format="%(asctime)s - %(levelname)s - %(message)s"
@@ -36,38 +35,13 @@ with open("cv.txt", "r") as f:
 
 
 def get_jobs(job_info, scrape_from):
-    # Convert the fixed cutoff when this search starts, including any queue delay.
-    # JobSpy's LinkedIn filter uses seconds; round up to avoid narrowing the window.
-    seconds_old = max(
-        1, ceil((datetime.now(timezone.utc) - scrape_from).total_seconds())
-    )
-    hours_old = seconds_old / 3600
-    hours, minutes = divmod(seconds_old // 60, 60)
-    print(
-        f"search for job {job_info['role']} for the past {hours}:{minutes:02d} "
-        f"in {job_info['country']}\n"
-    )
     jobs = getJobs(
         job_info["role"],
         job_info["results_wanted"],
-        hours_old,
         job_info["country"],
-        job_info["city"],
         job_info["is_remote"],
+        scrape_from,
     )
-    summary = (
-        f"\nRole: {job_info['role']}\n"
-        f"Country: {job_info['country']}\n"
-        f"Found {len(jobs)} jobs\n"
-        f"{'-' * 50}\n"
-    )
-    # JobSpy can return an empty DataFrame without any columns.
-    if not jobs.empty:
-        summary += "\n".join(
-            f"  {i}. {title}" for i, title in enumerate(jobs["title"], start=1)
-        )
-    print(summary + "\n")
-    time.sleep(60)
     return jobs
 
 
