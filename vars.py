@@ -488,6 +488,7 @@ positive_keywords = [
     # GitOps
     # =========================
     r"\bgitops\b",
+    r"\bargo\b",
     # =========================
     # Observability / Monitoring
     # =========================
@@ -517,6 +518,7 @@ positive_keywords = [
     r"\bsystemd\b",
     r"\bbash\b",
     r"\bshell scripting\b",
+    r"\boperating systems\b",
     # =========================
     # Networking / Proxies
     # =========================
@@ -528,6 +530,8 @@ positive_keywords = [
     r"\breverse prox(?:y|ies)\b",
     r"\bdns\b",
     r"\btcp\/ip\b",
+    r"\bnetworking\b",
+    r"\bnetworks\b",
     # =========================
     # Infrastructure / Platform
     # =========================
@@ -618,6 +622,11 @@ positive_keywords = [
     r"\bdisaster recovery\b",
     r"\bcapacity planning\b",
     r"\bperformance tuning\b",
+    #######
+    r"\bk6\b",
+    r"\bComputer Science\b",
+    r"\bInformation Technology\b",
+    r"\bInformation Systems\b",
 ]
 blocked_titles_regex = "|".join(
     levels_to_skip
