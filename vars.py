@@ -8,6 +8,9 @@ companies_blacklist = [
     r"\bTaskVerse\b",
     r"\bHaystack\b",
     r"\bCrossing Hurdles\b",
+    # call center
+    r"\bTaskUs\b",
+
 ]
 allowed_locations = ["worldwide", "egypt", "emea", "africa"]
 accepted_languages = [Language.ENGLISH, Language.ARABIC]
@@ -372,10 +375,7 @@ unrelated_non_tech_to_skip = [
     r"\bsmart[ -]?home\b",
     r"\bknx\b",
     # Support and field roles
-    r"\bhelp[ -]?desk\b",
     r"\bservice desk\b",
-    r"\bdesktop support\b",
-    r"\bit support\b",
     r"\bfield service engineer\b",
     r"\bcall center\b",
     r"\bsecurity guard\b",
@@ -419,6 +419,10 @@ unrelated_non_tech_to_skip = [
     r"\b(?:saudi|emirati|uae)\s+national(?:ity)?\s+(?:is\s+)?required\b",
     r"\b(?:open|available)\s+(?:only\s+)?to\s+(?:saudi|emirati|uae)\s+nationals?\b",
     r"\b(?:werkstudent(?:in)?|working student|duales studium|masterarbeit|abschlussarbeit|bachelorarbeit)\b",
+    r"\bMachine Operator\b",
+    r"\bDigital Designer\b",
+    r"\btelemarketing\b",
+    r"\bcustomer support\b",
 ]
 
 languages_to_skip = [
