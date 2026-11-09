@@ -60,7 +60,8 @@ def main():
                 if previous_run_started_at is not None
                 else run_started_at - timedelta(hours=job["hours_old"])
             )
-            # wait_seconds = 15 if index < len(jobs) - 1 else 0
+            # wait_seconds = 15 if index < len(jobs) - 1 else 0   # comment/uncomment to allow wait time between each job cat
+            wait_seconds = 0
             futures.append(executor.submit(get_jobs, job, scrape_from, wait_seconds))
         for future in concurrent.futures.as_completed(futures):
             all_jobs = pd.concat([all_jobs, future.result()], ignore_index=True)

@@ -13,7 +13,7 @@ def getJobs(jobTitle, results_wanted, country, is_remote, scrape_from):
     )
     jobs = scrape_jobs(
         site_name=[
-            # "indeed",
+            "indeed",
             "linkedin",
             # "zip_recruiter",
             # "google",
