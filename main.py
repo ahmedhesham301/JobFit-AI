@@ -34,7 +34,7 @@ with open("cv.txt", "r") as f:
     CV = f.read()
 
 
-def get_jobs(job_info, scrape_from):
+def get_jobs(job_info, scrape_from, wait_seconds=0):
     jobs = getJobs(
         job_info["role"],
         job_info["results_wanted"],
@@ -42,6 +42,8 @@ def get_jobs(job_info, scrape_from):
         job_info["is_remote"],
         scrape_from,
     )
+    # if wait_seconds > 0:
+    #     time.sleep(wait_seconds)
     return jobs
 
 
@@ -52,13 +54,14 @@ def main():
     t = datetime.now()
     with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
         futures = []
-        for job in jobs:
+        for index, job in enumerate(jobs):
             scrape_from = (
                 previous_run_started_at
                 if previous_run_started_at is not None
                 else run_started_at - timedelta(hours=job["hours_old"])
             )
-            futures.append(executor.submit(get_jobs, job, scrape_from))
+            # wait_seconds = 15 if index < len(jobs) - 1 else 0
+            futures.append(executor.submit(get_jobs, job, scrape_from, wait_seconds))
         for future in concurrent.futures.as_completed(futures):
             all_jobs = pd.concat([all_jobs, future.result()], ignore_index=True)
 
