@@ -177,6 +177,7 @@ abbreviations_to_skip = [
 ]
 
 unrelated_tech_to_skip = [
+    r"\bwith Disabilities\b",
     # data
     r"\bdata engineer(?:ing)?\b",
     r"\bdata scientist\b",
