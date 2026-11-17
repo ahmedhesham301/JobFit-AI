@@ -8,7 +8,9 @@ from threading import Lock
 from time import monotonic
 import os
 
-client = genai.Client(api_key=os.getenv("gemini_api_key"))
+client = genai.Client(
+    api_key=os.getenv("gemini_api_key"), http_options={"api_version": "v1beta"}
+)
 
 MODEL = os.getenv("gemini_model")
 CACHE_TTL_SECONDS = 60

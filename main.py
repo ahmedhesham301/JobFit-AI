@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from rich.logging import RichHandler
 from jobs import getJobs
 from alert import send_email
 from filter import filter_jobs, filter_jobs_by_regex, filter_jobs_by_language
@@ -19,8 +20,12 @@ import utils
 from ai import JobEvaluatorCache
 
 logging.basicConfig(
-    level=logging.WARNING, format="%(asctime)s - %(levelname)s - %(message)s"
+    level=logging.WARNING,
+    format=":%(message)s",
+    handlers=[RichHandler(rich_tracebacks=True)],
+    force=True,
 )
+logging.getLogger("scrapling").propagate = False
 
 SENDER = os.getenv("smtp_email")
 PASSWORD = os.getenv("smtp_password")
@@ -32,19 +37,6 @@ with open("system_instruction.md", "r") as f:
     SYSTEM_INSTRUCTIONS = f.read()
 with open("cv.txt", "r") as f:
     CV = f.read()
-
-
-def get_jobs(job_info, scrape_from, wait_seconds=0):
-    jobs = getJobs(
-        job_info["role"],
-        job_info["results_wanted"],
-        job_info["country"],
-        job_info["is_remote"],
-        scrape_from,
-    )
-    # if wait_seconds > 0:
-    #     time.sleep(wait_seconds)
-    return jobs
 
 
 def main():
@@ -60,9 +52,9 @@ def main():
                 if previous_run_started_at is not None
                 else run_started_at - timedelta(hours=job["hours_old"])
             )
-            # wait_seconds = 15 if index < len(jobs) - 1 else 0   # comment/uncomment to allow wait time between each job cat
-            wait_seconds = 0
-            futures.append(executor.submit(get_jobs, job, scrape_from, wait_seconds))
+            futures.append(
+                executor.submit(getJobs, job["role"], job["country"], scrape_from)
+            )
         for future in concurrent.futures.as_completed(futures):
             all_jobs = pd.concat([all_jobs, future.result()], ignore_index=True)
 
@@ -70,7 +62,7 @@ def main():
 
     if len(all_jobs) > 0:
         s.jobs_duplicates = len(all_jobs)
-        all_jobs.drop_duplicates(subset=["job_url"], inplace=True, ignore_index=True)
+        all_jobs = all_jobs.drop_duplicates(subset=["job_url"], ignore_index=True)
         all_jobs = all_jobs.dropna(subset=["description"], ignore_index=True)
         s.jobs_no_duplicates = len(all_jobs)
 
@@ -81,7 +73,7 @@ def main():
         s.jobs_skipped_by_title_filter = len(remaining)
 
         company_filtered_jobs, remaining = filter_jobs_by_regex(
-            title_filtered_jobs, "company", vars.blocked_companies_regex
+            title_filtered_jobs, "company_name", vars.blocked_companies_regex
         )
         database.bulk_insert(remaining, "company_filter")
         s.jobs_skipped_by_company_filter = len(remaining)

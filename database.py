@@ -321,7 +321,7 @@ def _insert_job(conn, job, why_skipped, evaluation_id):
     source_is_remote = _nullable(job.get("is_remote"))
     values = (
         job["title"],
-        _nullable(job.get("company")),
+        _nullable(job.get("company_name")),
         job["job_url"],
         _nullable(job.get("site")),
         _nullable(job.get("id")),

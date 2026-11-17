@@ -9,7 +9,7 @@ URL = "https://himalayas.app/jobs/api/search"
 COLUMNS = [
     "site",
     "title",
-    "company",
+    "company_name",
     "location",
     "job_type",
     "interval",
@@ -51,7 +51,7 @@ def scrape(jobTitle, seconds_old, country):
                         {
                             "site": "himalayas",
                             "title": job["title"],
-                            "company": job["companyName"],
+                            "company_name": job["companyName"],
                             "location": "TODO",
                             "job_type": job["employmentType"],
                             "interval": job["salaryPeriod"],

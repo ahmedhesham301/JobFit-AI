@@ -1,38 +1,22 @@
-from jobspy import scrape_jobs
 import himalayas.main as himalayas
 import pandas as pd
 import os
 import utils
+import job_scrappers.linkedin
+from job_scrappers.data import create_df
 
 ENABLE_HIMALAYAS = os.getenv("himalayas", "").lower() == "true"
 
 
-def getJobs(jobTitle, results_wanted, country, is_remote, scrape_from):
+def getJobs(jobTitle, country, scrape_from):
     utils.print_search_msg(
         jobTitle, "linkedin", country, utils.get_seconds_old(scrape_from)
     )
-    jobs = scrape_jobs(
-        site_name=[
-            "indeed",
-            "linkedin",
-            # "zip_recruiter",
-            # "google",
-            # "glassdoor",
-            # "bayt",
-            # "naukri",
-            # "bdjobs",
-        ],
-        search_term=jobTitle,
-        location=country,
-        country_indeed=country,
-        results_wanted=results_wanted,
-        # google_search_term=f"{jobTitle} jobs near Cairo since {hours_old} hours",
-        hours_old=utils.get_seconds_old(scrape_from) / 3600,
-        # JobSpy validates this even for LinkedIn-only searches.
-        # LinkedIn uses location above to select the search country.
-        is_remote=is_remote,
-        fetch_description=True,
+    # linkedin
+    jobs = job_scrappers.linkedin.scrape_jobs(
+        jobTitle, country, utils.get_seconds_old(scrape_from), True
     )
+
     utils.print_found_jobs(jobTitle, "linkedin", country, jobs)
     if ENABLE_HIMALAYAS:
         utils.print_search_msg(
