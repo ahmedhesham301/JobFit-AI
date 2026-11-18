@@ -69,7 +69,6 @@ def scrape_jobs(title: str, location: str, fetch_details: bool = True) -> pd.Dat
         if page.status in [200]:
             page_jobs_df = parse_job_cards(page)
             all_jobs_df = pd.concat([all_jobs_df, page_jobs_df], ignore_index=True)
-            print(len(page_jobs_df))
             if len(page_jobs_df) < 15:
                 break
             offset += 1

@@ -1,9 +1,31 @@
-from scrapling.fetchers import StealthyFetcher
+from scrapling.fetchers import StealthyFetcher, Fetcher
 from urllib.parse import urlencode
 
+cookies = None
+
+def solve_captha():
+    url = "https://wuzzuf.net/jobs/egypt"
+    response = StealthyFetcher.fetch(url, headless=True,solve_cloudflare=True)
+
+    ALLOWED_COOKIES = {"cf_clearance", "countryIso", "language"}
+    if isinstance(response.cookies, dict):
+        cookies = response.cookies
+    else:
+        cookies = {c["name"]: c["value"] for c in response.cookies}
+
+    return {
+        "cf_clearance": cookies["cf_clearance"],
+        "countryIso": cookies["countryIso"],
+        "language": cookies["language"],
+    }
+
+    
 
 def fetch_jobs_page(title, location, offset):
-    response = StealthyFetcher.fetch(build_search_url(title, location, offset), headless= True, solve_cloudflare=True)
+    global cookies
+    if not cookies:
+        cookies = solve_captha()
+    response = Fetcher.get(build_search_url(title, location, offset), impersonate="chrome",cookies=cookies)
     return response
 
 
@@ -20,4 +42,5 @@ def build_search_url(title, location, offset):
 
 
 def fetch_job_page(url):
-    return StealthyFetcher.fetch(url)
+    return Fetcher.get(url, impersonate="chrome", cookies=cookies)
+
