@@ -13,6 +13,8 @@ def solve_captha():
     else:
         cookies = {c["name"]: c["value"] for c in response.cookies}
 
+    print(cookies)
+    
     return {
         "cf_clearance": cookies["cf_clearance"],
         "countryIso": cookies["countryIso"],
