@@ -4,8 +4,12 @@ class Stats:
         self.language_filter_time = None
         self.filter_time = None
         self.email_time = None
-        self.jobs_duplicates = 0
+        self.jobs_scraped_total = 0
         self.jobs_no_duplicates = 0
+        self.jobs_no_description = 0
+        self.descriptions_from_db = 0
+        self.descriptions_scraped = 0
+        self.jobs_dropped_no_description = 0
         self.jobs_skipped_by_title_filter = 0
         self.jobs_skipped_by_company_filter = 0
         self.jobs_skipped_by_description_language_filter = 0
@@ -17,8 +21,9 @@ class Stats:
     def format_summary(self):
         jobs_remaining = (
             self.jobs_no_duplicates
-            - self.jobs_skipped_by_company_filter
             - self.jobs_skipped_by_title_filter
+            - self.jobs_skipped_by_company_filter
+            - self.jobs_dropped_no_description
             - self.jobs_skipped_by_description_language_filter
             - self.jobs_skipped_by_description_filter
             - self.jobs_skipped_by_positive_filter
@@ -29,10 +34,14 @@ class Stats:
             else None
         )
         rows = [
-            ("Total jobs scraped", self.jobs_duplicates),
-            ("Unique jobs with descriptions", self.jobs_no_duplicates),
-            ("Jobs excluded by company filter", self.jobs_skipped_by_company_filter),
+            ("Total jobs scraped", self.jobs_scraped_total),
+            ("Unique jobs", self.jobs_no_duplicates),
             ("Jobs excluded by keyword filter", self.jobs_skipped_by_title_filter),
+            ("Jobs excluded by company filter", self.jobs_skipped_by_company_filter),
+            ("Jobs without description", self.jobs_no_description),
+            ("Descriptions loaded from DB", self.descriptions_from_db),
+            ("Descriptions scraped", self.descriptions_scraped),
+            ("Jobs dropped (missing description)", self.jobs_dropped_no_description),
             (
                 "Jobs excluded by description language filter",
                 self.jobs_skipped_by_description_language_filter,

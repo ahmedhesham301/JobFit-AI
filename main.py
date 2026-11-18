@@ -68,11 +68,10 @@ def main():
             )
         for future in concurrent.futures.as_completed(futures):
             all_jobs = pd.concat([all_jobs, future.result()], ignore_index=True)
-
+    s.jobs_scraped_total = len(all_jobs)
     s.scraping_time = datetime.now() - t
 
     if len(all_jobs) > 0:
-        s.jobs_duplicates = len(all_jobs)
         all_jobs = all_jobs.drop_duplicates(subset=["job_url"], ignore_index=True)
         s.jobs_no_duplicates = len(all_jobs)
 
@@ -88,17 +87,24 @@ def main():
         database.bulk_insert(remaining, "company_filter")
         s.jobs_skipped_by_company_filter = len(remaining)
 
-        a = datetime.now()
-
+        missing_before_db = int(company_filtered_jobs["description"].isna().sum())
         database.get_descriptions(company_filtered_jobs)
         jobs_with_description = scrape_details(company_filtered_jobs)
         # log how many jobs where dropped by next line
-        jobs_with_description = jobs_with_description.dropna(subset=["description"])
+        missing_after_db = int(company_filtered_jobs["description"].isna().sum())
 
+        missing_after_scrape = int(jobs_with_description["description"].isna().sum())
+        jobs_with_description = jobs_with_description.dropna(subset=["description"])
         jobs_with_description["description"] = jobs_with_description[
             "description"
         ].apply(utils.clean_description)
 
+        s.jobs_no_description = missing_before_db
+        s.descriptions_from_db = missing_before_db - missing_after_db
+        s.descriptions_scraped = missing_after_db - missing_after_scrape
+        s.jobs_dropped_no_description = missing_after_scrape
+
+        a = datetime.now()
         jobs_filtered_by_description_language, remaining = filter_jobs_by_language(
             jobs_with_description
         )
