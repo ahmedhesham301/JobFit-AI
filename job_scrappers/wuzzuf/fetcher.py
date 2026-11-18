@@ -1,9 +1,9 @@
-from scrapling.fetchers import Fetcher
+from scrapling.fetchers import StealthyFetcher
 from urllib.parse import urlencode
 
 
 def fetch_jobs_page(title, location, offset):
-    response = Fetcher.get(build_search_url(title, location, offset))
+    response = StealthyFetcher.fetch(build_search_url(title, location, offset), headless= True, solve_cloudflare=True)
     return response
 
 
@@ -20,4 +20,4 @@ def build_search_url(title, location, offset):
 
 
 def fetch_job_page(url):
-    return Fetcher.get(url)
+    return StealthyFetcher.fetch(url)

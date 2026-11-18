@@ -32,9 +32,9 @@ logging.getLogger("scrapling").propagate = False
 SENDER = os.getenv("smtp_email")
 PASSWORD = os.getenv("smtp_password")
 RECEIVER = os.getenv("receiver_email")
+ENABLE_LINKEDIN = os.getenv("linkedin", "").lower() == "true"
+ENABLE_WUZZUF = os.getenv("wuzzuf", "").lower() == "true"
 
-all_jobs = create_df()
-good_fit_jobs = []
 with open("system_instruction.md", "r") as f:
     SYSTEM_INSTRUCTIONS = f.read()
 with open("cv.txt", "r") as f:
@@ -42,7 +42,6 @@ with open("cv.txt", "r") as f:
 
 
 def main():
-    global all_jobs, good_fit_jobs
     run_started_at = datetime.now(timezone.utc)
     previous_run_started_at = database.start_scrape_run(run_started_at)
     t = datetime.now()
@@ -51,13 +50,16 @@ def main():
         if previous_run_started_at is not None
         else run_started_at - timedelta(hours=2)
     )
+    all_jobs = create_df()
+    good_fit_jobs = []
 
-    linkedin_jobs_without_description = scrape_linkedin(jobs, scrape_from)
-    wuzzuf_jobs_without_description = scrape_wuzzuf(jobs)
-    all_jobs = pd.concat(
-        [linkedin_jobs_without_description, wuzzuf_jobs_without_description],
-        ignore_index=True,
-    )
+
+    if ENABLE_LINKEDIN:
+        linkedin_jobs_without_description = scrape_linkedin(jobs, scrape_from)
+        all_jobs = pd.concat([all_jobs, linkedin_jobs_without_description], ignore_index= True)
+    if ENABLE_WUZZUF:
+        wuzzuf_jobs_without_description = scrape_wuzzuf(jobs)
+        all_jobs = pd.concat([all_jobs, wuzzuf_jobs_without_description], ignore_index= True)
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
         futures = []
