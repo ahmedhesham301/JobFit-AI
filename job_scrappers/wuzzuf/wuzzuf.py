@@ -7,12 +7,20 @@ import random
 import logging
 
 
-def scrape_job_details(jobs):
+def scrape_job_details(jobs: pd.DataFrame):
     jobs_no_duplicates = jobs.drop_duplicates(
         subset=["job_url"],
         ignore_index=True,
     )
-    for job in jobs_no_duplicates.itertuples():
+
+    jobs_with_description = jobs_no_duplicates[
+        jobs_no_duplicates["description"].notna()
+    ].copy()
+    jobs_without_description = jobs_no_duplicates[
+        jobs_no_duplicates["description"].isna()
+    ].copy()
+
+    for job in jobs_without_description.itertuples():
         # skip non wuzzuf jobs for safety
         if job.site != "wuzzuf":
             logging.error(
@@ -25,7 +33,7 @@ def scrape_job_details(jobs):
             response = fetch_job_page(job.job_url)
             if response.status == 200:
                 details = parse_job_details(response)
-                jobs_no_duplicates.loc[job.Index, list(details.keys())] = list(
+                jobs_without_description.loc[job.Index, list(details.keys())] = list(
                     details.values()
                 )
                 times_failed = 0
@@ -46,7 +54,9 @@ def scrape_job_details(jobs):
                     f"{response.status}: details page Sleeping for {sleep_time} seconds wuzzuf"
                 )
                 time.sleep(sleep_time)
-    return jobs_no_duplicates
+    return pd.concat(
+        [jobs_with_description, jobs_without_description], ignore_index=True
+    )
 
 
 def scrape_jobs(title: str, location: str, fetch_details: bool = True) -> pd.DataFrame:

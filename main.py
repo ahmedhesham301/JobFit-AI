@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from rich.logging import RichHandler
-from jobs import getJobs
+from jobs import getJobs, scrape_linkedin, scrape_wuzzuf
 from alert import send_email
 from filter import filter_jobs, filter_jobs_by_regex, filter_jobs_by_language
 import os
@@ -18,6 +18,8 @@ import vars
 import database
 import utils
 from ai import JobEvaluatorCache
+from job_scrappers.data import create_df
+from job_scrappers.main import scrape_details
 
 logging.basicConfig(
     level=logging.WARNING,
@@ -31,7 +33,7 @@ SENDER = os.getenv("smtp_email")
 PASSWORD = os.getenv("smtp_password")
 RECEIVER = os.getenv("receiver_email")
 
-all_jobs = pd.DataFrame()
+all_jobs = create_df()
 good_fit_jobs = []
 with open("system_instruction.md", "r") as f:
     SYSTEM_INSTRUCTIONS = f.read()
@@ -44,14 +46,23 @@ def main():
     run_started_at = datetime.now(timezone.utc)
     previous_run_started_at = database.start_scrape_run(run_started_at)
     t = datetime.now()
+    scrape_from = (
+        previous_run_started_at
+        if previous_run_started_at is not None
+        else run_started_at - timedelta(hours=2)
+    )
+
+    linkedin_jobs_without_description = scrape_linkedin(jobs, scrape_from)
+    wuzzuf_jobs_without_description = scrape_wuzzuf(jobs)
+    all_jobs = pd.concat(
+        [linkedin_jobs_without_description, wuzzuf_jobs_without_description],
+        ignore_index=True,
+    )
+
     with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
         futures = []
         for index, job in enumerate(jobs):
-            scrape_from = (
-                previous_run_started_at
-                if previous_run_started_at is not None
-                else run_started_at - timedelta(hours=job["hours_old"])
-            )
+
             futures.append(
                 executor.submit(getJobs, job["role"], job["country"], scrape_from)
             )
@@ -63,7 +74,6 @@ def main():
     if len(all_jobs) > 0:
         s.jobs_duplicates = len(all_jobs)
         all_jobs = all_jobs.drop_duplicates(subset=["job_url"], ignore_index=True)
-        all_jobs = all_jobs.dropna(subset=["description"], ignore_index=True)
         s.jobs_no_duplicates = len(all_jobs)
 
         title_filtered_jobs, remaining = filter_jobs_by_regex(
@@ -78,14 +88,19 @@ def main():
         database.bulk_insert(remaining, "company_filter")
         s.jobs_skipped_by_company_filter = len(remaining)
 
-        company_filtered_jobs["description"] = company_filtered_jobs[
+        a = datetime.now()
+
+        database.get_descriptions(company_filtered_jobs)
+        jobs_with_description = scrape_details(company_filtered_jobs)
+        # log how many jobs where dropped by next line
+        jobs_with_description = jobs_with_description.dropna(subset=["description"])
+
+        jobs_with_description["description"] = jobs_with_description[
             "description"
         ].apply(utils.clean_description)
 
-        a = datetime.now()
-
         jobs_filtered_by_description_language, remaining = filter_jobs_by_language(
-            company_filtered_jobs
+            jobs_with_description
         )
         database.bulk_insert(remaining, "description_language")
         s.jobs_skipped_by_description_language_filter = len(remaining)

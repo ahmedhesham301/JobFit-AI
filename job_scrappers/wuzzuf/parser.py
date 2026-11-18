@@ -1,4 +1,4 @@
-from data import create_df
+from ..data import create_df
 from scrapling.engines.toolbelt.custom import Response
 
 

@@ -12,7 +12,7 @@ def build_search_url(title, location, offset):
     params = {
         "q": title,
         "filters[country][0]": location,
-        # "filters[post_date][0]": "within_24_hours",
+        "filters[post_date][0]": "within_24_hours",
         "start": offset,
     }
     query_string = urlencode(params)

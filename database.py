@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS jobs (
             OR source_is_remote IN (0, 1)
         ),
 
-    description_id INTEGER NOT NULL,
+    description_id INTEGER,
     evaluation_id INTEGER,
 
     why_skipped TEXT,
@@ -311,8 +311,13 @@ def insert_description(description):
 
 
 def _insert_job(conn, job, why_skipped, evaluation_id):
-    description_id = _insert_description(conn, job["description"])
+    description = _nullable(job.get("description"))
+    description_id = (
+        _insert_description(conn, description) if description is not None else None
+    )
     if evaluation_id is not None:
+        if description_id is None:
+            raise ValueError("Cannot attach an evaluation without a description")
         evaluation = conn.execute(
             "SELECT description_id FROM evaluations WHERE id = ?", (evaluation_id,)
         ).fetchone()
@@ -343,8 +348,8 @@ def _insert_job(conn, job, why_skipped, evaluation_id):
             source_job_id = excluded.source_job_id,
             location = excluded.location,
             source_is_remote = excluded.source_is_remote,
-            description_id = excluded.description_id,
-            evaluation_id = excluded.evaluation_id,
+            description_id = COALESCE(excluded.description_id, jobs.description_id),
+            evaluation_id = COALESCE(excluded.evaluation_id, jobs.evaluation_id),
             why_skipped = excluded.why_skipped,
             last_seen_at = CURRENT_TIMESTAMP
         RETURNING id""",
@@ -446,6 +451,21 @@ def get_info_from_hash(evaluation_hash):
         field: result.pop(f"{field}_score") for field in SCORE_FIELDS
     }
     return result
+
+
+def get_descriptions(jobs: pd.DataFrame):
+    with connect() as conn:
+        for row in jobs.itertuples():
+            if pd.notna(row.description):
+                continue
+            res = conn.execute(
+                "SELECT description FROM jobs "
+                "join descriptions on jobs.description_id = descriptions.id "
+                "WHERE url = ?",
+                (row.job_url,),
+            ).fetchone()
+            if res and res[0] is not None:
+                jobs.at[row.Index, "description"] = res[0]
 
 
 initialize_database()
