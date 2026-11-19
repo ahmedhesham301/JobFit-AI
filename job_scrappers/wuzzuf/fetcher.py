@@ -5,7 +5,7 @@ from ..utils import solve_captcha
 cookies = None
 headers = None
 
-ALLOWED_COOKIES = {"cf_clearance", "countryIso", "language", "uid"}
+ALLOWED_COOKIES = {"cf_clearance", "countryIso", "language"}
 
 
 def fetch_jobs_page(title, location, offset):

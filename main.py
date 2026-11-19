@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from rich.logging import RichHandler
-from jobs import getJobs, scrape_linkedin, scrape_wuzzuf
+from jobs import getJobs, scrape_linkedin, scrape_wuzzuf, scrape_bayt
 from alert import send_email
 from filter import filter_jobs, filter_jobs_by_regex, filter_jobs_by_language
 import os
@@ -34,6 +34,7 @@ PASSWORD = os.getenv("smtp_password")
 RECEIVER = os.getenv("receiver_email")
 ENABLE_LINKEDIN = os.getenv("linkedin", "").lower() == "true"
 ENABLE_WUZZUF = os.getenv("wuzzuf", "").lower() == "true"
+ENABLE_BAYT = os.getenv("bayt", "").lower() == "true"
 
 with open("system_instruction.md", "r") as f:
     SYSTEM_INSTRUCTIONS = f.read()
@@ -53,13 +54,21 @@ def main():
     all_jobs = create_df()
     good_fit_jobs = []
 
-
     if ENABLE_LINKEDIN:
         linkedin_jobs_without_description = scrape_linkedin(jobs, scrape_from)
-        all_jobs = pd.concat([all_jobs, linkedin_jobs_without_description], ignore_index= True)
+        all_jobs = pd.concat(
+            [all_jobs, linkedin_jobs_without_description], ignore_index=True
+        )
     if ENABLE_WUZZUF:
         wuzzuf_jobs_without_description = scrape_wuzzuf(jobs)
-        all_jobs = pd.concat([all_jobs, wuzzuf_jobs_without_description], ignore_index= True)
+        all_jobs = pd.concat(
+            [all_jobs, wuzzuf_jobs_without_description], ignore_index=True
+        )
+    if ENABLE_BAYT:
+        bayt_jobs_without_description = scrape_bayt(jobs)
+        all_jobs = pd.concat(
+            [all_jobs, bayt_jobs_without_description], ignore_index=True
+        )
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
         futures = []

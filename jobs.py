@@ -4,6 +4,7 @@ import os
 import utils
 import job_scrappers.linkedin
 import job_scrappers.wuzzuf
+import job_scrappers.bayt
 from job_scrappers.data import create_df
 
 ENABLE_HIMALAYAS = os.getenv("himalayas", "").lower() == "true"
@@ -36,6 +37,16 @@ def scrape_wuzzuf(jobs):
     jobs_without_description = create_df()
     for job in jobs:
         df = job_scrappers.wuzzuf.scrape_jobs(job["role"], job["country"], False)
+        jobs_without_description = pd.concat(
+            [jobs_without_description, df], ignore_index=True
+        )
+    return jobs_without_description
+
+
+def scrape_bayt(jobs):
+    jobs_without_description = create_df()
+    for job in jobs:
+        df = job_scrappers.bayt.scrape_jobs(job["role"], job["country"], False)
         jobs_without_description = pd.concat(
             [jobs_without_description, df], ignore_index=True
         )
