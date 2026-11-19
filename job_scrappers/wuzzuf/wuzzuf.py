@@ -42,7 +42,7 @@ def scrape_job_details(jobs: pd.DataFrame):
                 break
             elif response.status == 429:
                 times_failed += 1
-                sleep_time = random.randrange(300, 900, 1) / 100
+                sleep_time = random.randrange(6100, 6300, 1) / 100
                 logging.warning(
                     f"429: details page Sleeping for {sleep_time} seconds wuzzuf"
                 )
@@ -82,7 +82,7 @@ def scrape_jobs(title: str, location: str, fetch_details: bool = True) -> pd.Dat
             if times_failed > 10:
                 logging.warning(f"Got rate limited {times_failed} times skipping")
                 break
-            sleep_time = random.randrange(300, 900, 1) / 100
+            sleep_time = random.randrange(6100, 6300, 1) / 100
             logging.warning(f"429 jobs page Sleeping for {sleep_time} seconds")
             time.sleep(sleep_time)
         else:
