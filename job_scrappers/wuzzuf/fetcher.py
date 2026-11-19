@@ -31,10 +31,6 @@ def solve_captcha(force: bool = False):
     return cookies
 
 
-# Backward compatibility alias
-solve_captha = solve_captcha
-
-
 def get_headers():
     headers = {}
     if user_agent:
