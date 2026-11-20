@@ -2,7 +2,7 @@ from scrapling.fetchers import StealthyFetcher
 
 
 def solve_captcha(url, allowed_cookies):
-    response = StealthyFetcher.fetch(url, headless=False, solve_cloudflare=True)
+    response = StealthyFetcher.fetch(url, headless=True, solve_cloudflare=True)
 
     # Sync User-Agent from StealthyFetcher to prevent Cloudflare 403 token mismatch
     headers = {}

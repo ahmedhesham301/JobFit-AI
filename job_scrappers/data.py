@@ -23,3 +23,11 @@ def create_df():
             "times_sent",
         ]
     )
+
+COUNTRY_MAP = {
+    "Egypt": {
+        "linkedin": "egypt",
+        "wuzzuf": "Egypt",
+        "bayt":"egypt"
+    }
+}
