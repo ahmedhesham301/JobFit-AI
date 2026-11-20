@@ -8,7 +8,7 @@ import pandas as pd
 
 from utils import hash_text
 
-data_path = os.getenv("data_path")
+data_path = os.getenv("data_path") or "data.db"
 # Bump these when changing the evaluation instructions or profile interpretation.
 PROMPT_VERSION = 4
 CANDIDATE_PROFILE_VERSION = 1
@@ -210,6 +210,9 @@ ON jobs(description_id);
 CREATE INDEX IF NOT EXISTS idx_jobs_evaluation_id
 ON jobs(evaluation_id);
 
+CREATE INDEX IF NOT EXISTS idx_jobs_sent_at
+ON jobs(sent_at);
+
 CREATE INDEX IF NOT EXISTS idx_evaluations_percentage
 ON evaluations(percentage);
 
@@ -362,13 +365,44 @@ def insert_job(job, why_skipped=None, evaluation_id=None):
         return _insert_job(conn, job, why_skipped, evaluation_id)
 
 
+def is_job_sent_recently(url=None, description_id=None, hours=48, conn=None):
+    """Return True if a job with the given url or description was sent within the past `hours` hours."""
+    if not url and not description_id:
+        return False
+
+    query = """
+        SELECT 1 FROM jobs
+        WHERE (
+            (? IS NOT NULL AND url = ?)
+            OR (? IS NOT NULL AND description_id IS NOT NULL AND description_id = ?)
+        )
+        AND sent_at IS NOT NULL
+        AND datetime(sent_at) >= datetime('now', ? || ' hours')
+        LIMIT 1
+    """
+    params = (url, url, description_id, description_id, f"-{hours}")
+
+    if conn is not None:
+        return conn.execute(query, params).fetchone() is not None
+
+    with connect() as conn:
+        return conn.execute(query, params).fetchone() is not None
+
+
 def mark_jobs_sent(job_urls):
     """Record the latest successful email time in UTC for the included jobs."""
+    job_urls = [url for url in job_urls if url]
+    if not job_urls:
+        return
     with connect() as conn:
         sent_at = conn.execute("SELECT CURRENT_TIMESTAMP").fetchone()[0]
         conn.executemany(
-            "UPDATE jobs SET sent_at = ? WHERE url = ?",
-            ((sent_at, url) for url in job_urls),
+            """UPDATE jobs SET sent_at = ?
+               WHERE url = ?
+                  OR description_id IN (
+                      SELECT description_id FROM jobs WHERE url = ? AND description_id IS NOT NULL
+                  )""",
+            ((sent_at, url, url) for url in job_urls),
         )
 
 

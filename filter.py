@@ -177,6 +177,11 @@ def filter_jobs(jobs, system_instruction, cv, cache):
                 work_arrangement=saved_info["work_arrangement"],
                 remote_scope=saved_info.get("remote_scope"),
             )
+            and not database.is_job_sent_recently(
+                url=job.get("job_url"),
+                description_id=description_id,
+                hours=48,
+            )
         ):
             good_fit_jobs.append(
                 {
