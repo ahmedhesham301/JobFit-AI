@@ -178,8 +178,7 @@ def filter_jobs(jobs, system_instruction, cv, cache):
                 remote_scope=saved_info.get("remote_scope"),
             )
             and not database.is_job_sent_recently(
-                url=job.get("job_url"),
-                description_id=description_id,
+                job.get("job_url"),
                 hours=48,
             )
         ):

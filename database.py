@@ -365,22 +365,19 @@ def insert_job(job, why_skipped=None, evaluation_id=None):
         return _insert_job(conn, job, why_skipped, evaluation_id)
 
 
-def is_job_sent_recently(url=None, description_id=None, hours=48, conn=None):
-    """Return True if a job with the given url or description was sent within the past `hours` hours."""
-    if not url and not description_id:
+def is_job_sent_recently(url, hours=48, conn=None):
+    """Return True if a job with the given url was sent within the past `hours` hours."""
+    if not url:
         return False
 
     query = """
         SELECT 1 FROM jobs
-        WHERE (
-            (? IS NOT NULL AND url = ?)
-            OR (? IS NOT NULL AND description_id IS NOT NULL AND description_id = ?)
-        )
-        AND sent_at IS NOT NULL
-        AND datetime(sent_at) >= datetime('now', ? || ' hours')
+        WHERE url = ?
+          AND sent_at IS NOT NULL
+          AND datetime(sent_at) >= datetime('now', ? || ' hours')
         LIMIT 1
     """
-    params = (url, url, description_id, description_id, f"-{hours}")
+    params = (url, f"-{hours}")
 
     if conn is not None:
         return conn.execute(query, params).fetchone() is not None
@@ -397,12 +394,8 @@ def mark_jobs_sent(job_urls):
     with connect() as conn:
         sent_at = conn.execute("SELECT CURRENT_TIMESTAMP").fetchone()[0]
         conn.executemany(
-            """UPDATE jobs SET sent_at = ?
-               WHERE url = ?
-                  OR description_id IN (
-                      SELECT description_id FROM jobs WHERE url = ? AND description_id IS NOT NULL
-                  )""",
-            ((sent_at, url, url) for url in job_urls),
+            "UPDATE jobs SET sent_at = ? WHERE url = ?",
+            ((sent_at, url) for url in job_urls),
         )
 
 

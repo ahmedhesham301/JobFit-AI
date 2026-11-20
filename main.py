@@ -169,26 +169,6 @@ def main():
 
     s.filter_time = datetime.now() - t
     if len(good_fit_jobs) > 0:
-        seen_urls = set()
-        seen_descs = set()
-        unique_good_fit_jobs = []
-        for job in good_fit_jobs:
-            url = job.get("url") or job.get("job_url")
-            desc_id = job.get("description_id")
-            if url and url in seen_urls:
-                continue
-            if desc_id and desc_id in seen_descs:
-                continue
-            if database.is_job_sent_recently(url=url, description_id=desc_id, hours=48):
-                continue
-            if url:
-                seen_urls.add(url)
-            if desc_id:
-                seen_descs.add(desc_id)
-            unique_good_fit_jobs.append(job)
-        good_fit_jobs = unique_good_fit_jobs
-
-    if len(good_fit_jobs) > 0:
         t = datetime.now()
         send_email(SENDER, RECEIVER, PASSWORD, good_fit_jobs, s.format_summary())
         database.mark_jobs_sent(job["url"] for job in good_fit_jobs)
