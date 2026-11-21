@@ -24,10 +24,13 @@ def create_df():
         ]
     )
 
+
 COUNTRY_MAP = {
+    "worldwide": {"gulftalent": ""},
     "Egypt": {
         "linkedin": "egypt",
         "wuzzuf": "Egypt",
-        "bayt":"egypt"
-    }
+        "bayt": "egypt",
+        "gulftalent": "10229362000000",
+    },
 }

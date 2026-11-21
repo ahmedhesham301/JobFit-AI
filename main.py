@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from rich.logging import RichHandler
-from jobs import getJobs, scrape_linkedin, scrape_wuzzuf, scrape_bayt
+from jobs import scrape_linkedin, scrape_wuzzuf, scrape_bayt, scrape_himalayas
 from alert import send_email
 from filter import filter_jobs, filter_jobs_by_regex, filter_jobs_by_language
 import os
@@ -33,6 +33,7 @@ SENDER = os.getenv("smtp_email")
 PASSWORD = os.getenv("smtp_password")
 RECEIVER = os.getenv("receiver_email")
 ENABLE_LINKEDIN = os.getenv("linkedin", "").lower() == "true"
+ENABLE_HIMALAYAS = os.getenv("himalayas", "").lower() == "true"
 ENABLE_WUZZUF = os.getenv("wuzzuf", "").lower() == "true"
 ENABLE_BAYT = os.getenv("bayt", "").lower() == "true"
 
@@ -44,41 +45,41 @@ with open("cv.txt", "r") as f:
 
 def main():
     run_started_at = datetime.now(timezone.utc)
-    previous_run_started_at = database.start_scrape_run(run_started_at)
+    database.start_scrape_run(run_started_at)
     t = datetime.now()
-    scrape_from = (
-        previous_run_started_at
-        if previous_run_started_at is not None
-        else run_started_at - timedelta(hours=2)
-    )
     all_jobs = create_df()
     good_fit_jobs = []
 
-    if ENABLE_LINKEDIN:
-        linkedin_jobs_without_description = scrape_linkedin(jobs, scrape_from)
+    previous_linkedin_scrape = database.get_last_website_scrape("linkedin")
+    if ENABLE_LINKEDIN and database.start_website_scrape("linkedin", minutes=3):
+        linkedin_scrape_from = utils.get_scrape_from(
+            previous_linkedin_scrape, timedelta(hours=2)
+        )
+        linkedin_jobs_without_description = scrape_linkedin(jobs, linkedin_scrape_from)
         all_jobs = pd.concat(
             [all_jobs, linkedin_jobs_without_description], ignore_index=True
         )
-    if ENABLE_WUZZUF:
+
+    if ENABLE_WUZZUF and database.start_website_scrape("wuzzuf", hours=2):
         wuzzuf_jobs_without_description = scrape_wuzzuf(jobs)
         all_jobs = pd.concat(
             [all_jobs, wuzzuf_jobs_without_description], ignore_index=True
         )
-    if ENABLE_BAYT:
+
+    if ENABLE_BAYT and database.start_website_scrape("bayt", hours=2):
         bayt_jobs_without_description = scrape_bayt(jobs)
         all_jobs = pd.concat(
             [all_jobs, bayt_jobs_without_description], ignore_index=True
         )
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
-        futures = []
-        for index, job in enumerate(jobs):
+    previous_himalayas_scrape = database.get_last_website_scrape("himalayas")
+    if ENABLE_HIMALAYAS and database.start_website_scrape("himalayas", hours=2):
+        himalayas_scrape_from = utils.get_scrape_from(
+            previous_himalayas_scrape, timedelta(hours=2)
+        )
+        himalayas_jobs = scrape_himalayas(jobs, himalayas_scrape_from)
+        all_jobs = pd.concat([all_jobs, himalayas_jobs], ignore_index=True)
 
-            futures.append(
-                executor.submit(getJobs, job["role"], job["country"], scrape_from)
-            )
-        for future in concurrent.futures.as_completed(futures):
-            all_jobs = pd.concat([all_jobs, future.result()], ignore_index=True)
     s.jobs_scraped_total = len(all_jobs)
     s.scraping_time = datetime.now() - t
 
@@ -139,8 +140,6 @@ def main():
         )
         database.bulk_insert(remaining, "positive_keyword_filter")
         s.jobs_skipped_by_positive_filter = len(remaining)
-
-        positive_filtered_jobs["description_hash"] = None
 
         positive_filtered_jobs["description_hash"] = positive_filtered_jobs[
             "description"

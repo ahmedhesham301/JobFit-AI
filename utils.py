@@ -1,6 +1,12 @@
 import hashlib
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from math import ceil
+
+
+def get_scrape_from(previous_scrape, delta: timedelta):
+    if previous_scrape is not None:
+        return previous_scrape
+    return datetime.now(timezone.utc).replace(microsecond=0) - delta
 
 
 def hash_text(text: str):

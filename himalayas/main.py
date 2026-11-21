@@ -79,8 +79,3 @@ def scrape(jobTitle, seconds_old, country):
     else:
         logging.critical("himalayas all tries failed")
         return df
-
-
-# pd.set_option("display.max_colwidth", None)
-# data = scarpe("devops", 3000, "worldwide")
-# print(data["JOB_URL"])

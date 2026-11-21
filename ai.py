@@ -328,7 +328,3 @@ JOB DESCRIPTION:
             config=generate_content_config,
         )
     return response.text
-
-
-if __name__ == "__main__":
-    generate()

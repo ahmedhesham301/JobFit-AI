@@ -2,7 +2,7 @@ import json
 import os
 import sqlite3
 from contextlib import contextmanager
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 import pandas as pd
 
@@ -21,6 +21,15 @@ CREATE TABLE IF NOT EXISTS scrape_runs (
 
 CREATE INDEX IF NOT EXISTS idx_scrape_runs_started_at
 ON scrape_runs(started_at);
+
+CREATE TABLE IF NOT EXISTS website_scrapes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    website TEXT NOT NULL,
+    scraped_at TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_website_scrapes_website_scraped_at
+ON website_scrapes(website, scraped_at DESC);
 
 CREATE TABLE IF NOT EXISTS descriptions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -276,6 +285,98 @@ def start_scrape_run(run_started_at):
         ).fetchone()
         conn.execute("INSERT INTO scrape_runs (started_at) VALUES (?)", (started_at,))
     return datetime.fromisoformat(previous_run["started_at"]) if previous_run else None
+
+
+def get_last_website_scrape(website: str, offset: int = 0) -> datetime | None:
+    """Return the UTC datetime of the most recent scrape for the website, or None."""
+    if not website:
+        return None
+    website = website.strip().lower()
+    query = (
+        "SELECT scraped_at FROM website_scrapes "
+        "WHERE website = ? "
+        "ORDER BY scraped_at DESC, id DESC LIMIT 1 OFFSET ?"
+    )
+    with connect() as conn:
+        row = conn.execute(query, (website, offset)).fetchone()
+    if not row or not row["scraped_at"]:
+        return None
+    dt = datetime.fromisoformat(row["scraped_at"])
+    return dt if dt.tzinfo is not None else dt.replace(tzinfo=timezone.utc)
+
+
+def should_scrape_website(
+    website: str,
+    *,
+    minutes: float = 0,
+    mins: float = 0,
+    hours: float = 0,
+    days: float = 0,
+    weeks: float = 0,
+    tolerance: float = 0.10,
+) -> bool:
+    """Decide if a website should be scraped now, allowing -+10% tolerance on interval."""
+    if not website:
+        raise ValueError("Website name must be specified")
+
+    website = website.strip().lower()
+    target_interval = timedelta(
+        minutes=minutes + mins,
+        hours=hours,
+        days=days,
+        weeks=weeks,
+    )
+    if target_interval.total_seconds() <= 0:
+        raise ValueError(
+            "Must provide a positive time interval (e.g. minutes=10, hours=2)"
+        )
+
+    now = datetime.now(timezone.utc).replace(microsecond=0)
+    last_scraped_at = get_last_website_scrape(website)
+    if last_scraped_at is None:
+        return True
+
+    # Allow +-10% variance in scrape scheduling (e.g. 10m -> 9m; 2h -> 1h 48m)
+    min_interval = target_interval * (1.0 - tolerance)
+    return (now - last_scraped_at) >= min_interval
+
+
+def start_website_scrape(
+    website: str,
+    *,
+    minutes: float = 0,
+    mins: float = 0,
+    hours: float = 0,
+    days: float = 0,
+    weeks: float = 0,
+    tolerance: float = 0.10,
+) -> bool:
+    """Check if website is in range of -+10% of scheduled interval, and if so, record start time and return True."""
+    if not website:
+        raise ValueError("Website name must be provided")
+    website = website.strip().lower()
+
+    has_interval = minutes > 0 or mins > 0 or hours > 0 or days > 0 or weeks > 0
+    if has_interval:
+        if not should_scrape_website(
+            website,
+            minutes=minutes,
+            mins=mins,
+            hours=hours,
+            days=days,
+            weeks=weeks,
+            tolerance=tolerance,
+        ):
+            return False
+
+    now_utc = datetime.now(timezone.utc).replace(microsecond=0)
+    timestamp = now_utc.isoformat(timespec="seconds")
+    with connect() as conn:
+        conn.execute(
+            "INSERT INTO website_scrapes (website, scraped_at) VALUES (?, ?)",
+            (website, timestamp),
+        )
+    return True
 
 
 def _nullable(value):

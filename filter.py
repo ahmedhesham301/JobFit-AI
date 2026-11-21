@@ -8,7 +8,7 @@ from httpx import RemoteProtocolError
 import database
 from stats import s
 import os
-from lingua import LanguageDetector, LanguageDetectorBuilder
+from lingua import LanguageDetectorBuilder
 import vars
 
 rate = os.getenv("rate") == "true"
