@@ -69,7 +69,7 @@ def scrape_jobs(
         if page.status in [200]:
             page_jobs_df = parse_job_cards(page)
             all_jobs_df = pd.concat([all_jobs_df, page_jobs_df], ignore_index=True)
-            if len(page_jobs_df) < 10:
+            if len(page_jobs_df) < 10 or offset >= 990:
                 break
             offset += 10
             times_failed = 0

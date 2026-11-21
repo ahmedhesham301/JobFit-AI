@@ -110,6 +110,9 @@ def main():
 
         missing_before_db = int(company_filtered_jobs["description"].isna().sum())
         database.get_descriptions(company_filtered_jobs)
+        print(f"{"="*40}\n"*5)
+        print(f"Total jobs to scrape details for {len(company_filtered_jobs)}")
+        print(f"{"="*40}\n"*5)
         jobs_with_description = scrape_details(company_filtered_jobs)
         # log how many jobs where dropped by next line
         missing_after_db = int(company_filtered_jobs["description"].isna().sum())
