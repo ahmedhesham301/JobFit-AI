@@ -50,35 +50,44 @@ def main():
     all_jobs = create_df()
     good_fit_jobs = []
 
-    previous_linkedin_scrape = database.get_last_website_scrape("linkedin")
-    if ENABLE_LINKEDIN and database.start_website_scrape("linkedin", minutes=3):
-        linkedin_scrape_from = utils.get_scrape_from(
-            previous_linkedin_scrape, timedelta(hours=2)
-        )
-        linkedin_jobs_without_description = scrape_linkedin(jobs, linkedin_scrape_from)
-        all_jobs = pd.concat(
-            [all_jobs, linkedin_jobs_without_description], ignore_index=True
-        )
+    scraper_tasks = []
+
+    if ENABLE_LINKEDIN:
+        previous_linkedin_scrape = database.get_last_website_scrape("linkedin")
+        if database.start_website_scrape("linkedin", minutes=10):
+            linkedin_scrape_from = utils.get_scrape_from(
+                previous_linkedin_scrape, timedelta(hours=2)
+            )
+            scraper_tasks.append((scrape_linkedin, (jobs, linkedin_scrape_from)))
 
     if ENABLE_WUZZUF and database.start_website_scrape("wuzzuf", hours=2):
-        wuzzuf_jobs_without_description = scrape_wuzzuf(jobs)
-        all_jobs = pd.concat(
-            [all_jobs, wuzzuf_jobs_without_description], ignore_index=True
-        )
+        scraper_tasks.append((scrape_wuzzuf, (jobs,)))
 
     if ENABLE_BAYT and database.start_website_scrape("bayt", hours=2):
-        bayt_jobs_without_description = scrape_bayt(jobs)
-        all_jobs = pd.concat(
-            [all_jobs, bayt_jobs_without_description], ignore_index=True
-        )
+        scraper_tasks.append((scrape_bayt, (jobs,)))
 
-    previous_himalayas_scrape = database.get_last_website_scrape("himalayas")
-    if ENABLE_HIMALAYAS and database.start_website_scrape("himalayas", hours=2):
-        himalayas_scrape_from = utils.get_scrape_from(
-            previous_himalayas_scrape, timedelta(hours=2)
-        )
-        himalayas_jobs = scrape_himalayas(jobs, himalayas_scrape_from)
-        all_jobs = pd.concat([all_jobs, himalayas_jobs], ignore_index=True)
+    if ENABLE_HIMALAYAS:
+        previous_himalayas_scrape = database.get_last_website_scrape("himalayas")
+        if database.start_website_scrape("himalayas", hours=2):
+            himalayas_scrape_from = utils.get_scrape_from(
+                previous_himalayas_scrape, timedelta(hours=2)
+            )
+            scraper_tasks.append((scrape_himalayas, (jobs, himalayas_scrape_from)))
+
+    if scraper_tasks:
+        with concurrent.futures.ThreadPoolExecutor(
+            max_workers=len(scraper_tasks)
+        ) as executor:
+            future_to_name = {
+                executor.submit(fn, *args): fn.__name__ for fn, args in scraper_tasks
+            }
+            for future in concurrent.futures.as_completed(future_to_name):
+                task_name = future_to_name[future]
+                try:
+                    df = future.result()
+                    all_jobs = pd.concat([all_jobs, df], ignore_index=True)
+                except Exception as e:
+                    logging.exception(f"Error while running {task_name}: {e}")
 
     s.jobs_scraped_total = len(all_jobs)
     s.scraping_time = datetime.now() - t
