@@ -3,7 +3,6 @@ import pandas as pd
 import utils
 import job_scrappers.linkedin
 import job_scrappers.wuzzuf
-import job_scrappers.bebee
 import job_scrappers.bayt
 from job_scrappers.data import create_df
 import time
@@ -52,22 +51,6 @@ def scrape_bayt(jobs):
     jobs_without_description = create_df()
     for job in jobs:
         df = job_scrappers.bayt.scrape_jobs(job["role"], job["country"], False)
-        jobs_without_description = pd.concat(
-            [jobs_without_description, df], ignore_index=True
-        )
-    return jobs_without_description
-
-
-def scrape_bebee(jobs):
-    jobs_without_description = create_df()
-    for job in jobs:
-        # country_cfg = COUNTRY_MAP.get(job["country"]) or COUNTRY_MAP.get(job["country"].lower()) or {}
-        # location = country_cfg.get("bebee")
-        location = COUNTRY_MAP.get(job["country"].lower(), {}).get("bebee")
-        if not location:
-            logging.error(f"country {job['country']} is not supported by bebee")
-            continue
-        df = job_scrappers.bebee.scrape_jobs(job["role"], location, False)
         jobs_without_description = pd.concat(
             [jobs_without_description, df], ignore_index=True
         )

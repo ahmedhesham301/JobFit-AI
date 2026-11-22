@@ -32,6 +32,5 @@ COUNTRY_MAP = {
         "wuzzuf": "Egypt",
         "bayt": "egypt",
         "gulftalent": "10229362000000",
-        "bebee": "eg",
     },
 }

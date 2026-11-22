@@ -81,9 +81,6 @@ def main():
             )
             scraper_tasks.append((scrape_himalayas, (jobs, himalayas_scrape_from)))
 
-    if ENABLE_BEBEE and database.start_website_scrape("bebee", hours=2):
-        scraper_tasks.append((scrape_bebee, (jobs,)))
-
     if scraper_tasks:
         with concurrent.futures.ThreadPoolExecutor(
             max_workers=len(scraper_tasks)
