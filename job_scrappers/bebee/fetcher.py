@@ -11,7 +11,7 @@ def build_search_url(title: str, location: str, offset):
     base_url = f"https://bebee.com/{location}/jobs"
     params = {
         "q": title,
-        # "postedWithin": "24h",
+        "postedWithin": "24h",
         "sort": "newest",
         "page": offset,
     }
