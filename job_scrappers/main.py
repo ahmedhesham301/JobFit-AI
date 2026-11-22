@@ -10,14 +10,12 @@ def scrape_details(jobs: pd.DataFrame):
     linkedin_df = jobs[jobs["site"] == "linkedin"]
     wuzzuf_df = jobs[jobs["site"] == "wuzzuf"]
     bayt_df = jobs[jobs["site"] == "bayt"]
-    bebee_df = jobs[jobs["site"] == "bebee"]
-    other_df = jobs[~jobs["site"].isin(["linkedin", "wuzzuf", "bayt", "bebee"])]
+    other_df = jobs[~jobs["site"].isin(["linkedin", "wuzzuf", "bayt"])]
 
     tasks = [
         (scrape_linkedin_details, linkedin_df),
         (scrape_wuzzuf_details, wuzzuf_df),
         (scrape_bayt_details, bayt_df),
-        (scrape_bebee_details, bebee_df),
     ]
 
     dfs = [other_df]
