@@ -8,7 +8,6 @@ from jobs import (
     scrape_wuzzuf,
     scrape_bayt,
     scrape_himalayas,
-    scrape_bebee,
 )
 from alert import send_email
 from filter import filter_jobs, filter_jobs_by_regex, filter_jobs_by_language
@@ -42,7 +41,6 @@ ENABLE_LINKEDIN = os.getenv("linkedin", "").lower() == "true"
 ENABLE_HIMALAYAS = os.getenv("himalayas", "").lower() == "true"
 ENABLE_WUZZUF = os.getenv("wuzzuf", "").lower() == "true"
 ENABLE_BAYT = os.getenv("bayt", "").lower() == "true"
-ENABLE_BEBEE = os.getenv("bebee", "").lower() == "true"
 
 with open("system_instruction.md", "r") as f:
     SYSTEM_INSTRUCTIONS = f.read()
