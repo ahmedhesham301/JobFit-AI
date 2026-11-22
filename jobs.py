@@ -7,7 +7,6 @@ import job_scrappers.bayt
 from job_scrappers.data import create_df
 import time
 from job_scrappers.data import COUNTRY_MAP
-import logging
 
 
 def scrape_linkedin(jobs, scrape_from):
