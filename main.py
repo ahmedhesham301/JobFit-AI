@@ -3,7 +3,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from rich.logging import RichHandler
-from jobs import scrape_linkedin, scrape_wuzzuf, scrape_bayt, scrape_himalayas
+from jobs import (
+    scrape_linkedin,
+    scrape_wuzzuf,
+    scrape_bayt,
+    scrape_himalayas,
+    scrape_bebee,
+)
 from alert import send_email
 from filter import filter_jobs, filter_jobs_by_regex, filter_jobs_by_language
 import os
@@ -36,6 +42,7 @@ ENABLE_LINKEDIN = os.getenv("linkedin", "").lower() == "true"
 ENABLE_HIMALAYAS = os.getenv("himalayas", "").lower() == "true"
 ENABLE_WUZZUF = os.getenv("wuzzuf", "").lower() == "true"
 ENABLE_BAYT = os.getenv("bayt", "").lower() == "true"
+ENABLE_BEBEE = os.getenv("bebee", "").lower() == "true"
 
 with open("system_instruction.md", "r") as f:
     SYSTEM_INSTRUCTIONS = f.read()
@@ -74,6 +81,9 @@ def main():
             )
             scraper_tasks.append((scrape_himalayas, (jobs, himalayas_scrape_from)))
 
+    if ENABLE_BEBEE and database.start_website_scrape("bebee", hours=2):
+        scraper_tasks.append((scrape_bebee, (jobs,)))
+
     if scraper_tasks:
         with concurrent.futures.ThreadPoolExecutor(
             max_workers=len(scraper_tasks)
@@ -110,9 +120,9 @@ def main():
 
         missing_before_db = int(company_filtered_jobs["description"].isna().sum())
         database.get_descriptions(company_filtered_jobs)
-        print(f"{"="*40}\n"*5)
+        print(f"{"="*40}\n" * 5)
         print(f"Total jobs to scrape details for {len(company_filtered_jobs)}")
-        print(f"{"="*40}\n"*5)
+        print(f"{"="*40}\n" * 5)
         jobs_with_description = scrape_details(company_filtered_jobs)
         # log how many jobs where dropped by next line
         missing_after_db = int(company_filtered_jobs["description"].isna().sum())

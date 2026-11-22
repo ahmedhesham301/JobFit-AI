@@ -27,10 +27,11 @@ def create_df():
 
 COUNTRY_MAP = {
     "worldwide": {"gulftalent": ""},
-    "Egypt": {
+    "egypt": {
         "linkedin": "egypt",
         "wuzzuf": "Egypt",
         "bayt": "egypt",
         "gulftalent": "10229362000000",
+        "bebee": "eg",
     },
 }

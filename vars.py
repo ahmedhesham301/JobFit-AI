@@ -10,9 +10,21 @@ companies_blacklist = [
     r"\bCrossing Hurdles\b",
     # call center
     r"\bTaskUs\b",
-
 ]
-allowed_locations = ["worldwide", "egypt", "emea", "africa"]
+allowed_locations = [
+    "worldwide",
+    "egypt",
+    "eg",
+    "emea",
+    "africa",
+    "cairo",
+    "مصر",
+    "القاهرة",
+    "giza",
+    "الجيزة",
+    "eg",
+    "egy",
+]
 accepted_languages = [Language.ENGLISH, Language.ARABIC]
 
 description_blockers = [

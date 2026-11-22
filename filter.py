@@ -1,5 +1,6 @@
 import logging
 import time
+import re
 from ai import generate
 import json
 import sqlite3
@@ -82,10 +83,12 @@ def is_location_accepted(
     if ai_locations:
         return bool(ai_locations & allowed_locations)
 
-    if scrape_location and (
-        scrape_location.rsplit(",", 1)[-1].strip() in allowed_locations
-    ):
-        return True
+    if scrape_location:
+        scrape_lower = scrape_location.lower()
+        for loc in allowed_locations:
+            if re.search(r"\b" + re.escape(loc) + r"\b", scrape_lower):
+                return True
+
     return False
 
 
